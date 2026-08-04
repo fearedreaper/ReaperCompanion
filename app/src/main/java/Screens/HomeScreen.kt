@@ -39,7 +39,8 @@ import com.example.reapercompanion.design.ReaperColors
 
 @Composable
 fun HomeScreen(
-    onDeadByDaylightClick: () -> Unit
+    onDeadByDaylightClick: () -> Unit,
+    onReaperLiveClick: () -> Unit
 ) {
     AppBackground {
         LazyColumn(
@@ -104,6 +105,12 @@ fun HomeScreen(
             item {
                 PrimaryLaunchCard(
                     onClick = onDeadByDaylightClick
+                )
+            }
+
+            item {
+                ReaperLiveCard(
+                    onClick = onReaperLiveClick
                 )
             }
 

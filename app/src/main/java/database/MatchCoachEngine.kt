@@ -51,13 +51,9 @@ object MatchCoachEngine {
         "The Slasher"
     )
 
-    fun getSupportedMaps(): List<String> = listOf(
-        "Midwich Elementary School",
-        "Gideon Meat Plant",
-        "Raccoon City Police Department",
-        "Mount Ormond Resort",
-        "Badham Preschool"
-    )
+    fun getSupportedMaps(): List<String> {
+        return MapDatabase.getAllNames()
+    }
 
     fun generateRecommendation(
         opponentName: String,
@@ -715,145 +711,18 @@ object MatchCoachEngine {
     private fun getMapProfile(
         mapName: String
     ): MapProfile {
-        return when {
-            mapName.contains("midwich") ->
-                MapProfile(
-                    difficultyModifier = 8,
-                    recommendedPerkIds = listOf(
-                        "windows_of_opportunity",
-                        "lithe",
-                        "kindred"
-                    ),
-                    chaseAdvice = listOf(
-                        "Use classrooms and corners to break line of sight.",
-                        "Learn the stair locations before pressure begins."
-                    ),
-                    objectiveAdvice = listOf(
-                        "Track which floor teammates occupy.",
-                        "Complete difficult central generators early."
-                    ),
-                    endgameAdvice = listOf(
-                        "Start moving toward a gate before the final generator finishes."
-                    ),
-                    warnings = listOf(
-                        "Hallways create predictable movement.",
-                        "Missing a staircase wastes critical time."
-                    ),
-                    summary =
-                        "Midwich rewards map knowledge and repeated sightline breaks."
-                )
+        val map = MapDatabase.get(mapName)
+            ?: return defaultMapProfile()
 
-            mapName.contains("gideon") ||
-                    mapName.contains("meat plant") ->
-                MapProfile(
-                    difficultyModifier = 4,
-                    recommendedPerkIds = listOf(
-                        "windows_of_opportunity",
-                        "lithe",
-                        "balanced_landing"
-                    ),
-                    chaseAdvice = listOf(
-                        "Chain pallets carefully instead of spending several at once.",
-                        "Use floor changes to interrupt pursuit."
-                    ),
-                    objectiveAdvice = listOf(
-                        "Watch generators directly above and below active chases.",
-                        "Preserve routes between floors."
-                    ),
-                    endgameAdvice = listOf(
-                        "Plan the gate route before the last generator completes."
-                    ),
-                    warnings = listOf(
-                        "Poor pallet management creates severe dead zones."
-                    ),
-                    summary =
-                        "Gideon offers resources, but careless use empties the map quickly."
-                )
-
-            mapName.contains("rpd") ||
-                    mapName.contains("police") ->
-                MapProfile(
-                    difficultyModifier = 7,
-                    recommendedPerkIds = listOf(
-                        "windows_of_opportunity",
-                        "deja_vu",
-                        "kindred"
-                    ),
-                    chaseAdvice = listOf(
-                        "Use connected rooms to break line of sight.",
-                        "Avoid long halls without a nearby side room."
-                    ),
-                    objectiveAdvice = listOf(
-                        "Use information perks to reduce navigation time.",
-                        "Remember stairs and major connecting corridors."
-                    ),
-                    endgameAdvice = listOf(
-                        "Begin moving toward a gate before the last generator finishes."
-                    ),
-                    warnings = listOf(
-                        "Navigation mistakes cost more time than expected.",
-                        "Some hallways offer very limited escape options."
-                    ),
-                    summary =
-                        "RPD is a navigation test where information perks save time."
-                )
-
-            mapName.contains("ormond") ->
-                MapProfile(
-                    difficultyModifier = 3,
-                    recommendedPerkIds = listOf(
-                        "windows_of_opportunity",
-                        "lithe",
-                        "balanced_landing"
-                    ),
-                    chaseAdvice = listOf(
-                        "Use the main building to break sightlines.",
-                        "Avoid being caught far from structures."
-                    ),
-                    objectiveAdvice = listOf(
-                        "Pressure generators on opposite sides.",
-                        "Prevent a final cluster near one area."
-                    ),
-                    endgameAdvice = listOf(
-                        "Use open visibility to track gate pressure."
-                    ),
-                    warnings = listOf(
-                        "Large open areas favor ranged and mobile Killers."
-                    ),
-                    summary =
-                        "Ormond provides space, but exposed crossings require timing."
-                )
-
-            mapName.contains("badham") ||
-                    mapName.contains("preschool") ->
-                MapProfile(
-                    difficultyModifier = 5,
-                    recommendedPerkIds = listOf(
-                        "windows_of_opportunity",
-                        "lithe",
-                        "balanced_landing"
-                    ),
-                    chaseAdvice = listOf(
-                        "Transition between buildings instead of staying at one loop.",
-                        "Preserve strong windows for later."
-                    ),
-                    objectiveAdvice = listOf(
-                        "Avoid clustering final generators near the school.",
-                        "Track basement placement before risky rescues."
-                    ),
-                    endgameAdvice = listOf(
-                        "Use buildings to conceal gate approaches."
-                    ),
-                    warnings = listOf(
-                        "Key structures become dangerous after resources are removed."
-                    ),
-                    summary =
-                        "Badham rewards efficient structure-to-structure routing."
-                )
-
-            else ->
-                defaultMapProfile()
-        }
+        return MapProfile(
+            difficultyModifier = map.difficultyModifier,
+            recommendedPerkIds = map.recommendedPerkIds,
+            chaseAdvice = map.chaseAdvice,
+            objectiveAdvice = map.objectiveAdvice,
+            endgameAdvice = map.endgameAdvice,
+            warnings = map.warnings,
+            summary = map.summary
+        )
     }
 
     private fun defaultOpponentProfile(): OpponentProfile {

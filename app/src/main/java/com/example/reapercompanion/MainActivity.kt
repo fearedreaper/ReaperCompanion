@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.example.reapercompanion.livecontent.LiveContentScreen
 import com.example.reapercompanion.models.BuildRecommendation
 import com.example.reapercompanion.database.MatchCoachEngine
 import com.example.reapercompanion.models.BuildStyle
@@ -26,7 +27,9 @@ import com.example.reapercompanion.screens.HomeScreen
 import com.example.reapercompanion.screens.KillerBuildResultScreen
 import com.example.reapercompanion.screens.KillerScreen
 import com.example.reapercompanion.screens.MatchCoachResultScreen
-import com.example.reapercompanion.screens.MatchCoachScreen
+import com.example.reapercompanion.screens.MatchCoachKillerScreen
+import com.example.reapercompanion.screens.MatchCoachMapScreen
+import com.example.reapercompanion.screens.MatchCoachSummaryScreen
 import com.example.reapercompanion.screens.MetaBuildsScreen
 import com.example.reapercompanion.screens.RandomBuildScreen
 import com.example.reapercompanion.screens.SplashScreen
@@ -87,6 +90,14 @@ class MainActivity : ComponentActivity() {
                     mutableStateOf<MatchCoachRecommendation?>(null)
                 }
 
+                var selectedMatchCoachKiller by remember {
+                    mutableStateOf("")
+                }
+
+                var selectedMatchCoachMap by remember {
+                    mutableStateOf("")
+                }
+
                 LaunchedEffect(Unit) {
                     delay(2000)
                     showSplash = false
@@ -100,13 +111,16 @@ class MainActivity : ComponentActivity() {
                         "buildAroundResults" -> "buildStylePicker"
                         "buildStylePicker" -> "buildAround"
                         "buildAround" -> "deadByDaylight"
-                        "matchCoachResults" -> "matchCoach"
-                        "matchCoach" -> "deadByDaylight"
+                        "matchCoachResults" -> "matchCoachSummary"
+                        "matchCoachSummary" -> "matchCoachMap"
+                        "matchCoachMap" -> "matchCoachKiller"
+                        "matchCoachKiller" -> "deadByDaylight"
                         "randomBuild" -> "deadByDaylight"
                         "metaBuilds" -> "deadByDaylight"
                         "survivor" -> "deadByDaylight"
                         "killer" -> "deadByDaylight"
                         "favorites" -> "deadByDaylight"
+                        "reaperLive" -> "home"
                         "deadByDaylight" -> "home"
                         else -> "home"
                     }
@@ -120,6 +134,15 @@ class MainActivity : ComponentActivity() {
                         "home" -> HomeScreen(
                             onDeadByDaylightClick = {
                                 currentPage = "deadByDaylight"
+                            },
+                            onReaperLiveClick = {
+                                currentPage = "reaperLive"
+                            }
+                        )
+
+                        "reaperLive" -> LiveContentScreen(
+                            onBackClick = {
+                                currentPage = "home"
                             }
                         )
 
@@ -144,7 +167,9 @@ class MainActivity : ComponentActivity() {
                             },
                             onMatchCoachClick = {
                                 matchCoachRecommendation = null
-                                currentPage = "matchCoach"
+                                selectedMatchCoachKiller = ""
+                                selectedMatchCoachMap = ""
+                                currentPage = "matchCoachKiller"
                             },
                             onRandomBuildClick = {
                                 currentPage = "randomBuild"
@@ -295,9 +320,33 @@ class MainActivity : ComponentActivity() {
                             }
                         }
 
-                        "matchCoach" -> MatchCoachScreen(
+                        "matchCoachKiller" -> MatchCoachKillerScreen(
                             onBackClick = {
                                 currentPage = "deadByDaylight"
+                            },
+                            onKillerSelected = { killer ->
+                                selectedMatchCoachKiller = killer
+                                selectedMatchCoachMap = ""
+                                currentPage = "matchCoachMap"
+                            }
+                        )
+
+                        "matchCoachMap" -> MatchCoachMapScreen(
+                            selectedKiller = selectedMatchCoachKiller,
+                            onBackClick = {
+                                currentPage = "matchCoachKiller"
+                            },
+                            onMapSelected = { map ->
+                                selectedMatchCoachMap = map
+                                currentPage = "matchCoachSummary"
+                            }
+                        )
+
+                        "matchCoachSummary" -> MatchCoachSummaryScreen(
+                            selectedKiller = selectedMatchCoachKiller,
+                            selectedMap = selectedMatchCoachMap,
+                            onBackClick = {
+                                currentPage = "matchCoachMap"
                             },
                             onAnalyzeClick = { opponentName, mapName ->
                                 matchCoachRecommendation =
@@ -321,11 +370,13 @@ class MainActivity : ComponentActivity() {
                                     },
                                     onAnalyzeAnotherClick = {
                                         matchCoachRecommendation = null
-                                        currentPage = "matchCoach"
+                                        selectedMatchCoachKiller = ""
+                                        selectedMatchCoachMap = ""
+                                        currentPage = "matchCoachKiller"
                                     }
                                 )
                             } else {
-                                currentPage = "matchCoach"
+                                currentPage = "matchCoachKiller"
                             }
                         }
 
