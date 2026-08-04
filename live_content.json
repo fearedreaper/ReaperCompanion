@@ -2,12 +2,12 @@
   "announcements": [
     {
       "id": "welcome",
-      "title": "REAPER LIVE TEST",
+      "title": "title": "Welcome to Reaper Live",
       "message": "Thank you for downloading Reaper Companion. More live features are coming soon!",
       "active": true
     }
   ],
-  "rewards": [
+  "events": [
     {
       "id": "launch",
       "title": "Launch Reward",
