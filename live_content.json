@@ -2,7 +2,7 @@
   "announcements": [
     {
       "id": "welcome",
-      "title": "REAPER LIVE TEST",
+      "title": "Welcome to Reaper Companion",
       "message": "Thank you for downloading Reaper Companion. More live features are coming soon!",
       "active": true
     }
