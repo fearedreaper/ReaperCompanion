@@ -1,0 +1,26 @@
+{
+  "announcements": [
+    {
+      "id": "welcome",
+      "title": "Welcome to Reaper Live",
+      "message": "Thanks for using Reaper Companion! Check back regularly for live events, featured builds, and the latest Dead by Daylight updates.",
+      "active": true
+    }
+  ],
+  "events": [
+    {
+      "id": "launch",
+      "title": "Launch Celebration",
+      "description": "Reaper Companion is officially live! New events, guides, and featured builds will be added regularly.",
+      "expires": "Limited Time",
+      "active": true
+    }
+  ],
+  "featuredBuilds": [
+    {
+      "id": "starter",
+      "title": "Stealth Survivor",
+      "description": "Lightweight • Windows of Opportunity • Kindred • Adrenaline"
+    }
+  ]
+}
