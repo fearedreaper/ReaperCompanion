@@ -1,5 +1,6 @@
 package com.example.reapercompanion
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -11,6 +12,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.example.reapercompanion.livecontent.LiveContentScreen
+import com.example.reapercompanion.localization.LanguagePreferences
+import com.example.reapercompanion.localization.LanguageSelectionScreen
+import com.example.reapercompanion.settings.SettingsScreen
 import com.example.reapercompanion.models.BuildRecommendation
 import com.example.reapercompanion.database.MatchCoachEngine
 import com.example.reapercompanion.models.BuildStyle
@@ -52,6 +56,12 @@ class MainActivity : ComponentActivity() {
 
                 var currentPage by remember {
                     mutableStateOf("home")
+                }
+
+                var languageReady by remember {
+                    mutableStateOf(
+                        LanguagePreferences.hasSelectedLanguage(this@MainActivity)
+                    )
                 }
 
                 var selectedGoal by remember {
@@ -121,6 +131,7 @@ class MainActivity : ComponentActivity() {
                         "killer" -> "deadByDaylight"
                         "favorites" -> "deadByDaylight"
                         "reaperLive" -> "home"
+                        "settings" -> "home"
                         "deadByDaylight" -> "home"
                         else -> "home"
                     }
@@ -128,6 +139,16 @@ class MainActivity : ComponentActivity() {
 
                 if (showSplash) {
                     SplashScreen()
+                } else if (!languageReady) {
+                    LanguageSelectionScreen(
+                        onLanguageSelected = { language ->
+                            LanguagePreferences.saveSelectedLanguage(
+                                this@MainActivity,
+                                language.code
+                            )
+                            languageReady = true
+                        }
+                    )
                 } else {
                     when (currentPage) {
 
@@ -137,10 +158,19 @@ class MainActivity : ComponentActivity() {
                             },
                             onReaperLiveClick = {
                                 currentPage = "reaperLive"
+                            },
+                            onSettingsClick = {
+                                currentPage = "settings"
                             }
                         )
 
                         "reaperLive" -> LiveContentScreen(
+                            onBackClick = {
+                                currentPage = "home"
+                            }
+                        )
+
+                        "settings" -> SettingsScreen(
                             onBackClick = {
                                 currentPage = "home"
                             }

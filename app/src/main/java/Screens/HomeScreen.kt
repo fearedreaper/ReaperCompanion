@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -40,7 +41,8 @@ import com.example.reapercompanion.design.ReaperColors
 @Composable
 fun HomeScreen(
     onDeadByDaylightClick: () -> Unit,
-    onReaperLiveClick: () -> Unit
+    onReaperLiveClick: () -> Unit,
+    onSettingsClick: () -> Unit
 ) {
     AppBackground {
         LazyColumn(
@@ -59,8 +61,12 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    CircleActionButton("☰")
-                    CircleActionButton("⚙")
+                    Spacer(modifier = Modifier.size(46.dp))
+
+                    CircleActionButton(
+                        text = "⚙",
+                        onClick = onSettingsClick
+                    )
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -69,7 +75,7 @@ fun HomeScreen(
                     painter = painterResource(
                         id = R.drawable.reaper_companion_logo
                     ),
-                    contentDescription = "Reaper Companion Logo",
+                    contentDescription = stringResource(R.string.app_name),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(240.dp),
@@ -77,7 +83,7 @@ fun HomeScreen(
                 )
 
                 Text(
-                    text = "DEAD BY DAYLIGHT COMPANION",
+                    text = stringResource(R.string.home_dead_by_daylight_companion),
                     modifier = Modifier.fillMaxWidth(),
                     color = ReaperColors.CyanGlow,
                     fontSize = 13.sp,
@@ -89,7 +95,7 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Build smarter. Read the match. Escape—or dominate.",
+                    text = stringResource(R.string.home_headline),
                     modifier = Modifier.fillMaxWidth(),
                     color = ReaperColors.SecondaryText,
                     fontSize = 15.sp,
@@ -122,7 +128,7 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
-                    text = "REAPER COMPANION • DEAD BY DAYLIGHT",
+                    text = stringResource(R.string.app_name) + " • " + stringResource(R.string.home_dead_by_daylight),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 24.dp),
@@ -153,7 +159,7 @@ private fun WelcomePanel() {
             modifier = Modifier.padding(22.dp)
         ) {
             Text(
-                text = "WELCOME BACK",
+                text = stringResource(R.string.home_welcome_back),
                 color = ReaperColors.CyanGlow,
                 fontSize = 13.sp,
                 fontWeight = FontWeight.Bold,
@@ -163,7 +169,7 @@ private fun WelcomePanel() {
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Ready for the Fog?",
+                text = stringResource(R.string.home_ready_for_fog),
                 color = ReaperColors.PrimaryText,
                 fontSize = 27.sp,
                 fontWeight = FontWeight.Black
@@ -172,8 +178,7 @@ private fun WelcomePanel() {
             Spacer(modifier = Modifier.height(6.dp))
 
             Text(
-                text =
-                    "Generate Survivor and Killer builds, compare loadouts, save favorites, and prepare for specific Killers and maps with Reaper Match Coach.",
+                text = stringResource(R.string.home_welcome_body),
                 color = ReaperColors.SecondaryText,
                 fontSize = 15.sp,
                 lineHeight = 22.sp
@@ -220,7 +225,7 @@ private fun PrimaryLaunchCard(
                     color = Color(0x2200E5FF)
                 ) {
                     Text(
-                        text = "ENTER THE FOG",
+                        text = stringResource(R.string.home_enter_fog),
                         color = ReaperColors.CyanGlow,
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
@@ -235,7 +240,7 @@ private fun PrimaryLaunchCard(
                 Spacer(modifier = Modifier.height(18.dp))
 
                 Text(
-                    text = "DEAD BY DAYLIGHT",
+                    text = stringResource(R.string.home_dead_by_daylight),
                     color = ReaperColors.PrimaryText,
                     fontSize = 27.sp,
                     fontWeight = FontWeight.Black
@@ -244,8 +249,7 @@ private fun PrimaryLaunchCard(
                 Spacer(modifier = Modifier.height(7.dp))
 
                 Text(
-                    text =
-                        "Survivor builds • Killer builds • Build Around • Match Coach • Favorites",
+                    text = stringResource(R.string.home_dead_by_daylight_features),
                     color = ReaperColors.SecondaryText,
                     fontSize = 14.sp,
                     lineHeight = 20.sp
@@ -259,7 +263,7 @@ private fun PrimaryLaunchCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "OPEN COMPANION",
+                        text = stringResource(R.string.home_open_companion),
                         color = ReaperColors.CyanGlow,
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Black,
@@ -285,17 +289,17 @@ private fun FeatureStrip() {
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         FeatureBadge(
-            label = "BUILD",
+            label = stringResource(R.string.home_feature_build),
             modifier = Modifier.weight(1f)
         )
 
         FeatureBadge(
-            label = "COMPARE",
+            label = stringResource(R.string.home_feature_compare),
             modifier = Modifier.weight(1f)
         )
 
         FeatureBadge(
-            label = "COACH",
+            label = stringResource(R.string.home_feature_coach),
             modifier = Modifier.weight(1f)
         )
     }
@@ -332,10 +336,14 @@ private fun FeatureBadge(
 
 @Composable
 private fun CircleActionButton(
-    text: String
+    text: String,
+    onClick: () -> Unit
 ) {
     Surface(
-        modifier = Modifier.size(46.dp),
+        modifier = Modifier
+            .size(46.dp)
+            .pressScale()
+            .clickable(onClick = onClick),
         shape = CircleShape,
         color = Color(0x1600E5FF),
         border = BorderStroke(
