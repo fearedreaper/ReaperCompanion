@@ -12,6 +12,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.example.reapercompanion.livecontent.LiveContentScreen
+import com.example.reapercompanion.itemcoach.ItemCoachEngine
+import com.example.reapercompanion.itemcoach.ItemCoachGoalScreen
+import com.example.reapercompanion.itemcoach.ItemCoachRecommendationSet
+import com.example.reapercompanion.itemcoach.ItemCoachResultScreen
 import com.example.reapercompanion.localization.LanguagePreferences
 import com.example.reapercompanion.localization.LanguageSelectionScreen
 import com.example.reapercompanion.settings.SettingsScreen
@@ -72,6 +76,10 @@ class MainActivity : ComponentActivity() {
                     mutableStateOf("")
                 }
 
+                var itemCoachRecommendationSet by remember {
+                    mutableStateOf<ItemCoachRecommendationSet?>(null)
+                }
+
                 var selectedBuildAroundPerk by remember {
                     mutableStateOf<Perk?>(null)
                 }
@@ -121,6 +129,8 @@ class MainActivity : ComponentActivity() {
                         "buildAroundResults" -> "buildStylePicker"
                         "buildStylePicker" -> "buildAround"
                         "buildAround" -> "deadByDaylight"
+                        "itemCoachResults" -> "itemCoachGoals"
+                        "itemCoachGoals" -> "deadByDaylight"
                         "matchCoachResults" -> "matchCoachSummary"
                         "matchCoachSummary" -> "matchCoachMap"
                         "matchCoachMap" -> "matchCoachKiller"
@@ -186,14 +196,9 @@ class MainActivity : ComponentActivity() {
                             onKillerClick = {
                                 currentPage = "killer"
                             },
-                            onBuildAroundClick = {
-                                comparisonBuildA = null
-                                comparisonBuildB = null
-                                comparisonStyleA = null
-                                comparisonStyleB = null
-                                selectedBuildAroundPerk = null
-
-                                currentPage = "buildAround"
+                            onItemCoachClick = {
+                                itemCoachRecommendationSet = null
+                                currentPage = "itemCoachGoals"
                             },
                             onMatchCoachClick = {
                                 matchCoachRecommendation = null
@@ -211,6 +216,38 @@ class MainActivity : ComponentActivity() {
                                 currentPage = "favorites"
                             }
                         )
+
+                        "itemCoachGoals" -> ItemCoachGoalScreen(
+                            onBackClick = {
+                                currentPage = "deadByDaylight"
+                            },
+                            onGoalSelected = { goalId ->
+                                itemCoachRecommendationSet =
+                                    ItemCoachEngine.generate(goalId)
+
+                                currentPage = "itemCoachResults"
+                            }
+                        )
+
+                        "itemCoachResults" -> {
+                            val recommendationSet =
+                                itemCoachRecommendationSet
+
+                            if (recommendationSet != null) {
+                                ItemCoachResultScreen(
+                                    recommendationSet = recommendationSet,
+                                    onBackClick = {
+                                        currentPage = "itemCoachGoals"
+                                    },
+                                    onChooseAnotherClick = {
+                                        itemCoachRecommendationSet = null
+                                        currentPage = "itemCoachGoals"
+                                    }
+                                )
+                            } else {
+                                currentPage = "itemCoachGoals"
+                            }
+                        }
 
                         "survivor" -> SurvivorScreen(
                             onBackClick = {

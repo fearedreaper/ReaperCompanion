@@ -32,7 +32,7 @@ import com.example.reapercompanion.screens.AppBackground
 
 @Composable
 fun ItemCoachResultScreen(
-    recommendation: ItemCoachRecommendation,
+    recommendationSet: ItemCoachRecommendationSet,
     onBackClick: () -> Unit,
     onChooseAnotherClick: () -> Unit
 ) {
@@ -57,168 +57,71 @@ fun ItemCoachResultScreen(
             item {
                 ReaperInfoPanel(
                     eyebrow = "REAPER DECISION ENGINE",
-                    title = recommendation.goalTitle,
-                    body =
-                        "Reaper built a complete loadout around your objective.",
+                    title = recommendationSet.goalTitle,
+                    body = "Reaper ranked the strongest loadouts for this objective.",
                     accentColor = Color(0xFFFFC857),
-                    badge = "RECOMMENDED"
+                    badge = "RANKED"
                 )
             }
 
-            item {
-                ResultSectionHeader(
-                    title = "RECOMMENDED ITEM",
-                    badge = "ITEM",
-                    accentColor = Color(0xFFFFC857)
-                )
-            }
-
-            item {
-                ReaperCard(
-                    accentColor = Color(0xFFFFC857)
-                ) {
-                    Text(
-                        text = recommendation.recommendedItem,
-                        color = ReaperColors.PrimaryText,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Black
+            if (recommendationSet.recommendations.isEmpty()) {
+                item {
+                    ReaperCard {
+                        Text(
+                            text = "Recommendations for this goal are coming soon.",
+                            modifier = Modifier.fillMaxWidth(),
+                            color = ReaperColors.SecondaryText,
+                            fontSize = 14.sp,
+                            lineHeight = 20.sp,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            } else {
+                items(
+                    items = recommendationSet.recommendations,
+                    key = { recommendation -> recommendation.tier.name }
+                ) { recommendation ->
+                    RankedRecommendationCard(
+                        recommendation = recommendation
                     )
                 }
             }
 
-            item {
-                ResultSectionHeader(
-                    title = "BEST ADD-ONS",
-                    badge = recommendation.recommendedAddOns.size.toString(),
-                    accentColor = ReaperColors.CyanGlow
-                )
-            }
-
-            items(
-                items = recommendation.recommendedAddOns,
-                key = { addOn -> addOn }
-            ) { addOn ->
-                SimpleResultCard(
-                    title = addOn,
-                    accentColor = ReaperColors.CyanGlow
-                )
-            }
-
-            item {
-                ReaperDivider()
-            }
-
-            item {
-                ResultSectionHeader(
-                    title = "RECOMMENDED PERKS",
-                    badge = recommendation.recommendedPerks.size.toString(),
-                    accentColor = Color(0xFF56D6A7)
-                )
-            }
-
-            items(
-                items = recommendation.recommendedPerks,
-                key = { perk -> perk }
-            ) { perk ->
-                SimpleResultCard(
-                    title = perk,
-                    accentColor = Color(0xFF56D6A7)
-                )
-            }
-
-            recommendation.recommendedOffering?.let { offering ->
-                item {
-                    ReaperDivider()
-                }
+            if (recommendationSet.nextUnlock.isNotEmpty()) {
+                item { ReaperDivider() }
 
                 item {
                     ResultSectionHeader(
-                        title = "RECOMMENDED OFFERING",
-                        badge = "OPTIONAL",
+                        title = "NEXT UNLOCK",
+                        badge = recommendationSet.nextUnlock.size.toString(),
                         accentColor = Color(0xFFB38CFF)
                     )
                 }
 
                 item {
-                    SimpleResultCard(
-                        title = offering,
+                    ReaperCard(
                         accentColor = Color(0xFFB38CFF)
-                    )
-                }
-            }
+                    ) {
+                        Text(
+                            text = "If you unlock one thing next, work toward these:",
+                            color = ReaperColors.SecondaryText,
+                            fontSize = 14.sp,
+                            lineHeight = 20.sp
+                        )
 
-            item {
-                ReaperDivider()
-            }
+                        Spacer(modifier = Modifier.height(10.dp))
 
-            item {
-                ResultSectionHeader(
-                    title = "WHY THIS WORKS",
-                    badge = "STRATEGY",
-                    accentColor = Color(0xFFFFC857)
-                )
-            }
-
-            item {
-                ReaperCard(
-                    accentColor = Color(0xFFFFC857)
-                ) {
-                    Text(
-                        text = recommendation.explanation,
-                        color = ReaperColors.SecondaryText,
-                        fontSize = 14.sp,
-                        lineHeight = 21.sp
-                    )
-                }
-            }
-
-            if (recommendation.warnings.isNotEmpty()) {
-                item {
-                    ReaperDivider()
-                }
-
-                item {
-                    ResultSectionHeader(
-                        title = "REAPER WARNINGS",
-                        badge = recommendation.warnings.size.toString(),
-                        accentColor = Color(0xFFFF6B6B)
-                    )
-                }
-
-                items(
-                    items = recommendation.warnings,
-                    key = { warning -> warning }
-                ) { warning ->
-                    DetailResultCard(
-                        title = "WARNING",
-                        body = warning,
-                        accentColor = Color(0xFFFF6B6B)
-                    )
-                }
-            }
-
-            if (recommendation.alternatives.isNotEmpty()) {
-                item {
-                    ReaperDivider()
-                }
-
-                item {
-                    ResultSectionHeader(
-                        title = "ALTERNATIVES",
-                        badge = recommendation.alternatives.size.toString(),
-                        accentColor = ReaperColors.CyanGlow
-                    )
-                }
-
-                items(
-                    items = recommendation.alternatives,
-                    key = { alternative -> alternative }
-                ) { alternative ->
-                    DetailResultCard(
-                        title = "OPTION",
-                        body = alternative,
-                        accentColor = ReaperColors.CyanGlow
-                    )
+                        recommendationSet.nextUnlock.forEachIndexed { index, unlock ->
+                            Text(
+                                text = "${index + 1}. $unlock",
+                                color = ReaperColors.PrimaryText,
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(vertical = 3.dp)
+                            )
+                        }
+                    }
                 }
             }
 
@@ -240,22 +143,168 @@ fun ItemCoachResultScreen(
 
             item {
                 Text(
-                    text = "REAPER RECOMMENDS THE WHOLE LOADOUT—NOT JUST FOUR PERKS.",
+                    text = "REAPER RECOMMENDS. YOU EXECUTE.",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(
-                            top = 4.dp,
-                            bottom = 24.dp
-                        ),
+                        .padding(top = 4.dp, bottom = 24.dp),
                     color = Color(0xFF526268),
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 1.sp,
-                    lineHeight = 15.sp,
                     textAlign = TextAlign.Center
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun RankedRecommendationCard(
+    recommendation: RankedRecommendation
+) {
+    val accentColor = when (recommendation.tier) {
+        RecommendationTier.REAPER_CHOICE -> Color(0xFFFFC857)
+        RecommendationTier.STRONG_ALTERNATIVE -> ReaperColors.CyanGlow
+        RecommendationTier.BUDGET -> Color(0xFF56D6A7)
+    }
+
+    val tierLabel = when (recommendation.tier) {
+        RecommendationTier.REAPER_CHOICE -> "REAPER'S CHOICE"
+        RecommendationTier.STRONG_ALTERNATIVE -> "STRONG ALTERNATIVE"
+        RecommendationTier.BUDGET -> "BUDGET CHOICE"
+    }
+
+    val stars = when (recommendation.tier) {
+        RecommendationTier.REAPER_CHOICE -> "★★★★★"
+        RecommendationTier.STRONG_ALTERNATIVE -> "★★★★☆"
+        RecommendationTier.BUDGET -> "★★★☆☆"
+    }
+
+    ReaperCard(
+        accentColor = accentColor
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = tierLabel,
+                    color = accentColor,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Black,
+                    letterSpacing = 1.3.sp
+                )
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                Text(
+                    text = recommendation.title,
+                    color = ReaperColors.PrimaryText,
+                    fontSize = 19.sp,
+                    fontWeight = FontWeight.Black
+                )
+            }
+
+            ReaperBadge(
+                text = stars,
+                accentColor = accentColor
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        DetailBlock(
+            label = "ITEM",
+            values = listOf(recommendation.item),
+            accentColor = accentColor
+        )
+
+        Spacer(modifier = Modifier.height(14.dp))
+
+        DetailBlock(
+            label = "ADD-ONS",
+            values = recommendation.addOns,
+            accentColor = ReaperColors.CyanGlow
+        )
+
+        Spacer(modifier = Modifier.height(14.dp))
+
+        DetailBlock(
+            label = "PERKS",
+            values = recommendation.perks,
+            accentColor = Color(0xFF56D6A7)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = "WHY THIS WORKS",
+            color = accentColor,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Black,
+            letterSpacing = 1.2.sp
+        )
+
+        Spacer(modifier = Modifier.height(6.dp))
+
+        Text(
+            text = recommendation.whyThisWorks,
+            color = ReaperColors.SecondaryText,
+            fontSize = 14.sp,
+            lineHeight = 20.sp
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        ReaperDivider()
+        Spacer(modifier = Modifier.height(14.dp))
+
+        Text(
+            text = "REAPER EXECUTION TIP",
+            color = Color(0xFFFF6B6B),
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Black,
+            letterSpacing = 1.2.sp
+        )
+
+        Spacer(modifier = Modifier.height(6.dp))
+
+        Text(
+            text = recommendation.executionTip,
+            color = ReaperColors.PrimaryText,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            lineHeight = 20.sp
+        )
+    }
+}
+
+@Composable
+private fun DetailBlock(
+    label: String,
+    values: List<String>,
+    accentColor: Color
+) {
+    Text(
+        text = label,
+        color = accentColor,
+        fontSize = 11.sp,
+        fontWeight = FontWeight.Black,
+        letterSpacing = 1.2.sp
+    )
+
+    Spacer(modifier = Modifier.height(6.dp))
+
+    values.forEach { value ->
+        Text(
+            text = "• $value",
+            color = ReaperColors.PrimaryText,
+            fontSize = 14.sp,
+            lineHeight = 20.sp,
+            modifier = Modifier.padding(vertical = 2.dp)
+        )
     }
 }
 
@@ -282,52 +331,5 @@ private fun ResultSectionHeader(
             text = badge,
             accentColor = accentColor
         )
-    }
-}
-
-@Composable
-private fun SimpleResultCard(
-    title: String,
-    accentColor: Color
-) {
-    ReaperCard(
-        accentColor = accentColor
-    ) {
-        Text(
-            text = title,
-            color = ReaperColors.PrimaryText,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
-        )
-    }
-}
-
-@Composable
-private fun DetailResultCard(
-    title: String,
-    body: String,
-    accentColor: Color
-) {
-    ReaperCard(
-        accentColor = accentColor
-    ) {
-        Column {
-            Text(
-                text = title,
-                color = accentColor,
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 1.2.sp
-            )
-
-            Spacer(modifier = Modifier.height(6.dp))
-
-            Text(
-                text = body,
-                color = ReaperColors.SecondaryText,
-                fontSize = 14.sp,
-                lineHeight = 20.sp
-            )
-        }
     }
 }

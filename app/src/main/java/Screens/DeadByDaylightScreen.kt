@@ -43,7 +43,7 @@ fun DeadByDaylightScreen(
     onBackClick: () -> Unit,
     onSurvivorClick: () -> Unit,
     onKillerClick: () -> Unit,
-    onBuildAroundClick: () -> Unit,
+    onItemCoachClick: () -> Unit,
     onMatchCoachClick: () -> Unit,
     onRandomBuildClick: () -> Unit,
     onMetaBuildsClick: () -> Unit,
@@ -136,12 +136,12 @@ fun DeadByDaylightScreen(
             Spacer(modifier = Modifier.height(14.dp))
 
             QuickAccessCard(
-                title = "BUILD AROUND A PERK",
-                subtitle = "Choose any Survivor or Killer perk as the core of a build",
-                accent = Color(0xFF00E5FF),
-                label = "REAPER ENGINE",
+                title = "ITEM COACH",
+                subtitle = "Choose your goal and get ranked items, add-ons, perks, execution tips, and next unlocks",
+                accent = Color(0xFFFFC857),
+                label = "DECISION ENGINE",
                 iconRes = R.drawable.icon_build_around,
-                onClick = onBuildAroundClick
+                onClick = onItemCoachClick
             )
 
             Spacer(modifier = Modifier.height(14.dp))
