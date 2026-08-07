@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="match_coach_result_recommended_perks">Recommended Perks</string>
+    <string name="match_coach_result_chase_plan">Chase Plan</string>
+    <string name="match_coach_result_objective_plan">Objective Plan</string>
+    <string name="match_coach_result_endgame_plan">Endgame Plan</string>
+    <string name="match_coach_result_watch_out">Watch Out For</string>
+    <string name="match_coach_result_analyze_another">Analyze Another Match</string>
+    <string name="match_coach_result_back_dbd">Back to Dead by Daylight</string>
+    <string name="match_coach_result_threat_level">Threat Level</string>
+    <string name="match_coach_result_difficulty">Match Difficulty</string>
+    <string name="match_coach_result_assessment">Reaper Assessment</string>
+    <string name="match_coach_result_tap_details">Tap for Details</string>
+    <string name="match_coach_result_no_advice">No additional advice available.</string>
+</resources>

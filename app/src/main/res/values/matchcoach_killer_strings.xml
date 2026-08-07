@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="match_coach_choose_killer_body">Select the Killer you are preparing to face. Reaper will use that matchup when building your plan.</string>
+    <string name="match_coach_know_threat">Know the Threat</string>
+    <string name="match_coach_know_threat_body">Each Killer changes how you should route, repair, rescue, and prepare for endgame.</string>
+    <string name="match_coach_killer_count">%1$d Killers</string>
+    <string name="match_coach_tap_killer">Tap a Killer to continue to map selection.</string>
+
+    <string name="match_coach_killer_subtitle_blink">Blink mobility, prediction, and line-of-sight pressure</string>
+    <string name="match_coach_killer_subtitle_speed">High-speed pressure, fast rotations, and aggressive chase power</string>
+    <string name="match_coach_killer_subtitle_ranged">Ranged threat, dangerous sightlines, and prediction pressure</string>
+    <string name="match_coach_killer_subtitle_stealth">Stealth, surprise attacks, and difficult tracking</string>
+    <string name="match_coach_killer_subtitle_control">Area control, route denial, and map-object pressure</string>
+    <string name="match_coach_killer_subtitle_disruption">Disruption, secondary objectives, and team-wide pressure</string>
+    <string name="match_coach_killer_subtitle_default">Matchup-specific strategy, counters, and recommended perks</string>
+</resources>

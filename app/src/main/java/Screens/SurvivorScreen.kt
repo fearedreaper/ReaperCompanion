@@ -23,13 +23,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.reapercompanion.R
 import com.example.reapercompanion.design.ReaperColors
 
 data class SurvivorGoal(
+    val id: String,
     val title: String,
     val description: String
 )
@@ -41,32 +44,39 @@ fun SurvivorScreen(
 ) {
     val goals = listOf(
         SurvivorGoal(
-            title = "LOOP BETTER",
-            description = "Extend chases and create distance"
+            id = "LOOP BETTER",
+            title = stringResource(R.string.survivor_goal_loop_title),
+            description = stringResource(R.string.survivor_goal_loop_description)
         ),
         SurvivorGoal(
-            title = "RUSH GENERATORS",
-            description = "Complete objectives as quickly as possible"
+            id = "RUSH GENERATORS",
+            title = stringResource(R.string.survivor_goal_generators_title),
+            description = stringResource(R.string.survivor_goal_generators_description)
         ),
         SurvivorGoal(
-            title = "SUPPORT THE TEAM",
-            description = "Heal, rescue, protect and assist teammates"
+            id = "SUPPORT THE TEAM",
+            title = stringResource(R.string.survivor_goal_support_title),
+            description = stringResource(R.string.survivor_goal_support_description)
         ),
         SurvivorGoal(
-            title = "STEALTH",
-            description = "Avoid detection and disappear from the Killer"
+            id = "STEALTH",
+            title = stringResource(R.string.survivor_goal_stealth_title),
+            description = stringResource(R.string.survivor_goal_stealth_description)
         ),
         SurvivorGoal(
-            title = "TROLL THE KILLER",
-            description = "Create funny moments and annoying mind games"
+            id = "TROLL THE KILLER",
+            title = stringResource(R.string.survivor_goal_troll_title),
+            description = stringResource(R.string.survivor_goal_troll_description)
         ),
         SurvivorGoal(
-            title = "SURVIVE LONGER",
-            description = "Second chances and safer escapes"
+            id = "SURVIVE LONGER",
+            title = stringResource(R.string.survivor_goal_survive_title),
+            description = stringResource(R.string.survivor_goal_survive_description)
         ),
         SurvivorGoal(
-            title = "SURPRISE ME",
-            description = "Let Reaper Companion choose your playstyle"
+            id = "SURPRISE ME",
+            title = stringResource(R.string.survivor_goal_surprise_title),
+            description = stringResource(R.string.survivor_goal_surprise_description)
         )
     )
 
@@ -95,7 +105,7 @@ fun SurvivorScreen(
                 )
 
                 Text(
-                    text = "SURVIVOR",
+                    text = stringResource(R.string.survivor_title),
                     modifier = Modifier.weight(1f),
                     color = ReaperColors.PrimaryText,
                     fontSize = 26.sp,
@@ -111,7 +121,7 @@ fun SurvivorScreen(
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = "What do you want to accomplish?",
+                text = stringResource(R.string.survivor_prompt),
                 color = ReaperColors.SecondaryText,
                 fontSize = 17.sp,
                 textAlign = TextAlign.Center
@@ -126,7 +136,7 @@ fun SurvivorScreen(
                     SurvivorGoalCard(
                         goal = goal,
                         onClick = {
-                            onGoalClick(goal.title)
+                            onGoalClick(goal.id)
                         }
                     )
                 }

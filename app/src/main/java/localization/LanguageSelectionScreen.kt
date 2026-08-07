@@ -14,10 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.reapercompanion.R
 import com.example.reapercompanion.design.ReaperColors
 import com.example.reapercompanion.design.ReaperHeader
 import com.example.reapercompanion.design.ReaperInfoPanel
@@ -41,14 +43,14 @@ fun LanguageSelectionScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 ReaperHeader(
-                    title = "WELCOME",
+                    title = stringResource(R.string.language_welcome),
                     onBackClick = null
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Text(
-                    text = "CHOOSE YOUR LANGUAGE",
+                    text = stringResource(R.string.language_choose_title),
                     modifier = Modifier.fillMaxWidth(),
                     color = ReaperColors.PrimaryText,
                     fontSize = 26.sp,
@@ -59,8 +61,7 @@ fun LanguageSelectionScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text =
-                        "Select the language you want Reaper Companion to use. You can change it later in Settings.",
+                    text = stringResource(R.string.language_choose_body),
                     modifier = Modifier.fillMaxWidth(),
                     color = ReaperColors.SecondaryText,
                     fontSize = 14.sp,
@@ -71,12 +72,24 @@ fun LanguageSelectionScreen(
 
             item {
                 ReaperInfoPanel(
-                    eyebrow = "DEAD BY DAYLIGHT DECISION ENGINE",
-                    title = "Play Without the Language Barrier",
+                    eyebrow =
+                        stringResource(
+                            R.string.language_panel_eyebrow
+                        ),
+                    title =
+                        stringResource(
+                            R.string.language_panel_title
+                        ),
                     body =
-                        "Reaper Companion is being prepared for players around the world.",
+                        stringResource(
+                            R.string.language_panel_body
+                        ),
                     accentColor = Color(0xFFFFC857),
-                    badge = "${SupportedLanguages.all.size} LANGUAGES"
+                    badge =
+                        stringResource(
+                            R.string.language_count,
+                            SupportedLanguages.all.size
+                        )
                 )
             }
 
@@ -99,7 +112,10 @@ fun LanguageSelectionScreen(
 
             item {
                 Text(
-                    text = "Choose a language to continue.",
+                    text =
+                        stringResource(
+                            R.string.language_choose_to_continue
+                        ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(

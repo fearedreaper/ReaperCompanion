@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="survivor_title">Survivor</string>
+    <string name="survivor_prompt">What do you want to accomplish?</string>
+
+    <string name="survivor_goal_loop_title">Loop Better</string>
+    <string name="survivor_goal_loop_description">Extend chases and create distance</string>
+
+    <string name="survivor_goal_generators_title">Rush Generators</string>
+    <string name="survivor_goal_generators_description">Complete objectives as quickly as possible</string>
+
+    <string name="survivor_goal_support_title">Support the Team</string>
+    <string name="survivor_goal_support_description">Heal, rescue, protect and assist teammates</string>
+
+    <string name="survivor_goal_stealth_title">Stealth</string>
+    <string name="survivor_goal_stealth_description">Avoid detection and disappear from the Killer</string>
+
+    <string name="survivor_goal_troll_title">Troll the Killer</string>
+    <string name="survivor_goal_troll_description">Create funny moments and annoying mind games</string>
+
+    <string name="survivor_goal_survive_title">Survive Longer</string>
+    <string name="survivor_goal_survive_description">Second chances and safer escapes</string>
+
+    <string name="survivor_goal_surprise_title">Surprise Me</string>
+    <string name="survivor_goal_surprise_description">Let Reaper Companion choose your playstyle</string>
+</resources>

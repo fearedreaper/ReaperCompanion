@@ -17,10 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.reapercompanion.R
 import com.example.reapercompanion.design.ReaperBadge
 import com.example.reapercompanion.design.ReaperCard
 import com.example.reapercompanion.design.ReaperColors
@@ -49,18 +51,18 @@ fun ItemCoachResultScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 ReaperHeader(
-                    title = "ITEM COACH",
+                    title = stringResource(R.string.itemcoach_title),
                     onBackClick = onBackClick
                 )
             }
 
             item {
                 ReaperInfoPanel(
-                    eyebrow = "REAPER DECISION ENGINE",
+                    eyebrow = stringResource(R.string.itemcoach_eyebrow),
                     title = recommendationSet.goalTitle,
-                    body = "Reaper ranked the strongest loadouts for this objective.",
+                    body = stringResource(R.string.itemcoach_result_body),
                     accentColor = Color(0xFFFFC857),
-                    badge = "RANKED"
+                    badge = stringResource(R.string.itemcoach_ranked)
                 )
             }
 
@@ -68,7 +70,7 @@ fun ItemCoachResultScreen(
                 item {
                     ReaperCard {
                         Text(
-                            text = "Recommendations for this goal are coming soon.",
+                            text = stringResource(R.string.itemcoach_coming_soon),
                             modifier = Modifier.fillMaxWidth(),
                             color = ReaperColors.SecondaryText,
                             fontSize = 14.sp,
@@ -82,9 +84,7 @@ fun ItemCoachResultScreen(
                     items = recommendationSet.recommendations,
                     key = { recommendation -> recommendation.tier.name }
                 ) { recommendation ->
-                    RankedRecommendationCard(
-                        recommendation = recommendation
-                    )
+                    RankedRecommendationCard(recommendation)
                 }
             }
 
@@ -93,18 +93,16 @@ fun ItemCoachResultScreen(
 
                 item {
                     ResultSectionHeader(
-                        title = "NEXT UNLOCK",
+                        title = stringResource(R.string.itemcoach_next_unlock),
                         badge = recommendationSet.nextUnlock.size.toString(),
                         accentColor = Color(0xFFB38CFF)
                     )
                 }
 
                 item {
-                    ReaperCard(
-                        accentColor = Color(0xFFB38CFF)
-                    ) {
+                    ReaperCard(accentColor = Color(0xFFB38CFF)) {
                         Text(
-                            text = "If you unlock one thing next, work toward these:",
+                            text = stringResource(R.string.itemcoach_next_unlock_body),
                             color = ReaperColors.SecondaryText,
                             fontSize = 14.sp,
                             lineHeight = 20.sp
@@ -129,21 +127,21 @@ fun ItemCoachResultScreen(
                 Spacer(modifier = Modifier.height(4.dp))
 
                 ReaperSecondaryButton(
-                    text = "CHOOSE ANOTHER GOAL",
+                    text = stringResource(R.string.itemcoach_choose_another_goal),
                     onClick = onChooseAnotherClick
                 )
             }
 
             item {
                 ReaperSecondaryButton(
-                    text = "BACK",
+                    text = stringResource(R.string.itemcoach_back),
                     onClick = onBackClick
                 )
             }
 
             item {
                 Text(
-                    text = "REAPER RECOMMENDS. YOU EXECUTE.",
+                    text = stringResource(R.string.itemcoach_result_footer),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 4.dp, bottom = 24.dp),
@@ -169,9 +167,12 @@ private fun RankedRecommendationCard(
     }
 
     val tierLabel = when (recommendation.tier) {
-        RecommendationTier.REAPER_CHOICE -> "REAPER'S CHOICE"
-        RecommendationTier.STRONG_ALTERNATIVE -> "STRONG ALTERNATIVE"
-        RecommendationTier.BUDGET -> "BUDGET CHOICE"
+        RecommendationTier.REAPER_CHOICE ->
+            stringResource(R.string.itemcoach_reapers_choice)
+        RecommendationTier.STRONG_ALTERNATIVE ->
+            stringResource(R.string.itemcoach_strong_alternative)
+        RecommendationTier.BUDGET ->
+            stringResource(R.string.itemcoach_budget_choice)
     }
 
     val stars = when (recommendation.tier) {
@@ -180,16 +181,12 @@ private fun RankedRecommendationCard(
         RecommendationTier.BUDGET -> "★★★☆☆"
     }
 
-    ReaperCard(
-        accentColor = accentColor
-    ) {
+    ReaperCard(accentColor = accentColor) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = tierLabel,
                     color = accentColor,
@@ -217,7 +214,7 @@ private fun RankedRecommendationCard(
         Spacer(modifier = Modifier.height(16.dp))
 
         DetailBlock(
-            label = "ITEM",
+            label = stringResource(R.string.itemcoach_item),
             values = listOf(recommendation.item),
             accentColor = accentColor
         )
@@ -225,7 +222,7 @@ private fun RankedRecommendationCard(
         Spacer(modifier = Modifier.height(14.dp))
 
         DetailBlock(
-            label = "ADD-ONS",
+            label = stringResource(R.string.itemcoach_addons),
             values = recommendation.addOns,
             accentColor = ReaperColors.CyanGlow
         )
@@ -233,7 +230,7 @@ private fun RankedRecommendationCard(
         Spacer(modifier = Modifier.height(14.dp))
 
         DetailBlock(
-            label = "PERKS",
+            label = stringResource(R.string.itemcoach_perks),
             values = recommendation.perks,
             accentColor = Color(0xFF56D6A7)
         )
@@ -241,7 +238,7 @@ private fun RankedRecommendationCard(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "WHY THIS WORKS",
+            text = stringResource(R.string.itemcoach_why_this_works),
             color = accentColor,
             fontSize = 11.sp,
             fontWeight = FontWeight.Black,
@@ -262,7 +259,7 @@ private fun RankedRecommendationCard(
         Spacer(modifier = Modifier.height(14.dp))
 
         Text(
-            text = "REAPER EXECUTION TIP",
+            text = stringResource(R.string.itemcoach_execution_tip),
             color = Color(0xFFFF6B6B),
             fontSize = 11.sp,
             fontWeight = FontWeight.Black,

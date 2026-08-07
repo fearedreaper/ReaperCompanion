@@ -14,15 +14,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.reapercompanion.R
 import com.example.reapercompanion.database.MatchCoachEngine
 import com.example.reapercompanion.design.ReaperColors
 import com.example.reapercompanion.design.ReaperHeader
 import com.example.reapercompanion.design.ReaperInfoPanel
 import com.example.reapercompanion.design.ReaperListCard
+import java.util.Locale
 
 @Composable
 fun MatchCoachKillerScreen(
@@ -46,7 +49,7 @@ fun MatchCoachKillerScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 ReaperHeader(
-                    title = "MATCH COACH",
+                    title = stringResource(R.string.match_coach_title),
                     onBackClick = onBackClick,
                     accentColor = Color(0xFFFF6B6B)
                 )
@@ -54,7 +57,7 @@ fun MatchCoachKillerScreen(
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "Step 1 of 3",
+                    text = stringResource(R.string.match_coach_step_1),
                     color = Color(0xFFFF6B6B),
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
@@ -64,7 +67,7 @@ fun MatchCoachKillerScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "CHOOSE THE KILLER",
+                    text = stringResource(R.string.match_coach_choose_killer),
                     color = ReaperColors.PrimaryText,
                     fontSize = 26.sp,
                     fontWeight = FontWeight.Black
@@ -73,8 +76,7 @@ fun MatchCoachKillerScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text =
-                        "Select the Killer you are preparing to face. Reaper will use that matchup when building your plan.",
+                    text = stringResource(R.string.match_coach_choose_killer_body),
                     color = ReaperColors.SecondaryText,
                     fontSize = 14.sp,
                     lineHeight = 20.sp
@@ -83,12 +85,14 @@ fun MatchCoachKillerScreen(
 
             item {
                 ReaperInfoPanel(
-                    eyebrow = "REAPER MATCH COACH",
-                    title = "Know the Threat",
-                    body =
-                        "Each Killer changes how you should route, repair, rescue, and prepare for endgame.",
+                    eyebrow = stringResource(R.string.match_coach_title),
+                    title = stringResource(R.string.match_coach_know_threat),
+                    body = stringResource(R.string.match_coach_know_threat_body),
                     accentColor = Color(0xFFFF6B6B),
-                    badge = "${killers.size} KILLERS"
+                    badge = stringResource(
+                        R.string.match_coach_killer_count,
+                        killers.size
+                    )
                 )
             }
 
@@ -99,9 +103,10 @@ fun MatchCoachKillerScreen(
                 }
             ) { killer ->
                 ReaperListCard(
-                    title = killer,
+                    title = localizedKillerDisplayName(killer),
                     description = killerSubtitle(killer),
                     onClick = {
+                        // Preserve the canonical English Killer name for MatchCoachEngine.
                         onKillerSelected(killer)
                     },
                     accentColor = Color(0xFFFF6B6B),
@@ -111,7 +116,7 @@ fun MatchCoachKillerScreen(
 
             item {
                 Text(
-                    text = "Tap a Killer to continue to map selection.",
+                    text = stringResource(R.string.match_coach_tap_killer),
                     modifier = Modifier
                         .padding(
                             top = 6.dp,
@@ -127,6 +132,7 @@ fun MatchCoachKillerScreen(
     }
 }
 
+@Composable
 private fun killerSubtitle(
     killer: String
 ): String {
@@ -134,7 +140,7 @@ private fun killerSubtitle(
 
     return when {
         normalized.contains("nurse") ->
-            "Blink mobility, prediction, and line-of-sight pressure"
+            stringResource(R.string.match_coach_killer_subtitle_blink)
 
         normalized.contains("blight") ||
                 normalized.contains("hillbilly") ||
@@ -142,7 +148,7 @@ private fun killerSubtitle(
                 normalized.contains("mastermind") ||
                 normalized.contains("houndmaster") ||
                 normalized.contains("slasher") ->
-            "High-speed pressure, fast rotations, and aggressive chase power"
+            stringResource(R.string.match_coach_killer_subtitle_speed)
 
         normalized.contains("huntress") ||
                 normalized.contains("deathslinger") ||
@@ -153,7 +159,7 @@ private fun killerSubtitle(
                 normalized.contains("unknown") ||
                 normalized.contains("animatronic") ||
                 normalized.contains("first") ->
-            "Ranged threat, dangerous sightlines, and prediction pressure"
+            stringResource(R.string.match_coach_killer_subtitle_ranged)
 
         normalized.contains("spirit") ||
                 normalized.contains("wraith") ||
@@ -164,7 +170,7 @@ private fun killerSubtitle(
                 normalized.contains("good guy") ||
                 normalized.contains("dark lord") ||
                 normalized.contains("ghoul") ->
-            "Stealth, surprise attacks, and difficult tracking"
+            stringResource(R.string.match_coach_killer_subtitle_stealth)
 
         normalized.contains("trapper") ||
                 normalized.contains("hag") ||
@@ -172,7 +178,7 @@ private fun killerSubtitle(
                 normalized.contains("skull merchant") ||
                 normalized.contains("singularity") ||
                 normalized.contains("xenomorph") ->
-            "Area control, route denial, and map-object pressure"
+            stringResource(R.string.match_coach_killer_subtitle_control)
 
         normalized.contains("doctor") ||
                 normalized.contains("clown") ||
@@ -185,9 +191,60 @@ private fun killerSubtitle(
                 normalized.contains("demogorgon") ||
                 normalized.contains("lich") ||
                 normalized.contains("krasue") ->
-            "Disruption, secondary objectives, and team-wide pressure"
+            stringResource(R.string.match_coach_killer_subtitle_disruption)
 
         else ->
-            "Matchup-specific strategy, counters, and recommended perks"
+            stringResource(R.string.match_coach_killer_subtitle_default)
     }
 }
+
+private fun localizedKillerDisplayName(
+    killer: String
+): String {
+    if (Locale.getDefault().language != "es") {
+        return killer
+    }
+
+    return spanishKillerNames[killer] ?: killer
+}
+
+private val spanishKillerNames = mapOf(
+    "The Trapper" to "El Trampero",
+    "The Wraith" to "El Espectro",
+    "The Hillbilly" to "El Pueblerino",
+    "The Nurse" to "La Enfermera",
+    "The Shape" to "La Forma",
+    "The Hag" to "La Bruja",
+    "The Doctor" to "El Doctor",
+    "The Huntress" to "La Cazadora",
+    "The Cannibal" to "El Caníbal",
+    "The Nightmare" to "La Pesadilla",
+    "The Pig" to "La Cerda",
+    "The Clown" to "El Payaso",
+    "The Spirit" to "El Espíritu",
+    "The Legion" to "La Legión",
+    "The Plague" to "La Plaga",
+    "The Ghost Face" to "El Ghost Face",
+    "The Demogorgon" to "El Demogorgon",
+    "The Oni" to "El Oni",
+    "The Deathslinger" to "El Arponero",
+    "The Executioner" to "El Verdugo",
+    "The Blight" to "La Plaga",
+    "The Twins" to "Los Gemelos",
+    "The Trickster" to "El Traicionero",
+    "The Nemesis" to "El Némesis",
+    "The Cenobite" to "El Cenobita",
+    "The Artist" to "La Artista",
+    "The Onryo" to "La Onryō",
+    "The Dredge" to "La Draga",
+    "The Mastermind" to "El Cerebro",
+    "The Knight" to "El Caballero",
+    "The Skull Merchant" to "La Comerciante de Calaveras",
+    "The Singularity" to "La Singularidad",
+    "The Xenomorph" to "El Xenomorfo",
+    "The Good Guy" to "El Chico Bueno",
+    "The Unknown" to "Lo Desconocido",
+    "The Lich" to "El Liche",
+    "The Dark Lord" to "El Señor Oscuro",
+    "The Houndmaster" to "La Maestra de Sabuesos"
+)

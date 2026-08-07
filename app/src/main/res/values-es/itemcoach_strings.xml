@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Pantalla Item Coach -->
+    <string name="itemcoach_title">Item Coach</string>
+    <string name="itemcoach_eyebrow">Motor de decisiones Reaper</string>
+    <string name="itemcoach_goal_title">¿Qué estás intentando hacer?</string>
+    <string name="itemcoach_goal_body">Elige tu objetivo y Reaper recomendará el objeto, complementos, perks, ofrenda y estrategia que mejor lo apoyen.</string>
+    <string name="itemcoach_full_loadout">Equipamiento completo</string>
+    <string name="itemcoach_footer">Reaper recomienda el conjunto completo, no solo cuatro perks.</string>
+
+    <!-- Objetivos de Item Coach -->
+    <string name="itemcoach_goal_blind_title">Cegar al Asesino</string>
+    <string name="itemcoach_goal_blind_description">Crea una configuración centrada en linternas para cegamientos y rescates.</string>
+    <string name="itemcoach_goal_heal_title">Curar más rápido</string>
+    <string name="itemcoach_goal_heal_description">Configura tu equipo para curaciones rápidas y recuperación del equipo.</string>
+    <string name="itemcoach_goal_generators_title">Acelerar generadores</string>
+    <string name="itemcoach_goal_generators_description">Maximiza la eficiencia de reparación y la presión sobre generadores.</string>
+    <string name="itemcoach_goal_sabotage_title">Sabotear ganchos</string>
+    <string name="itemcoach_goal_sabotage_description">Prepárate para negar ganchos y realizar jugadas de rescate.</string>
+    <string name="itemcoach_goal_support_title">Apoyar a los compañeros</string>
+    <string name="itemcoach_goal_support_description">Mejora la información, la curación y el potencial de rescate.</string>
+    <string name="itemcoach_goal_stealth_title">Jugar con sigilo</string>
+    <string name="itemcoach_goal_stealth_description">Reduce la detección y evita persecuciones innecesarias.</string>
+
+    <!-- Resultados de Item Coach -->
+    <string name="itemcoach_result_body">Reaper clasificó los equipamientos más fuertes para este objetivo.</string>
+    <string name="itemcoach_ranked">Clasificado</string>
+    <string name="itemcoach_coming_soon">Las recomendaciones para este objetivo estarán disponibles pronto.</string>
+    <string name="itemcoach_next_unlock">Próximo desbloqueo</string>
+    <string name="itemcoach_next_unlock_body">Si vas a desbloquear algo después, prioriza esto:</string>
+    <string name="itemcoach_choose_another_goal">Elegir otro objetivo</string>
+    <string name="itemcoach_back">Atrás</string>
+    <string name="itemcoach_result_footer">Reaper recomienda. Tú ejecutas.</string>
+    <string name="itemcoach_reapers_choice">Elección de Reaper</string>
+    <string name="itemcoach_strong_alternative">Alternativa fuerte</string>
+    <string name="itemcoach_budget_choice">Opción económica</string>
+    <string name="itemcoach_item">Objeto</string>
+    <string name="itemcoach_addons">Complementos</string>
+    <string name="itemcoach_perks">Perks</string>
+    <string name="itemcoach_why_this_works">Por qué funciona</string>
+    <string name="itemcoach_execution_tip">Consejo de ejecución de Reaper</string>
+
+</resources>

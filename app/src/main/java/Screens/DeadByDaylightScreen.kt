@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -70,7 +71,7 @@ fun DeadByDaylightScreen(
                 )
 
                 Text(
-                    text = "DEAD BY DAYLIGHT",
+                    text = stringResource(R.string.home_dead_by_daylight),
                     modifier = Modifier.weight(1f),
                     color = ReaperColors.PrimaryText,
                     fontSize = 22.sp,
@@ -88,7 +89,7 @@ fun DeadByDaylightScreen(
             Spacer(modifier = Modifier.height(26.dp))
 
             Text(
-                text = "CHOOSE YOUR PATH",
+                text = stringResource(R.string.dbd_choose_your_path),
                 modifier = Modifier.fillMaxWidth(),
                 color = ReaperColors.PrimaryText,
                 fontSize = 13.sp,
@@ -99,12 +100,12 @@ fun DeadByDaylightScreen(
             Spacer(modifier = Modifier.height(14.dp))
 
             PremiumRoleCard(
-                title = "SURVIVOR",
-                subtitle = "Loop. Heal. Repair. Escape.",
+                title = stringResource(R.string.dbd_survivor),
+                subtitle = stringResource(R.string.dbd_survivor_subtitle),
                 description =
-                    "Tell Reaper Companion what you want to accomplish and get a build matched to your playstyle.",
+                    stringResource(R.string.dbd_survivor_body),
                 accent = ReaperColors.CyanGlow,
-                badge = "BUILD WIZARD",
+                badge = stringResource(R.string.dbd_build_wizard),
                 iconRes = R.drawable.icon_survivor,
                 onClick = onSurvivorClick
             )
@@ -112,12 +113,12 @@ fun DeadByDaylightScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             PremiumRoleCard(
-                title = "KILLER",
-                subtitle = "Chase. Pressure. Control. Sacrifice.",
+                title = stringResource(R.string.dbd_killer),
+                subtitle = stringResource(R.string.dbd_killer_subtitle),
                 description =
-                    "Build around slowdown, stealth, aura reading, chase power, or pure aggression.",
+                    stringResource(R.string.dbd_killer_body),
                 accent = Color(0xFFE24A4A),
-                badge = "BUILD WIZARD",
+                badge = stringResource(R.string.dbd_build_wizard),
                 iconRes = R.drawable.icon_killer,
                 onClick = onKillerClick
             )
@@ -125,7 +126,7 @@ fun DeadByDaylightScreen(
             Spacer(modifier = Modifier.height(26.dp))
 
             Text(
-                text = "QUICK ACCESS",
+                text = stringResource(R.string.dbd_quick_access),
                 modifier = Modifier.fillMaxWidth(),
                 color = ReaperColors.PrimaryText,
                 fontSize = 13.sp,
@@ -136,10 +137,10 @@ fun DeadByDaylightScreen(
             Spacer(modifier = Modifier.height(14.dp))
 
             QuickAccessCard(
-                title = "ITEM COACH",
-                subtitle = "Choose your goal and get ranked items, add-ons, perks, execution tips, and next unlocks",
+                title = stringResource(R.string.dbd_build_around_perk),
+                subtitle = stringResource(R.string.dbd_build_around_perk_body),
                 accent = Color(0xFFFFC857),
-                label = "DECISION ENGINE",
+                label = stringResource(R.string.language_panel_eyebrow),
                 iconRes = R.drawable.icon_build_around,
                 onClick = onItemCoachClick
             )
@@ -147,10 +148,10 @@ fun DeadByDaylightScreen(
             Spacer(modifier = Modifier.height(14.dp))
 
             QuickAccessCard(
-                title = "REAPER MATCH COACH",
-                subtitle = "Choose a Killer and map to generate a complete Survivor match plan",
+                title = stringResource(R.string.dbd_match_coach),
+                subtitle = stringResource(R.string.dbd_match_coach_body),
                 accent = Color(0xFF56D6A7),
-                label = "MATCH PLAN",
+                label = stringResource(R.string.dbd_match_plan),
                 iconRes = R.drawable.icon_match_coach,
                 onClick = onMatchCoachClick
             )
@@ -158,10 +159,10 @@ fun DeadByDaylightScreen(
             Spacer(modifier = Modifier.height(14.dp))
 
             QuickAccessCard(
-                title = "RANDOM BUILD",
-                subtitle = "Let Reaper Companion choose everything",
+                title = stringResource(R.string.dbd_random_build),
+                subtitle = stringResource(R.string.dbd_random_build_body),
                 accent = Color(0xFFB26BFF),
-                label = "SURPRISE ME",
+                label = stringResource(R.string.dbd_surprise_me),
                 iconRes = R.drawable.icon_random,
                 onClick = onRandomBuildClick
             )
@@ -169,10 +170,10 @@ fun DeadByDaylightScreen(
             Spacer(modifier = Modifier.height(14.dp))
 
             QuickAccessCard(
-                title = "META BUILDS",
-                subtitle = "Strong options for the current game",
+                title = stringResource(R.string.dbd_meta_builds),
+                subtitle = stringResource(R.string.dbd_meta_builds_body),
                 accent = Color(0xFFFFC857),
-                label = "TOP PICKS",
+                label = stringResource(R.string.dbd_top_picks),
                 iconRes = R.drawable.icon_meta,
                 onClick = onMetaBuildsClick
             )
@@ -180,10 +181,10 @@ fun DeadByDaylightScreen(
             Spacer(modifier = Modifier.height(14.dp))
 
             QuickAccessCard(
-                title = "FAVORITES",
-                subtitle = "Your saved Survivor and Killer builds",
+                title = stringResource(R.string.dbd_favorites),
+                subtitle = stringResource(R.string.dbd_favorites_body),
                 accent = Color(0xFFFF6B9D),
-                label = "SAVED",
+                label = stringResource(R.string.dbd_saved),
                 iconRes = R.drawable.icon_favorites,
                 onClick = onFavoritesClick
             )
@@ -235,7 +236,7 @@ private fun HeroPanel() {
                     color = Color(0x2200E5FF)
                 ) {
                     Text(
-                        text = "REAPER COMPANION",
+                        text = stringResource(R.string.app_name),
                         color = ReaperColors.CyanGlow,
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
@@ -250,7 +251,7 @@ private fun HeroPanel() {
                 Spacer(modifier = Modifier.height(18.dp))
 
                 Text(
-                    text = "HOW DO YOU WANT TO PLAY?",
+                    text = stringResource(R.string.dbd_hero_title),
                     color = ReaperColors.PrimaryText,
                     fontSize = 25.sp,
                     fontWeight = FontWeight.Black
@@ -260,7 +261,7 @@ private fun HeroPanel() {
 
                 Text(
                     text =
-                        "Choose Survivor or Killer, then tell us your goal. Reaper Companion handles the build.",
+                        stringResource(R.string.dbd_hero_body),
                     color = ReaperColors.SecondaryText,
                     fontSize = 15.sp,
                     lineHeight = 22.sp
@@ -368,7 +369,7 @@ private fun PremiumRoleCard(
                 Spacer(modifier = Modifier.height(18.dp))
 
                 Text(
-                    text = "OPEN  ›",
+                    text = "${stringResource(R.string.open)}  ›",
                     modifier = Modifier.fillMaxWidth(),
                     color = accent,
                     fontSize = 14.sp,

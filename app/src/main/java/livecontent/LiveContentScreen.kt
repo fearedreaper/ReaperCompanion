@@ -23,10 +23,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.reapercompanion.R
 import com.example.reapercompanion.design.ReaperBadge
 import com.example.reapercompanion.design.ReaperCard
 import com.example.reapercompanion.design.ReaperColors
@@ -80,28 +82,28 @@ fun LiveContentScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 ReaperHeader(
-                    title = "REAPER LIVE",
+                    title = stringResource(R.string.live_content_title),
                     onBackClick = onBackClick
                 )
             }
 
             item {
                 ReaperInfoPanel(
-                    eyebrow = "REAPER NETWORK",
+                    eyebrow = stringResource(R.string.live_network),
                     title = if (isLoading) {
-                        "Checking for Updates"
+                        stringResource(R.string.live_checking_updates)
                     } else {
-                        "Fresh Content Without App Updates"
+                        stringResource(R.string.live_fresh_content)
                     },
                     body = if (isLoading) {
-                        "Reaper is contacting the live content source."
+                        stringResource(R.string.live_contacting_source)
                     } else {
-                        "Announcements, live events, and featured builds update remotely without a new Play Store release."
+                        stringResource(R.string.live_content_body)
                     },
                     badge = if (isLoading) {
-                        "SYNCING"
+                        stringResource(R.string.live_syncing)
                     } else {
-                        "LIVE"
+                        stringResource(R.string.live)
                     }
                 )
             }
@@ -113,7 +115,7 @@ fun LiveContentScreen(
             } else {
                 item {
                     LiveSectionHeader(
-                        title = "ANNOUNCEMENTS",
+                        title = stringResource(R.string.live_announcements),
                         count = activeAnnouncements.size,
                         accentColor = ReaperColors.CyanGlow
                     )
@@ -122,7 +124,7 @@ fun LiveContentScreen(
                 if (activeAnnouncements.isEmpty()) {
                     item {
                         EmptyLiveCard(
-                            message = "No active announcements."
+                            message = stringResource(R.string.live_no_announcements)
                         )
                     }
                 } else {
@@ -144,7 +146,7 @@ fun LiveContentScreen(
 
                 item {
                     LiveSectionHeader(
-                        title = "LIVE EVENTS",
+                        title = stringResource(R.string.live_events),
                         count = activeEvents.size,
                         accentColor = Color(0xFFFFC857)
                     )
@@ -153,7 +155,7 @@ fun LiveContentScreen(
                 if (activeEvents.isEmpty()) {
                     item {
                         EmptyLiveCard(
-                            message = "No active events."
+                            message = stringResource(R.string.live_no_events)
                         )
                     }
                 } else {
@@ -175,7 +177,7 @@ fun LiveContentScreen(
 
                 item {
                     LiveSectionHeader(
-                        title = "FEATURED BUILDS",
+                        title = stringResource(R.string.live_featured_builds),
                         count = featuredBuilds.size,
                         accentColor = Color(0xFF56D6A7)
                     )
@@ -184,7 +186,7 @@ fun LiveContentScreen(
                 if (featuredBuilds.isEmpty()) {
                     item {
                         EmptyLiveCard(
-                            message = "No featured builds."
+                            message = stringResource(R.string.live_no_featured_builds)
                         )
                     }
                 } else {
@@ -203,7 +205,7 @@ fun LiveContentScreen(
 
             item {
                 ReaperSecondaryButton(
-                    text = "BACK",
+                    text = stringResource(R.string.back),
                     onClick = onBackClick
                 )
             }
@@ -211,9 +213,9 @@ fun LiveContentScreen(
             item {
                 Text(
                     text = if (isLoading) {
-                        "CONNECTING TO REAPER NETWORK..."
+                        stringResource(R.string.live_connecting_footer)
                     } else {
-                        "LIVE CONTENT LOADED FROM THE SHARED REMOTE SOURCE."
+                        stringResource(R.string.live_loaded_footer)
                     },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -252,7 +254,7 @@ private fun LoadingCard() {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "SYNCING LIVE CONTENT",
+                    text = stringResource(R.string.live_syncing_content),
                     color = ReaperColors.PrimaryText,
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Black
@@ -262,7 +264,7 @@ private fun LoadingCard() {
 
                 Text(
                     text =
-                        "If the remote source is unavailable, Reaper will safely use the local fallback content.",
+                        stringResource(R.string.live_fallback_body),
                     color = ReaperColors.SecondaryText,
                     fontSize = 13.sp,
                     lineHeight = 18.sp

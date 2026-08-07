@@ -17,6 +17,7 @@ import com.example.reapercompanion.itemcoach.ItemCoachGoalScreen
 import com.example.reapercompanion.itemcoach.ItemCoachRecommendationSet
 import com.example.reapercompanion.itemcoach.ItemCoachResultScreen
 import com.example.reapercompanion.localization.LanguagePreferences
+import com.example.reapercompanion.localization.LocaleManager
 import com.example.reapercompanion.localization.LanguageSelectionScreen
 import com.example.reapercompanion.settings.SettingsScreen
 import com.example.reapercompanion.models.BuildRecommendation
@@ -50,6 +51,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        if (LanguagePreferences.hasSelectedLanguage(this)) {
+            LocaleManager.applySavedLanguage(this)
+        }
 
         setContent {
             ReaperCompanionTheme {
@@ -156,7 +161,13 @@ class MainActivity : ComponentActivity() {
                                 this@MainActivity,
                                 language.code
                             )
-                            languageReady = true
+
+                            LocaleManager.applyLanguage(
+                                context = this@MainActivity,
+                                languageCode = language.code
+                            )
+
+                            recreate()
                         }
                     )
                 } else {

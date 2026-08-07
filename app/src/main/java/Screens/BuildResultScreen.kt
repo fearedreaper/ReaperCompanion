@@ -32,16 +32,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.reapercompanion.R
 import com.example.reapercompanion.database.PerkDatabase
 import com.example.reapercompanion.design.ReaperColors
 import com.example.reapercompanion.models.BuildRecommendation
 import com.example.reapercompanion.models.FavoriteBuild
 import com.example.reapercompanion.models.Perk
 import com.example.reapercompanion.storage.FavoritesStorage
+import java.util.Locale
 
 @Composable
 fun BuildResultScreen(
@@ -51,12 +54,13 @@ fun BuildResultScreen(
 ) {
     val context = LocalContext.current
     val build = getBuildForGoal(selectedGoal)
+    val localizedBuild = localizeBuildForDisplay(build)
 
     val favoriteBuild = FavoriteBuild(
         name = build.name,
         goal = build.goal,
         score = build.score,
-        difficulty = build.difficulty,
+        difficulty = localizedBuild.difficulty,
         perks = build.perks.map { it.name }
     )
 
@@ -94,7 +98,7 @@ fun BuildResultScreen(
                 Spacer(modifier = Modifier.height(18.dp))
 
                 Text(
-                    text = "YOUR REAPER BUILD",
+                    text = stringResource(R.string.survivor_result_your_build),
                     modifier = Modifier.fillMaxWidth(),
                     color = ReaperColors.CyanGlow,
                     fontSize = 13.sp,
@@ -106,7 +110,7 @@ fun BuildResultScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = build.name,
+                    text = localizedBuild.name,
                     modifier = Modifier.fillMaxWidth(),
                     color = ReaperColors.PrimaryText,
                     fontSize = 31.sp,
@@ -117,7 +121,7 @@ fun BuildResultScreen(
                 Spacer(modifier = Modifier.height(5.dp))
 
                 Text(
-                    text = build.goal,
+                    text = localizedBuild.goal,
                     modifier = Modifier.fillMaxWidth(),
                     color = ReaperColors.SecondaryText,
                     fontSize = 14.sp,
@@ -128,12 +132,12 @@ fun BuildResultScreen(
             item {
                 ScorePanel(
                     score = build.score,
-                    difficulty = build.difficulty
+                    difficulty = localizedBuild.difficulty
                 )
             }
 
             item {
-                SectionHeading("RECOMMENDED PERKS")
+                SectionHeading(stringResource(R.string.survivor_result_recommended_perks))
             }
 
             item {
@@ -147,7 +151,7 @@ fun BuildResultScreen(
 
             item {
                 StrengthPanel(
-                    strengths = build.strengths
+                    strengths = localizedBuild.strengths
                 )
             }
 
@@ -162,7 +166,7 @@ fun BuildResultScreen(
 
             item {
                 ExplanationPanel(
-                    explanation = build.explanation
+                    explanation = localizedBuild.explanation
                 )
             }
 
@@ -202,9 +206,9 @@ fun BuildResultScreen(
                 ) {
                     Text(
                         text = if (isSaved) {
-                            "SAVED ✓"
+                            stringResource(R.string.survivor_result_saved)
                         } else {
-                            "SAVE BUILD"
+                            stringResource(R.string.survivor_result_save_build)
                         },
                         fontWeight = FontWeight.Black,
                         fontSize = 15.sp
@@ -225,7 +229,7 @@ fun BuildResultScreen(
                     )
                 ) {
                     Text(
-                        text = "GENERATE ANOTHER BUILD",
+                        text = stringResource(R.string.survivor_result_generate_another),
                         fontWeight = FontWeight.Bold
                     )
                 }
@@ -244,7 +248,7 @@ fun BuildResultScreen(
                     )
                 ) {
                     Text(
-                        text = "BACK TO SURVIVOR GOALS",
+                        text = stringResource(R.string.survivor_result_back_goals),
                         color = ReaperColors.CyanGlow,
                         fontWeight = FontWeight.Bold
                     )
@@ -295,7 +299,7 @@ private fun ScorePanel(
             ) {
                 Column {
                     Text(
-                        text = "REAPER SCORE",
+                        text = stringResource(R.string.survivor_result_score),
                         color = ReaperColors.CyanGlow,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
@@ -312,7 +316,7 @@ private fun ScorePanel(
                     )
 
                     Text(
-                        text = "OUT OF 100",
+                        text = stringResource(R.string.survivor_result_out_of_100),
                         color = ReaperColors.SecondaryText,
                         fontSize = 11.sp,
                         letterSpacing = 1.sp
@@ -323,7 +327,7 @@ private fun ScorePanel(
                     horizontalAlignment = Alignment.End
                 ) {
                     Text(
-                        text = "DIFFICULTY",
+                        text = stringResource(R.string.survivor_result_difficulty),
                         color = ReaperColors.SecondaryText,
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold
@@ -417,7 +421,7 @@ private fun PerkCard(
             Spacer(modifier = Modifier.height(12.dp))
 
             Text(
-                text = perk.name,
+                text = localizedPerkName(perk.name),
                 modifier = Modifier.fillMaxWidth(),
                 color = ReaperColors.PrimaryText,
                 fontSize = 14.sp,
@@ -433,7 +437,7 @@ private fun PerkCard(
             )
 
             Text(
-                text = "TAP FOR DETAILS",
+                text = stringResource(R.string.survivor_result_tap_details),
                 modifier = Modifier.fillMaxWidth(),
                 color = ReaperColors.CyanGlow,
                 fontSize = 9.sp,
@@ -450,7 +454,7 @@ private fun StrengthPanel(
     strengths: List<String>
 ) {
     InformationPanel(
-        title = "BUILD STRENGTHS",
+        title = stringResource(R.string.survivor_result_strengths),
         lines = strengths.map { strength ->
             "✓  $strength"
         }
@@ -477,7 +481,7 @@ private fun AlternativePerksPanel(
             modifier = Modifier.padding(21.dp)
         ) {
             Text(
-                text = "ALTERNATIVE PERKS",
+                text = stringResource(R.string.survivor_result_alternative_perks),
                 color = ReaperColors.CyanGlow,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
@@ -507,7 +511,7 @@ private fun AlternativePerksPanel(
                         modifier = Modifier.padding(14.dp)
                     ) {
                         Text(
-                            text = perk.name,
+                            text = localizedPerkName(perk.name),
                             color = ReaperColors.PrimaryText,
                             fontSize = 15.sp,
                             fontWeight = FontWeight.Bold
@@ -516,7 +520,7 @@ private fun AlternativePerksPanel(
                         Spacer(modifier = Modifier.height(3.dp))
 
                         Text(
-                            text = "${perk.owner} • Tap for details",
+                            text = "${perk.owner} • ${stringResource(R.string.survivor_result_tap_details_sentence)}",
                             color = ReaperColors.SecondaryText,
                             fontSize = 12.sp
                         )
@@ -587,7 +591,7 @@ private fun ExplanationPanel(
             modifier = Modifier.padding(21.dp)
         ) {
             Text(
-                text = "WHY THIS BUILD WORKS",
+                text = stringResource(R.string.survivor_result_why_build_works),
                 color = ReaperColors.CyanGlow,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
@@ -618,6 +622,164 @@ private fun SectionHeading(
         letterSpacing = 2.sp
     )
 }
+
+private fun localizedPerkName(
+    englishName: String
+): String {
+    if (Locale.getDefault().language != "es") {
+        return englishName
+    }
+
+    return spanishPerkNames[englishName] ?: englishName
+}
+
+private val spanishPerkNames = mapOf(
+    "Windows of Opportunity" to "Oportunidades",
+    "Lithe" to "Agilidad",
+    "Resilience" to "Resiliencia",
+    "Adrenaline" to "Adrenalina",
+    "Finesse" to "Finura",
+    "Balanced Landing" to "Caída Equilibrada",
+    "Quick & Quiet" to "Velocidad Silenciosa",
+    "Five Moves Ahead" to "Cinco Movimientos por Delante",
+
+    "Deja Vu" to "Déjà Vu",
+    "Prove Thyself" to "Demuestra lo que Vales",
+    "Built to Last" to "Fabricado para Durar",
+    "Overzealous" to "Exceso de Entusiasmo",
+    "Stake Out" to "Bajo Vigilancia",
+    "Hyperfocus" to "Hiperconcentración",
+
+    "We'll Make It" to "Lo Conseguiremos",
+    "Botany Knowledge" to "Conocimientos de Botánica",
+    "Empathy" to "Empatía",
+    "Kindred" to "Afinidad",
+    "Desperate Measures" to "Medidas Desesperadas",
+    "Aftercare" to "Postratamiento",
+    "Babysitter" to "Canguro",
+    "Leader" to "Líder",
+
+    "Lightweight" to "De Pies Ligeros",
+    "Distortion" to "Distorsión",
+    "Iron Will" to "Voluntad de Hierro",
+    "Dance With Me" to "Baila Conmigo",
+    "Lucky Break" to "Golpe de Suerte",
+    "Calm Spirit" to "Espíritu Tranquilo",
+    "Urban Evasion" to "Evasión Urbana",
+
+    "Head On" to "De Frente",
+    "Flashbang" to "Granada Aturdidora",
+    "Deception" to "Engaño",
+    "Blast Mine" to "Mina Explosiva",
+    "Diversion" to "Diversión",
+    "Power Struggle" to "Lucha de Poder",
+    "Chemical Trap" to "Trampa Química",
+
+    "Off the Record" to "Extraoficial",
+    "Decisive Strike" to "Golpe Decisivo",
+    "Unbreakable" to "Inquebrantable",
+    "Deliverance" to "Liberación",
+    "Dead Hard" to "Fajador",
+
+    "Bond" to "Vínculo"
+)
+
+private fun localizeBuildForDisplay(
+    build: BuildRecommendation
+): BuildRecommendation {
+    if (Locale.getDefault().language != "es") {
+        return build
+    }
+
+    return build.copy(
+        name = spanishBuildText[build.name] ?: build.name,
+        goal = spanishBuildText[build.goal] ?: build.goal,
+        difficulty = spanishBuildText[build.difficulty] ?: build.difficulty,
+        strengths = build.strengths.map { strength ->
+            spanishBuildText[strength] ?: strength
+        },
+        explanation =
+            spanishBuildText[build.explanation]
+                ?: build.explanation
+    )
+}
+
+private val spanishBuildText = mapOf(
+    "LOOP BETTER" to "MEJORAR EN PERSECUCIONES",
+    "RUSH GENERATORS" to "ACELERAR GENERADORES",
+    "SUPPORT THE TEAM" to "APOYAR AL EQUIPO",
+    "STEALTH" to "SIGILO",
+    "TROLL THE KILLER" to "TROLLEAR AL ASESINO",
+    "SURVIVE LONGER" to "SOBREVIVIR MÁS TIEMPO",
+    "SURPRISE ME" to "SORPRÉNDEME",
+
+    "Loop Monster" to "Monstruo de persecución",
+    "Generator Specialist" to "Especialista en generadores",
+    "Guardian Angel" to "Ángel guardián",
+    "Vanishing Act" to "Acto de desaparición",
+    "Chaos Gremlin" to "Gremlin del caos",
+    "Second Chance" to "Segunda oportunidad",
+    "Reaper's Choice" to "Elección de Reaper",
+
+    "Easy" to "Fácil",
+    "Medium" to "Media",
+    "Hard" to "Difícil",
+
+    "Strong chase pathing" to "Rutas fuertes durante la persecución",
+    "Creates distance after vaults" to "Crea distancia después de saltos",
+    "Useful in solo queue" to "Útil en Solo Queue",
+    "Powerful endgame recovery" to "Recuperación potente en el final de partida",
+
+    "Fast objective progress" to "Progreso rápido de objetivos",
+    "Generator information" to "Información de generadores",
+    "Beginner friendly" to "Apto para principiantes",
+    "Strong coordinated repairs" to "Reparaciones coordinadas fuertes",
+
+    "Fast healing" to "Curación rápida",
+    "Strong rescue value" to "Gran valor en rescates",
+    "Team information" to "Información del equipo",
+
+    "Quiet movement" to "Movimiento silencioso",
+    "Reduced tracking information" to "Menos información de rastreo",
+    "Strong line-of-sight breaks" to "Fuertes rupturas de línea de visión",
+    "Useful against aura reading" to "Útil contra lectura de auras",
+
+    "Funny coordinated plays" to "Jugadas coordinadas divertidas",
+    "Locker mind games" to "Mind games con taquillas",
+    "Surprise saves" to "Rescates sorpresa",
+    "Best with friends" to "Mejor con amigos",
+
+    "Protection after unhook" to "Protección después del desenganche",
+    "Reliable chase information" to "Información fiable de persecución",
+    "Strong escape potential" to "Gran potencial de escape",
+    "Good for solo queue" to "Bueno para Solo Queue",
+
+    "Balanced utility" to "Utilidad equilibrada",
+    "Good information" to "Buena información",
+    "Reliable mobility" to "Movilidad fiable",
+    "Team support" to "Apoyo al equipo",
+
+    "This build helps you identify nearby resources, create distance after a fast vault, gain value while injured, and receive a powerful boost when the final generator is completed." to
+            "Esta configuración te ayuda a identificar recursos cercanos, crear distancia tras un salto rápido, obtener valor mientras estás herido y recibir un potente impulso cuando se completa el último generador.",
+
+    "This build focuses on locating important generators, improving repair efficiency, and maintaining pressure on objectives throughout the match." to
+            "Esta configuración se centra en localizar generadores importantes, mejorar la eficiencia de reparación y mantener presión sobre los objetivos durante toda la partida.",
+
+    "This support build helps you locate injured teammates, heal efficiently, make safer rescues, and provide useful information to the entire team." to
+            "Esta configuración de apoyo te ayuda a localizar compañeros heridos, curar con eficiencia, realizar rescates más seguros y proporcionar información útil a todo el equipo.",
+
+    "This stealth build reduces the information you leave behind and gives you tools for quietly breaking line of sight and disappearing during a chase." to
+            "Esta configuración de sigilo reduce la información que dejas atrás y te da herramientas para romper silenciosamente la línea de visión y desaparecer durante una persecución.",
+
+    "This build is designed for locker tricks, surprise stuns, fake movements, and funny saves. It works best with friends who can coordinate around the chaos." to
+            "Esta configuración está diseñada para trucos con taquillas, aturdimientos sorpresa, movimientos falsos y rescates divertidos. Funciona mejor con amigos que puedan coordinarse alrededor del caos.",
+
+    "This build gives you information, distance, protection after being unhooked, and a strong opportunity to escape during the final stage of the match." to
+            "Esta configuración te proporciona información, distancia, protección después de ser desenganchado y una gran oportunidad de escapar durante la fase final de la partida.",
+
+    "This balanced build provides information, chase mobility, objective guidance, and faster healing after rescues." to
+            "Esta configuración equilibrada proporciona información, movilidad en persecución, orientación de objetivos y curación más rápida después de los rescates."
+)
 
 private fun getBuildForGoal(
     goal: String

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Item Coach screen -->
+    <string name="itemcoach_title">Item Coach</string>
+    <string name="itemcoach_eyebrow">Reaper Decision Engine</string>
+    <string name="itemcoach_goal_title">What Are You Trying to Do?</string>
+    <string name="itemcoach_goal_body">Choose your objective and Reaper will recommend the item, add-ons, perks, offering, and strategy that best support it.</string>
+    <string name="itemcoach_full_loadout">Full Loadout</string>
+    <string name="itemcoach_footer">Reaper recommends the whole setup—not just four perks.</string>
+
+    <!-- Item Coach goals -->
+    <string name="itemcoach_goal_blind_title">Blind the Killer</string>
+    <string name="itemcoach_goal_blind_description">Create a flashlight-focused loadout for blinds and saves.</string>
+
+    <string name="itemcoach_goal_heal_title">Heal Faster</string>
+    <string name="itemcoach_goal_heal_description">Build around quick healing and team recovery.</string>
+
+    <string name="itemcoach_goal_generators_title">Rush Generators</string>
+    <string name="itemcoach_goal_generators_description">Maximize repair efficiency and generator pressure.</string>
+
+    <string name="itemcoach_goal_sabotage_title">Sabotage Hooks</string>
+    <string name="itemcoach_goal_sabotage_description">Prepare for hook denial and rescue plays.</string>
+
+    <string name="itemcoach_goal_support_title">Support Teammates</string>
+    <string name="itemcoach_goal_support_description">Improve information, healing, and rescue potential.</string>
+
+    <string name="itemcoach_goal_stealth_title">Play Stealthy</string>
+    <string name="itemcoach_goal_stealth_description">Reduce detection and avoid unnecessary chases.</string>
+
+    <!-- Item Coach results -->
+    <string name="itemcoach_result_body">Reaper ranked the strongest loadouts for this objective.</string>
+    <string name="itemcoach_ranked">Ranked</string>
+    <string name="itemcoach_coming_soon">Recommendations for this goal are coming soon.</string>
+
+    <string name="itemcoach_next_unlock">Next Unlock</string>
+    <string name="itemcoach_next_unlock_body">If you unlock one thing next, work toward these:</string>
+
+    <string name="itemcoach_choose_another_goal">Choose Another Goal</string>
+    <string name="itemcoach_back">Back</string>
+    <string name="itemcoach_result_footer">Reaper recommends. You execute.</string>
+
+    <string name="itemcoach_reapers_choice">Reaper\'s Choice</string>
+    <string name="itemcoach_strong_alternative">Strong Alternative</string>
+    <string name="itemcoach_budget_choice">Budget Choice</string>
+
+    <string name="itemcoach_item">Item</string>
+    <string name="itemcoach_addons">Add-ons</string>
+    <string name="itemcoach_perks">Perks</string>
+
+    <string name="itemcoach_why_this_works">Why This Works</string>
+    <string name="itemcoach_execution_tip">Reaper Execution Tip</string>
+
+</resources>

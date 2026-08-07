@@ -14,10 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.reapercompanion.R
 import com.example.reapercompanion.design.ReaperColors
 import com.example.reapercompanion.design.ReaperHeader
 import com.example.reapercompanion.design.ReaperInfoPanel
@@ -29,6 +31,39 @@ fun ItemCoachGoalScreen(
     onBackClick: () -> Unit,
     onGoalSelected: (String) -> Unit
 ) {
+    val localizedGoals = listOf(
+        ItemCoachGoal(
+            id = "blind_killer",
+            title = stringResource(R.string.itemcoach_goal_blind_title),
+            description = stringResource(R.string.itemcoach_goal_blind_description)
+        ),
+        ItemCoachGoal(
+            id = "heal_faster",
+            title = stringResource(R.string.itemcoach_goal_heal_title),
+            description = stringResource(R.string.itemcoach_goal_heal_description)
+        ),
+        ItemCoachGoal(
+            id = "rush_generators",
+            title = stringResource(R.string.itemcoach_goal_generators_title),
+            description = stringResource(R.string.itemcoach_goal_generators_description)
+        ),
+        ItemCoachGoal(
+            id = "sabotage_hooks",
+            title = stringResource(R.string.itemcoach_goal_sabotage_title),
+            description = stringResource(R.string.itemcoach_goal_sabotage_description)
+        ),
+        ItemCoachGoal(
+            id = "support_teammates",
+            title = stringResource(R.string.itemcoach_goal_support_title),
+            description = stringResource(R.string.itemcoach_goal_support_description)
+        ),
+        ItemCoachGoal(
+            id = "stealth",
+            title = stringResource(R.string.itemcoach_goal_stealth_title),
+            description = stringResource(R.string.itemcoach_goal_stealth_description)
+        )
+    )
+
     AppBackground {
         LazyColumn(
             modifier = Modifier
@@ -42,27 +77,24 @@ fun ItemCoachGoalScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 ReaperHeader(
-                    title = "ITEM COACH",
+                    title = stringResource(R.string.itemcoach_title),
                     onBackClick = onBackClick
                 )
             }
 
             item {
                 ReaperInfoPanel(
-                    eyebrow = "REAPER DECISION ENGINE",
-                    title = "What Are You Trying to Do?",
-                    body =
-                        "Choose your objective and Reaper will recommend the item, add-ons, perks, offering, and strategy that best support it.",
+                    eyebrow = stringResource(R.string.itemcoach_eyebrow),
+                    title = stringResource(R.string.itemcoach_goal_title),
+                    body = stringResource(R.string.itemcoach_goal_body),
                     accentColor = Color(0xFFFFC857),
-                    badge = "FULL LOADOUT"
+                    badge = stringResource(R.string.itemcoach_full_loadout)
                 )
             }
 
             items(
-                items = ItemCoachGoals.all,
-                key = { goal ->
-                    goal.id
-                }
+                items = localizedGoals,
+                key = { goal -> goal.id }
             ) { goal ->
                 ReaperListCard(
                     title = goal.title,
@@ -77,8 +109,7 @@ fun ItemCoachGoalScreen(
 
             item {
                 Text(
-                    text =
-                        "Reaper recommends the whole setup—not just four perks.",
+                    text = stringResource(R.string.itemcoach_footer),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(

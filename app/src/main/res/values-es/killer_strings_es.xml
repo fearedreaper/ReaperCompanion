@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="killer_builder_title">Constructor de Asesino</string>
+    <string name="killer_builder_prompt">Elige cómo quieres controlar la prueba.</string>
+    <string name="killer_back_to_dbd">‹  Volver a Dead by Daylight</string>
+
+    <string name="killer_goal_gen_regression_title">Regresión de generadores</string>
+    <string name="killer_goal_gen_regression_subtitle">Ralentiza las reparaciones y controla el progreso de los generadores</string>
+    <string name="killer_goal_anti_loop_title">Anti-loop</string>
+    <string name="killer_goal_anti_loop_subtitle">Termina las persecuciones más rápido alrededor de pallets y saltos</string>
+    <string name="killer_goal_aura_reading_title">Lectura de auras</string>
+    <string name="killer_goal_aura_reading_subtitle">Rastrea a los Supervivientes y mantén la presión</string>
+    <string name="killer_goal_stealth_title">Sigilo</string>
+    <string name="killer_goal_stealth_subtitle">Oculta tu radio de terror y crea ataques sorpresa</string>
+    <string name="killer_goal_hex_title">Configuración de maleficios</string>
+    <string name="killer_goal_hex_subtitle">Construye alrededor de poderosos efectos de Tótem</string>
+    <string name="killer_goal_endgame_title">Final de partida</string>
+    <string name="killer_goal_endgame_subtitle">Hazte más fuerte después de completar los generadores</string>
+    <string name="killer_goal_beginner_title">Principiante</string>
+    <string name="killer_goal_beginner_subtitle">Perks fiables con valor simple y constante</string>
+    <string name="killer_goal_meme_title">Configuración meme</string>
+    <string name="killer_goal_meme_subtitle">Combinaciones caóticas, inusuales y entretenidas</string>
+
+    <string name="killer_result_your_build">Tu configuración de Asesino</string>
+    <string name="killer_result_recommended_perks">Perks recomendados</string>
+    <string name="killer_result_strengths">Fortalezas de la configuración</string>
+    <string name="killer_result_saved">Guardado ✓</string>
+    <string name="killer_result_save_build">Guardar configuración de Asesino</string>
+    <string name="killer_result_generate_another">Generar otra configuración</string>
+    <string name="killer_result_back_goals">Volver a objetivos de Asesino</string>
+    <string name="killer_result_score">Puntuación Reaper</string>
+    <string name="killer_result_out_of_100">De 100</string>
+    <string name="killer_result_difficulty">Dificultad</string>
+    <string name="killer_result_tap_details">Toca para ver detalles</string>
+    <string name="killer_result_tap_details_sentence">Toca para ver detalles</string>
+    <string name="killer_result_alternative_perks">Perks alternativos</string>
+    <string name="killer_result_why_build_works">Por qué funciona esta configuración</string>
+</resources>

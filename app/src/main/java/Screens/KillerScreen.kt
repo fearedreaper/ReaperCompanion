@@ -19,13 +19,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.reapercompanion.R
 import com.example.reapercompanion.design.ReaperColors
 
 data class KillerGoal(
+    val id: String,
     val title: String,
     val subtitle: String
 )
@@ -37,36 +40,44 @@ fun KillerScreen(
 ) {
     val goals = listOf(
         KillerGoal(
-            title = "GEN REGRESSION",
-            subtitle = "Slow repairs and control generator progress"
+            id = "GEN REGRESSION",
+            title = stringResource(R.string.killer_goal_gen_regression_title),
+            subtitle = stringResource(R.string.killer_goal_gen_regression_subtitle)
         ),
         KillerGoal(
-            title = "ANTI-LOOP",
-            subtitle = "End chases faster around pallets and vaults"
+            id = "ANTI-LOOP",
+            title = stringResource(R.string.killer_goal_anti_loop_title),
+            subtitle = stringResource(R.string.killer_goal_anti_loop_subtitle)
         ),
         KillerGoal(
-            title = "AURA READING",
-            subtitle = "Track Survivors and maintain pressure"
+            id = "AURA READING",
+            title = stringResource(R.string.killer_goal_aura_reading_title),
+            subtitle = stringResource(R.string.killer_goal_aura_reading_subtitle)
         ),
         KillerGoal(
-            title = "STEALTH",
-            subtitle = "Hide your terror radius and create surprise attacks"
+            id = "STEALTH",
+            title = stringResource(R.string.killer_goal_stealth_title),
+            subtitle = stringResource(R.string.killer_goal_stealth_subtitle)
         ),
         KillerGoal(
-            title = "HEX BUILD",
-            subtitle = "Build around powerful Totem effects"
+            id = "HEX BUILD",
+            title = stringResource(R.string.killer_goal_hex_title),
+            subtitle = stringResource(R.string.killer_goal_hex_subtitle)
         ),
         KillerGoal(
-            title = "ENDGAME",
-            subtitle = "Become strongest after the generators are completed"
+            id = "ENDGAME",
+            title = stringResource(R.string.killer_goal_endgame_title),
+            subtitle = stringResource(R.string.killer_goal_endgame_subtitle)
         ),
         KillerGoal(
-            title = "BEGINNER",
-            subtitle = "Reliable perks with simple, consistent value"
+            id = "BEGINNER",
+            title = stringResource(R.string.killer_goal_beginner_title),
+            subtitle = stringResource(R.string.killer_goal_beginner_subtitle)
         ),
         KillerGoal(
-            title = "MEME BUILD",
-            subtitle = "Chaotic, unusual, and entertaining combinations"
+            id = "MEME BUILD",
+            title = stringResource(R.string.killer_goal_meme_title),
+            subtitle = stringResource(R.string.killer_goal_meme_subtitle)
         )
     )
 
@@ -83,7 +94,7 @@ fun KillerScreen(
                 Spacer(modifier = Modifier.height(18.dp))
 
                 Text(
-                    text = "KILLER BUILDER",
+                    text = stringResource(R.string.killer_builder_title),
                     modifier = Modifier.fillMaxWidth(),
                     color = ReaperColors.PrimaryText,
                     fontSize = 30.sp,
@@ -94,7 +105,7 @@ fun KillerScreen(
                 Spacer(modifier = Modifier.height(7.dp))
 
                 Text(
-                    text = "Choose how you want to control the trial.",
+                    text = stringResource(R.string.killer_builder_prompt),
                     modifier = Modifier.fillMaxWidth(),
                     color = ReaperColors.SecondaryText,
                     fontSize = 15.sp,
@@ -117,7 +128,7 @@ fun KillerScreen(
                     )
                 ) {
                     Text(
-                        text = "‹  BACK TO DEAD BY DAYLIGHT",
+                        text = stringResource(R.string.killer_back_to_dbd),
                         modifier = Modifier.padding(16.dp),
                         color = ReaperColors.CyanGlow,
                         fontSize = 13.sp,
@@ -133,7 +144,7 @@ fun KillerScreen(
                     KillerGoalCard(
                         goal = goal,
                         onClick = {
-                            onGoalClick(goal.title)
+                            onGoalClick(goal.id)
                         }
                     )
                 }

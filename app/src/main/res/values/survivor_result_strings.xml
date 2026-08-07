@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="survivor_result_your_build">Your Reaper Build</string>
+    <string name="survivor_result_recommended_perks">Recommended Perks</string>
+    <string name="survivor_result_saved">Saved ✓</string>
+    <string name="survivor_result_save_build">Save Build</string>
+    <string name="survivor_result_generate_another">Generate Another Build</string>
+    <string name="survivor_result_back_goals">Back to Survivor Goals</string>
+    <string name="survivor_result_score">Reaper Score</string>
+    <string name="survivor_result_out_of_100">Out of 100</string>
+    <string name="survivor_result_difficulty">Difficulty</string>
+    <string name="survivor_result_tap_details">Tap for Details</string>
+    <string name="survivor_result_tap_details_sentence">Tap for details</string>
+    <string name="survivor_result_strengths">Build Strengths</string>
+    <string name="survivor_result_alternative_perks">Alternative Perks</string>
+    <string name="survivor_result_why_build_works">Why This Build Works</string>
+</resources>

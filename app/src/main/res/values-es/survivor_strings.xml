@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="survivor_title">Superviviente</string>
+    <string name="survivor_prompt">¿Qué quieres conseguir?</string>
+
+    <string name="survivor_goal_loop_title">Mejorar en persecuciones</string>
+    <string name="survivor_goal_loop_description">Alarga las persecuciones y crea distancia</string>
+
+    <string name="survivor_goal_generators_title">Acelerar generadores</string>
+    <string name="survivor_goal_generators_description">Completa los objetivos lo más rápido posible</string>
+
+    <string name="survivor_goal_support_title">Apoyar al equipo</string>
+    <string name="survivor_goal_support_description">Cura, rescata, protege y ayuda a tus compañeros</string>
+
+    <string name="survivor_goal_stealth_title">Sigilo</string>
+    <string name="survivor_goal_stealth_description">Evita que te detecten y desaparece ante el Asesino</string>
+
+    <string name="survivor_goal_troll_title">Trollear al Asesino</string>
+    <string name="survivor_goal_troll_description">Crea momentos divertidos y mind games molestos</string>
+
+    <string name="survivor_goal_survive_title">Sobrevivir más tiempo</string>
+    <string name="survivor_goal_survive_description">Segundas oportunidades y escapes más seguros</string>
+
+    <string name="survivor_goal_surprise_title">Sorpréndeme</string>
+    <string name="survivor_goal_surprise_description">Deja que Reaper Companion elija tu estilo de juego</string>
+</resources>

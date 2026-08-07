@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="match_coach_choose_killer_body">Selecciona al Asesino al que te estás preparando para enfrentar. Reaper usará ese enfrentamiento al crear tu plan.</string>
+    <string name="match_coach_know_threat">Conoce la amenaza</string>
+    <string name="match_coach_know_threat_body">Cada Asesino cambia cómo debes moverte, reparar, rescatar y prepararte para el final de la partida.</string>
+    <string name="match_coach_killer_count">%1$d Asesinos</string>
+    <string name="match_coach_tap_killer">Toca un Asesino para continuar a la selección de mapa.</string>
+
+    <string name="match_coach_killer_subtitle_blink">Movilidad con parpadeo, predicción y presión sobre la línea de visión</string>
+    <string name="match_coach_killer_subtitle_speed">Presión a gran velocidad, rotaciones rápidas y persecución agresiva</string>
+    <string name="match_coach_killer_subtitle_ranged">Amenaza a distancia, líneas de visión peligrosas y presión de predicción</string>
+    <string name="match_coach_killer_subtitle_stealth">Sigilo, ataques sorpresa y rastreo difícil</string>
+    <string name="match_coach_killer_subtitle_control">Control de zona, negación de rutas y presión sobre elementos del mapa</string>
+    <string name="match_coach_killer_subtitle_disruption">Interrupción, objetivos secundarios y presión sobre todo el equipo</string>
+    <string name="match_coach_killer_subtitle_default">Estrategia específica del enfrentamiento, counters y perks recomendados</string>
+</resources>

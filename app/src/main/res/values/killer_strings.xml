@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="killer_builder_title">Killer Builder</string>
+    <string name="killer_builder_prompt">Choose how you want to control the trial.</string>
+    <string name="killer_back_to_dbd">‹  Back to Dead by Daylight</string>
+
+    <string name="killer_goal_gen_regression_title">Gen Regression</string>
+    <string name="killer_goal_gen_regression_subtitle">Slow repairs and control generator progress</string>
+    <string name="killer_goal_anti_loop_title">Anti-Loop</string>
+    <string name="killer_goal_anti_loop_subtitle">End chases faster around pallets and vaults</string>
+    <string name="killer_goal_aura_reading_title">Aura Reading</string>
+    <string name="killer_goal_aura_reading_subtitle">Track Survivors and maintain pressure</string>
+    <string name="killer_goal_stealth_title">Stealth</string>
+    <string name="killer_goal_stealth_subtitle">Hide your terror radius and create surprise attacks</string>
+    <string name="killer_goal_hex_title">Hex Build</string>
+    <string name="killer_goal_hex_subtitle">Build around powerful Totem effects</string>
+    <string name="killer_goal_endgame_title">Endgame</string>
+    <string name="killer_goal_endgame_subtitle">Become strongest after the generators are completed</string>
+    <string name="killer_goal_beginner_title">Beginner</string>
+    <string name="killer_goal_beginner_subtitle">Reliable perks with simple, consistent value</string>
+    <string name="killer_goal_meme_title">Meme Build</string>
+    <string name="killer_goal_meme_subtitle">Chaotic, unusual, and entertaining combinations</string>
+
+    <string name="killer_result_your_build">Your Killer Build</string>
+    <string name="killer_result_recommended_perks">Recommended Perks</string>
+    <string name="killer_result_strengths">Build Strengths</string>
+    <string name="killer_result_saved">Saved ✓</string>
+    <string name="killer_result_save_build">Save Killer Build</string>
+    <string name="killer_result_generate_another">Generate Another Build</string>
+    <string name="killer_result_back_goals">Back to Killer Goals</string>
+    <string name="killer_result_score">Reaper Score</string>
+    <string name="killer_result_out_of_100">Out of 100</string>
+    <string name="killer_result_difficulty">Difficulty</string>
+    <string name="killer_result_tap_details">Tap for Details</string>
+    <string name="killer_result_tap_details_sentence">Tap for details</string>
+    <string name="killer_result_alternative_perks">Alternative Perks</string>
+    <string name="killer_result_why_build_works">Why This Build Works</string>
+</resources>

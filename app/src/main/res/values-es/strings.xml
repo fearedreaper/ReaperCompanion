@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App -->
+    <string name="app_name">Reaper Companion</string>
+    <string name="app_tagline">El motor de decisiones de Dead by Daylight</string>
+    <string name="app_slogan">Deja de adivinar. Empieza a escapar.</string>
+    <string name="version_name">Versión 1.0.0</string>
+
+    <!-- Common -->
+    <string name="back">Atrás</string>
+    <string name="open">Abrir</string>
+    <string name="continue_label">Continuar</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="close">Cerrar</string>
+    <string name="refresh">Actualizar</string>
+    <string name="settings">Ajustes</string>
+    <string name="available">Disponible</string>
+    <string name="active">Activo</string>
+    <string name="coming_soon">Próximamente</string>
+    <string name="required">Obligatorio</string>
+    <string name="live">En vivo</string>
+    <string name="ready">Listo</string>
+    <string name="selected">Seleccionado</string>
+    <string name="no_results">No se encontraron resultados.</string>
+
+    <!-- Splash / Home -->
+    <string name="home_dead_by_daylight_companion">Compañero de Dead by Daylight</string>
+    <string name="home_headline">Crea mejores configuraciones. Lee la partida. Escapa… o domina.</string>
+    <string name="home_welcome_back">Bienvenido de nuevo</string>
+    <string name="home_ready_for_fog">¿Listo para la Niebla?</string>
+    <string name="home_welcome_body">Genera configuraciones de Superviviente y Asesino, compara equipamientos, guarda favoritos y prepárate para Asesinos y mapas específicos con Reaper Match Coach.</string>
+    <string name="home_enter_fog">Entra en la Niebla</string>
+    <string name="home_dead_by_daylight">Dead by Daylight</string>
+    <string name="home_dead_by_daylight_features">Configuraciones de Superviviente • Configuraciones de Asesino • Item Coach • Match Coach • Favoritos</string>
+    <string name="home_open_companion">Abrir Companion</string>
+    <string name="home_reaper_live">Reaper Live</string>
+    <string name="home_reaper_live_subtitle">Noticias • Eventos • Configuraciones destacadas</string>
+    <string name="home_reaper_live_body">Consulta anuncios, eventos activos y contenido destacado sin esperar una actualización de Google Play.</string>
+    <string name="home_open_reaper_live">Abrir Reaper Live</string>
+    <string name="home_feature_build">Configurar</string>
+    <string name="home_feature_compare">Comparar</string>
+    <string name="home_feature_coach">Asesorar</string>
+
+    <!-- First-run language selection -->
+    <string name="language_welcome">Bienvenido</string>
+    <string name="language_choose_title">Elige tu idioma</string>
+    <string name="language_choose_body">Selecciona el idioma que quieres usar en Reaper Companion. Puedes cambiarlo más tarde en Ajustes.</string>
+    <string name="language_panel_eyebrow">Motor de decisiones de Dead by Daylight</string>
+    <string name="language_panel_title">Juega sin barreras de idioma</string>
+    <string name="language_panel_body">Reaper Companion está preparado para jugadores de todo el mundo.</string>
+    <string name="language_count">%1$d idiomas</string>
+    <string name="language_choose_to_continue">Elige un idioma para continuar.</string>
+    <string name="language_section_title">Idioma</string>
+    <string name="language_change">Cambiar idioma</string>
+
+    <!-- Supported language names -->
+    <string name="language_english">Inglés</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_french">Francés</string>
+    <string name="language_german">Alemán</string>
+    <string name="language_italian">Italiano</string>
+    <string name="language_portuguese_brazil">Portugués (Brasil)</string>
+    <string name="language_chinese_simplified">Chino (simplificado)</string>
+    <string name="language_japanese">Japonés</string>
+    <string name="language_korean">Coreano</string>
+    <string name="language_turkish">Turco</string>
+
+    <!-- Dead by Daylight hub -->
+    <string name="dbd_choose_your_path">Elige tu camino</string>
+    <string name="dbd_hero_title">¿Cómo quieres jugar?</string>
+    <string name="dbd_hero_body">Elige Superviviente o Asesino y dinos tu objetivo. Reaper Companion se encarga de la configuración.</string>
+    <string name="dbd_survivor">Superviviente</string>
+    <string name="dbd_survivor_subtitle">Haz loops. Cura. Repara. Escapa.</string>
+    <string name="dbd_survivor_body">Dile a Reaper Companion qué quieres lograr y obtén una configuración adaptada a tu estilo de juego.</string>
+    <string name="dbd_killer">Asesino</string>
+    <string name="dbd_killer_subtitle">Persigue. Presiona. Controla. Sacrifica.</string>
+    <string name="dbd_killer_body">Crea configuraciones centradas en ralentización, sigilo, lectura de auras, persecución o agresión pura.</string>
+    <string name="dbd_build_wizard">Asistente de configuración</string>
+    <string name="dbd_quick_access">Acceso rápido</string>
+    <string name="dbd_build_around_perk">Item Coach</string>
+    <string name="dbd_build_around_perk_body">Elige tu objetivo y recibe objetos, complementos, perks y consejos de ejecución clasificados.</string>
+    <string name="dbd_reaper_engine">Motor Reaper</string>
+    <string name="dbd_match_coach">Reaper Match Coach</string>
+    <string name="dbd_match_coach_body">Elige un Asesino y un mapa para generar un plan completo de partida para Superviviente.</string>
+    <string name="dbd_match_plan">Plan de partida</string>
+    <string name="dbd_random_build">Configuración aleatoria</string>
+    <string name="dbd_random_build_body">Deja que Reaper Companion lo elija todo.</string>
+    <string name="dbd_surprise_me">Sorpréndeme</string>
+    <string name="dbd_meta_builds">Configuraciones meta</string>
+    <string name="dbd_meta_builds_body">Opciones fuertes para el estado actual del juego.</string>
+    <string name="dbd_top_picks">Mejores opciones</string>
+    <string name="dbd_favorites">Favoritos</string>
+    <string name="dbd_favorites_body">Tus configuraciones guardadas de Superviviente y Asesino.</string>
+    <string name="dbd_saved">Guardado</string>
+
+    <!-- Match Coach -->
+    <string name="match_coach_title">Match Coach</string>
+    <string name="match_coach_step_1">Paso 1 de 3</string>
+    <string name="match_coach_step_2">Paso 2 de 3</string>
+    <string name="match_coach_step_3_ready">Paso 3 de 3 • Listo</string>
+    <string name="match_coach_choose_killer">Elige al Asesino</string>
+    <string name="match_coach_choose_map">Elige el mapa</string>
+    <string name="match_coach_reaper_analysis">Análisis de Reaper</string>
+    <string name="match_coach_killer_not_set">Asesino no definido</string>
+    <string name="match_coach_no_killer_selected">Ningún Asesino seleccionado</string>
+    <string name="match_coach_no_map_selected">Ningún mapa seleccionado</string>
+    <string name="match_coach_selected_killer">Asesino seleccionado</string>
+    <string name="match_coach_selected_map">Mapa seleccionado</string>
+    <string name="match_coach_map_body">Selecciona el mapa donde se jugará la prueba. Reaper combinará el diseño del mapa con el enfrentamiento contra el Asesino.</string>
+    <string name="match_coach_continue_summary">Elige un mapa para continuar al resumen final del enfrentamiento.</string>
+    <string name="match_coach_tap_map">Toca un mapa para continuar al resumen del enfrentamiento.</string>
+    <string name="match_coach_analysis_locked">Tu Asesino y mapa están fijados. Reaper está listo para crear el plan completo de partida del Superviviente.</string>
+    <string name="match_coach_fog_is_set">La Niebla está lista</string>
+    <string name="match_coach_analysis_ready">Análisis de Reaper listo</string>
+    <string name="match_coach_analysis_body">Tu enfrentamiento combina presión del Asesino, geometría del mapa, perks recomendados, planificación de persecuciones, objetivos y estrategia de final de partida.</string>
+    <string name="match_coach_what_reaper_analyzes">Lo que Reaper analizará</string>
+    <string name="match_coach_recommended_perks">Perks recomendados de Superviviente</string>
+    <string name="match_coach_chase_adjustments">Ajustes de persecución</string>
+    <string name="match_coach_objective_strategy">Estrategia de generadores y objetivos</string>
+    <string name="match_coach_endgame_planning">Planificación del final de partida</string>
+    <string name="match_coach_priority_warnings">Advertencias prioritarias</string>
+    <string name="match_coach_generate_plan">Generar plan de partida</string>
+    <string name="match_coach_incomplete">Enfrentamiento incompleto</string>
+    <string name="match_coach_change_map">Cambiar mapa</string>
+    <string name="match_coach_footer">La Entidad observa. Reaper se prepara.</string>
+
+    <!-- Reaper Live -->
+    <string name="live_content_title">Reaper Live</string>
+    <string name="live_network">Red Reaper</string>
+    <string name="live_checking_updates">Buscando actualizaciones</string>
+    <string name="live_fresh_content">Contenido nuevo sin actualizar la app</string>
+    <string name="live_contacting_source">Reaper está contactando la fuente de contenido en vivo.</string>
+    <string name="live_content_body">Los anuncios, eventos en vivo y configuraciones destacadas se actualizan de forma remota sin una nueva versión de Google Play.</string>
+    <string name="live_syncing">Sincronizando</string>
+    <string name="live_announcements">Anuncios</string>
+    <string name="live_events">Eventos en vivo</string>
+    <string name="live_featured_builds">Configuraciones destacadas</string>
+    <string name="live_no_announcements">No hay anuncios activos.</string>
+    <string name="live_no_events">No hay eventos activos.</string>
+    <string name="live_no_featured_builds">No hay configuraciones destacadas.</string>
+    <string name="live_syncing_content">Sincronizando contenido en vivo</string>
+    <string name="live_fallback_body">Si la fuente remota no está disponible, Reaper usará de forma segura el contenido local de respaldo.</string>
+    <string name="live_connecting_footer">Conectando con la Red Reaper…</string>
+    <string name="live_loaded_footer">Contenido en vivo cargado desde la fuente remota compartida.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_app_settings">Ajustes de la app</string>
+    <string name="settings_body">Gestiona la información de la app, soporte, idioma y datos de la versión.</string>
+    <string name="settings_app_information">Información de la app</string>
+    <string name="settings_reaper_companion_body">Un motor de decisiones de Dead by Daylight para configuraciones, estrategia de Match Coach, favoritos y contenido en vivo.</string>
+    <string name="settings_reaper_live_body">Los anuncios, eventos en vivo y configuraciones destacadas se actualizan de forma remota sin una nueva versión de Google Play.</string>
+    <string name="settings_support">Soporte</string>
+    <string name="settings_contact_support">Contactar soporte</string>
+    <string name="settings_contact_support_body">Los datos de contacto de soporte se añadirán antes del lanzamiento público en Google Play.</string>
+    <string name="settings_privacy_policy">Política de privacidad</string>
+    <string name="settings_privacy_policy_body">Consulta cómo Reaper Companion gestiona el acceso a Internet, los datos locales de la app y la privacidad.</string>
+    <string name="settings_open_privacy_policy">Abrir política de privacidad</string>
+    <string name="settings_about">Acerca de</string>
+    <string name="settings_built_by">Creado por Feared Reaper</string>
+    <string name="settings_about_body">Reaper Companion fue creado para ayudar a los jugadores a crear mejores configuraciones, prepararse para enfrentamientos y mantenerse conectados mediante Reaper Live.</string>
+    <string name="settings_footer">Reaper Companion • Versión 1.0.0</string>
+
+    <!-- Launch checklist -->
+    <string name="launch_checklist_title">Lista de lanzamiento</string>
+    <string name="launch_mode">Modo lanzamiento</string>
+    <string name="launch_ready_percent">%1$d%% listo para lanzar</string>
+    <string name="launch_tasks_complete">%1$d de %2$d tareas de lanzamiento están completadas.</string>
+    <string name="launch_core_features">Funciones principales</string>
+    <string name="launch_live_content">Contenido en vivo</string>
+    <string name="launch_polish_testing">Pulido y pruebas</string>
+    <string name="launch_google_play">Google Play</string>
+    <string name="launch_footer">Lanza la app. Mejórala después de que jugadores reales la usen.</string>
+
+</resources>

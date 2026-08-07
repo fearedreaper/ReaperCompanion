@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="match_coach_result_recommended_perks">Perks recomendados</string>
+    <string name="match_coach_result_chase_plan">Plan de persecución</string>
+    <string name="match_coach_result_objective_plan">Plan de objetivos</string>
+    <string name="match_coach_result_endgame_plan">Plan de final de partida</string>
+    <string name="match_coach_result_watch_out">Ten cuidado con</string>
+    <string name="match_coach_result_analyze_another">Analizar otra partida</string>
+    <string name="match_coach_result_back_dbd">Volver a Dead by Daylight</string>
+    <string name="match_coach_result_threat_level">Nivel de amenaza</string>
+    <string name="match_coach_result_difficulty">Dificultad de la partida</string>
+    <string name="match_coach_result_assessment">Evaluación de Reaper</string>
+    <string name="match_coach_result_tap_details">Toca para ver detalles</string>
+    <string name="match_coach_result_no_advice">No hay consejos adicionales disponibles.</string>
+</resources>
