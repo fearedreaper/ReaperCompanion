@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="random_build_title">Build aleatoria</string>
+    <string name="random_build_subtitle">Deja que la Entidad elija tu configuración.</string>
+
+    <string name="random_build_eyebrow">La Entidad decide</string>
+    <string name="random_build_survivor_title">Build aleatoria de Superviviente</string>
+    <string name="random_build_killer_title">Build aleatoria de Asesino</string>
+    <string name="random_build_body">Se han seleccionado cuatro ventajas de tu base de datos actual.</string>
+
+    <string name="random_build_survivor">Superviviente</string>
+    <string name="random_build_killer">Asesino</string>
+
+    <string name="random_build_verdict">Veredicto de Reaper</string>
+    <string name="random_build_survivor_verdict">La Entidad ha elegido tu camino. Adáptate, sobrevive y haz que cada ventaja cuente.</string>
+    <string name="random_build_killer_verdict">La Entidad exige presión. Usa la build que te ha tocado y haz que cada persecución cuente.</string>
+
+    <string name="random_build_reroll">Generar otra build</string>
+    <string name="random_build_back_dbd">Volver a Dead by Daylight</string>
+    <string name="random_build_tap_details">Toca para ver detalles</string>
+
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="random_build_title">Random Build</string>
+    <string name="random_build_subtitle">Let the Entity choose your loadout.</string>
+
+    <string name="random_build_eyebrow">The Entity Decides</string>
+    <string name="random_build_survivor_title">Random Survivor Build</string>
+    <string name="random_build_killer_title">Random Killer Build</string>
+    <string name="random_build_body">Four perks have been selected from your current database.</string>
+
+    <string name="random_build_survivor">Survivor</string>
+    <string name="random_build_killer">Killer</string>
+
+    <string name="random_build_verdict">Reaper Verdict</string>
+    <string name="random_build_survivor_verdict">The Entity has chosen your path. Adapt, survive, and make every perk matter.</string>
+    <string name="random_build_killer_verdict">The Entity demands pressure. Use the build you were given and make every chase count.</string>
+
+    <string name="random_build_reroll">Reroll Build</string>
+    <string name="random_build_back_dbd">Back to Dead by Daylight</string>
+    <string name="random_build_tap_details">Tap for Details</string>
+
+</resources>

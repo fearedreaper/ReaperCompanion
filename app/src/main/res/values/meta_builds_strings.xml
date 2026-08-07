@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="meta_builds_title">Meta Builds</string>
+    <string name="meta_builds_subtitle">Curated loadouts built around clear roles and reliable synergy.</string>
+
+    <string name="meta_builds_eyebrow">Reaper Curated</string>
+    <string name="meta_builds_panel_title">Proven Build Archetypes</string>
+    <string name="meta_builds_panel_body">Choose a playstyle to see the full loadout, why it works, and what can counter it.</string>
+    <string name="meta_builds_badge">V1 Meta</string>
+
+    <string name="meta_builds_back_dbd">Back to Dead by Daylight</string>
+
+    <string name="meta_builds_loadout_eyebrow">Meta Loadout</string>
+    <string name="meta_builds_survivor">Survivor</string>
+    <string name="meta_builds_killer">Killer</string>
+
+    <string name="meta_builds_reaper_score">Reaper Score</string>
+    <string name="meta_builds_difficulty">Difficulty</string>
+    <string name="meta_builds_build_strength">Build Strength</string>
+    <string name="meta_builds_loadout">Loadout</string>
+
+    <string name="meta_builds_reaper_analysis">Reaper Analysis</string>
+    <string name="meta_builds_analysis_prefix">This loadout earns its score through reliable synergy.</string>
+
+    <string name="meta_builds_best_for">Best For</string>
+    <string name="meta_builds_watch_out_for">Watch Out For</string>
+
+    <string name="meta_builds_choose_another">Choose Another Build</string>
+    <string name="meta_builds_back">Back</string>
+
+</resources>

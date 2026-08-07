@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="favorites_title">Favorites</string>
+    <string name="favorites_subtitle">Your saved Reaper builds</string>
+
+    <string name="favorites_empty_title">No Saved Builds</string>
+    <string name="favorites_empty_body">Builds you save will appear here.</string>
+
+    <string name="favorites_reaper_score">Reaper Score</string>
+    <string name="favorites_difficulty">Difficulty</string>
+    <string name="favorites_delete_build">Delete Build</string>
+
+</resources>

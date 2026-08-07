@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="meta_builds_title">Builds meta</string>
+    <string name="meta_builds_subtitle">Configuraciones seleccionadas con roles claros y sinergias fiables.</string>
+
+    <string name="meta_builds_eyebrow">Selección de Reaper</string>
+    <string name="meta_builds_panel_title">Arquetipos de builds probados</string>
+    <string name="meta_builds_panel_body">Elige un estilo de juego para ver la configuración completa, por qué funciona y qué puede contrarrestarla.</string>
+    <string name="meta_builds_badge">Meta V1</string>
+
+    <string name="meta_builds_back_dbd">Volver a Dead by Daylight</string>
+
+    <string name="meta_builds_loadout_eyebrow">Build meta</string>
+    <string name="meta_builds_survivor">Superviviente</string>
+    <string name="meta_builds_killer">Asesino</string>
+
+    <string name="meta_builds_reaper_score">Puntuación Reaper</string>
+    <string name="meta_builds_difficulty">Dificultad</string>
+    <string name="meta_builds_build_strength">Fuerza de la build</string>
+    <string name="meta_builds_loadout">Configuración</string>
+
+    <string name="meta_builds_reaper_analysis">Análisis de Reaper</string>
+    <string name="meta_builds_analysis_prefix">Esta configuración obtiene su puntuación gracias a una sinergia fiable.</string>
+
+    <string name="meta_builds_best_for">Ideal para</string>
+    <string name="meta_builds_watch_out_for">Ten cuidado con</string>
+
+    <string name="meta_builds_choose_another">Elegir otra build</string>
+    <string name="meta_builds_back">Volver</string>
+
+</resources>

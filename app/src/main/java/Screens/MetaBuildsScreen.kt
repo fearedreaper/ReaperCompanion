@@ -26,10 +26,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.reapercompanion.R
 import com.example.reapercompanion.database.KillerPerkDatabase
 import com.example.reapercompanion.database.PerkDatabase
 import com.example.reapercompanion.design.ReaperBadge
@@ -42,6 +44,7 @@ import com.example.reapercompanion.design.ReaperPrimaryButton
 import com.example.reapercompanion.design.ReaperSecondaryButton
 import com.example.reapercompanion.models.Perk
 import com.example.reapercompanion.models.PerkRole
+import java.util.Locale
 
 private data class MetaBuildDefinition(
     val id: String,
@@ -119,14 +122,18 @@ private fun MetaBuildLibrary(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 ReaperHeader(
-                    title = "META BUILDS",
+                    title = stringResource(
+                        R.string.meta_builds_title
+                    ),
                     onBackClick = onBackClick
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "Curated loadouts built around clear roles and reliable synergy.",
+                    text = stringResource(
+                        R.string.meta_builds_subtitle
+                    ),
                     modifier = Modifier.fillMaxWidth(),
                     color = ReaperColors.SecondaryText,
                     fontSize = 15.sp,
@@ -137,20 +144,29 @@ private fun MetaBuildLibrary(
 
             item {
                 ReaperInfoPanel(
-                    eyebrow = "REAPER CURATED",
-                    title = "Proven Build Archetypes",
-                    body =
-                        "Choose a playstyle to see the full loadout, why it works, and what can counter it.",
-                    badge = "V1 META"
+                    eyebrow = stringResource(
+                        R.string.meta_builds_eyebrow
+                    ),
+                    title = stringResource(
+                        R.string.meta_builds_panel_title
+                    ),
+                    body = stringResource(
+                        R.string.meta_builds_panel_body
+                    ),
+                    badge = stringResource(
+                        R.string.meta_builds_badge
+                    )
                 )
             }
 
             items(metaBuilds.size) { index ->
                 val build = metaBuilds[index]
+                val displayBuild =
+                    localizeMetaBuildForDisplay(build)
 
                 ReaperListCard(
-                    title = build.title,
-                    description = build.description,
+                    title = displayBuild.title,
+                    description = displayBuild.description,
                     onClick = {
                         onBuildClick(build)
                     },
@@ -161,7 +177,9 @@ private fun MetaBuildLibrary(
 
             item {
                 ReaperSecondaryButton(
-                    text = "BACK TO DEAD BY DAYLIGHT",
+                    text = stringResource(
+                        R.string.meta_builds_back_dbd
+                    ),
                     onClick = onBackClick
                 )
             }
@@ -188,6 +206,9 @@ private fun MetaBuildDetails(
         }
     }
 
+    val displayBuild =
+        localizeMetaBuildForDisplay(build)
+
     AppBackground {
         LazyColumn(
             modifier = Modifier
@@ -201,7 +222,7 @@ private fun MetaBuildDetails(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 ReaperHeader(
-                    title = build.title,
+                    title = displayBuild.title,
                     onBackClick = onBackClick,
                     accentColor = build.accentColor
                 )
@@ -209,14 +230,22 @@ private fun MetaBuildDetails(
 
             item {
                 ReaperInfoPanel(
-                    eyebrow = "META LOADOUT",
-                    title = build.title,
-                    body = build.description,
+                    eyebrow = stringResource(
+                        R.string.meta_builds_loadout_eyebrow
+                    ),
+                    title = displayBuild.title,
+                    body = displayBuild.description,
                     accentColor = build.accentColor,
-                    badge = if (build.role == PerkRole.SURVIVOR) {
-                        "SURVIVOR"
+                    badge = if (
+                        build.role == PerkRole.SURVIVOR
+                    ) {
+                        stringResource(
+                            R.string.meta_builds_survivor
+                        )
                     } else {
-                        "KILLER"
+                        stringResource(
+                            R.string.meta_builds_killer
+                        )
                     }
                 )
             }
@@ -224,18 +253,23 @@ private fun MetaBuildDetails(
             item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    horizontalArrangement =
+                        Arrangement.spacedBy(12.dp)
                 ) {
                     MetaStatCard(
-                        label = "REAPER SCORE",
+                        label = stringResource(
+                            R.string.meta_builds_reaper_score
+                        ),
                         value = build.score.toString(),
                         accentColor = build.accentColor,
                         modifier = Modifier.weight(1f)
                     )
 
                     MetaStatCard(
-                        label = "DIFFICULTY",
-                        value = build.difficulty,
+                        label = stringResource(
+                            R.string.meta_builds_difficulty
+                        ),
+                        value = displayBuild.difficulty,
                         accentColor = build.accentColor,
                         modifier = Modifier.weight(1f)
                     )
@@ -249,12 +283,18 @@ private fun MetaBuildDetails(
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                        horizontalArrangement =
+                            Arrangement.SpaceBetween,
+                        verticalAlignment =
+                            Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "BUILD STRENGTH",
-                            color = ReaperColors.SecondaryText,
+                            text = stringResource(
+                                R.string
+                                    .meta_builds_build_strength
+                            ),
+                            color =
+                                ReaperColors.SecondaryText,
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                             letterSpacing = 1.sp
@@ -271,19 +311,24 @@ private fun MetaBuildDetails(
                     Spacer(modifier = Modifier.height(10.dp))
 
                     LinearProgressIndicator(
-                        progress = { build.score / 100f },
+                        progress = {
+                            build.score / 100f
+                        },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(8.dp),
                         color = build.accentColor,
-                        trackColor = ReaperColors.BorderInactive
+                        trackColor =
+                            ReaperColors.BorderInactive
                     )
                 }
             }
 
             item {
                 Text(
-                    text = "LOADOUT",
+                    text = stringResource(
+                        R.string.meta_builds_loadout
+                    ),
                     color = ReaperColors.PrimaryText,
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Bold,
@@ -304,7 +349,9 @@ private fun MetaBuildDetails(
                     accentColor = build.accentColor
                 ) {
                     Text(
-                        text = "REAPER ANALYSIS",
+                        text = stringResource(
+                            R.string.meta_builds_reaper_analysis
+                        ),
                         color = build.accentColor,
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
@@ -315,8 +362,12 @@ private fun MetaBuildDetails(
 
                     Text(
                         text =
-                            "This loadout earns its score through reliable synergy. " +
-                                    build.whyItWorks,
+                            stringResource(
+                                R.string
+                                    .meta_builds_analysis_prefix
+                            ) +
+                                    " " +
+                                    displayBuild.whyItWorks,
                         color = ReaperColors.PrimaryText,
                         fontSize = 15.sp,
                         lineHeight = 22.sp
@@ -326,23 +377,29 @@ private fun MetaBuildDetails(
 
             item {
                 MetaBulletPanel(
-                    title = "BEST FOR",
-                    entries = build.bestFor,
+                    title = stringResource(
+                        R.string.meta_builds_best_for
+                    ),
+                    entries = displayBuild.bestFor,
                     accentColor = build.accentColor
                 )
             }
 
             item {
                 MetaBulletPanel(
-                    title = "WATCH OUT FOR",
-                    entries = build.watchOutFor,
+                    title = stringResource(
+                        R.string.meta_builds_watch_out_for
+                    ),
+                    entries = displayBuild.watchOutFor,
                     accentColor = Color(0xFFFF6A6A)
                 )
             }
 
             item {
                 ReaperPrimaryButton(
-                    text = "CHOOSE ANOTHER BUILD",
+                    text = stringResource(
+                        R.string.meta_builds_choose_another
+                    ),
                     onClick = onChooseAnotherClick,
                     accentColor = build.accentColor
                 )
@@ -350,7 +407,9 @@ private fun MetaBuildDetails(
 
             item {
                 ReaperSecondaryButton(
-                    text = "BACK",
+                    text = stringResource(
+                        R.string.meta_builds_back
+                    ),
                     onClick = onBackClick,
                     accentColor = build.accentColor
                 )
@@ -375,7 +434,8 @@ private fun MetaPerkGrid(
         perks.chunked(2).forEach { rowPerks ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement =
+                    Arrangement.spacedBy(12.dp)
             ) {
                 rowPerks.forEach { perk ->
                     Card(
@@ -386,12 +446,14 @@ private fun MetaPerkGrid(
                             },
                         shape = RoundedCornerShape(20.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = ReaperColors.CardBackground
+                            containerColor =
+                                ReaperColors.CardBackground
                         )
                     ) {
                         Column(
                             modifier = Modifier.padding(14.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
+                            horizontalAlignment =
+                                Alignment.CenterHorizontally
                         ) {
                             OnlinePerkImage(
                                 perk = perk,
@@ -400,22 +462,40 @@ private fun MetaPerkGrid(
                                     .aspectRatio(1f)
                             )
 
-                            Spacer(modifier = Modifier.height(10.dp))
+                            Spacer(
+                                modifier =
+                                    Modifier.height(10.dp)
+                            )
 
                             Text(
-                                text = perk.name,
-                                modifier = Modifier.fillMaxWidth(),
-                                color = ReaperColors.PrimaryText,
+                                text =
+                                    localizedMetaPerkName(
+                                        perk.name
+                                    ),
+                                modifier =
+                                    Modifier.fillMaxWidth(),
+                                color =
+                                    ReaperColors.PrimaryText,
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Bold,
                                 lineHeight = 18.sp,
                                 textAlign = TextAlign.Center
                             )
 
-                            Spacer(modifier = Modifier.height(8.dp))
+                            Spacer(
+                                modifier =
+                                    Modifier.height(8.dp)
+                            )
 
                             ReaperBadge(
-                                text = perk.category.name.replace("_", " "),
+                                text =
+                                    localizedMetaCategory(
+                                        perk.category.name
+                                            .replace(
+                                                "_",
+                                                " "
+                                            )
+                                    ),
                                 accentColor = accentColor
                             )
                         }
@@ -511,11 +591,433 @@ private fun allPerksForRole(
     }
 }
 
+private fun localizeMetaBuildForDisplay(
+    build: MetaBuildDefinition
+): MetaBuildDefinition {
+    if (Locale.getDefault().language != "es") {
+        return build
+    }
+
+    return build.copy(
+        title =
+            spanishMetaText[build.title]
+                ?: build.title,
+
+        description =
+            spanishMetaText[build.description]
+                ?: build.description,
+
+        difficulty =
+            spanishMetaText[build.difficulty]
+                ?: build.difficulty,
+
+        whyItWorks =
+            spanishMetaText[build.whyItWorks]
+                ?: build.whyItWorks,
+
+        bestFor = build.bestFor.map { text ->
+            spanishMetaText[text] ?: text
+        },
+
+        watchOutFor =
+            build.watchOutFor.map { text ->
+                spanishMetaText[text] ?: text
+            }
+    )
+}
+
+private fun localizedMetaPerkName(
+    name: String
+): String {
+    if (Locale.getDefault().language != "es") {
+        return name
+    }
+
+    return spanishMetaPerkNames[name] ?: name
+}
+
+private fun localizedMetaCategory(
+    category: String
+): String {
+    if (Locale.getDefault().language != "es") {
+        return category
+    }
+
+    return spanishMetaCategories[category]
+        ?: category
+}
+
+private val spanishMetaCategories = mapOf(
+    "CHASE" to "PERSECUCIÓN",
+    "INFORMATION" to "INFORMACIÓN",
+    "EXHAUSTION" to "AGOTAMIENTO",
+    "GENERATOR" to "GENERADOR",
+    "OBJECTIVE" to "OBJETIVO",
+    "HEALING" to "CURACIÓN",
+    "SUPPORT" to "APOYO",
+    "STEALTH" to "SIGILO",
+    "SECOND CHANCE" to "SEGUNDA OPORTUNIDAD",
+    "SURVIVAL" to "SUPERVIVENCIA",
+    "ENDGAME" to "FINAL DE PARTIDA",
+    "REGRESSION" to "REGRESIÓN",
+    "SLOWDOWN" to "RALENTIZACIÓN",
+    "AURA" to "AURA",
+    "TRACKING" to "RASTREO",
+    "HEX" to "MALEFICIO"
+)
+
+private val spanishMetaPerkNames = mapOf(
+
+    // Survivor
+
+    "Windows of Opportunity" to
+            "Oportunidades",
+
+    "Lithe" to
+            "Agilidad",
+
+    "Resilience" to
+            "Resiliencia",
+
+    "Adrenaline" to
+            "Adrenalina",
+
+    "Déjà Vu" to
+            "Déjà Vu",
+
+    "Deja Vu" to
+            "Déjà Vu",
+
+    "Prove Thyself" to
+            "Demuestra lo que vales",
+
+    "Hyperfocus" to
+            "Hiperconcentración",
+
+    "Stake Out" to
+            "Vigilancia",
+
+    "Kindred" to
+            "Afinidad",
+
+    "Bond" to
+            "Vínculo",
+
+    "Off the Record" to
+            "Extraoficialmente",
+
+    "Distortion" to
+            "Distorsión",
+
+    "Quick & Quiet" to
+            "Velocidad silenciosa",
+
+    "Dance With Me" to
+            "Baila conmigo",
+
+    "Lucky Break" to
+            "Golpe de suerte",
+
+    "Decisive Strike" to
+            "Golpe decisivo",
+
+    "Dead Hard" to
+            "Fajador",
+
+    "Unbreakable" to
+            "Inquebrantable",
+
+    // Killer
+
+    "Scourge Hook: Pain Resonance" to
+            "Gancho Flagelante: Resonancia del dolor",
+
+    "Pop Goes the Weasel" to
+            "Pop Goes the Weasel",
+
+    "Corrupt Intervention" to
+            "Intervención corrupta",
+
+    "Deadlock" to
+            "Bloqueo",
+
+    "Lethal Pursuer" to
+            "Perseguidor letal",
+
+    "Barbecue & Chilli" to
+            "Barbacoa y chile",
+
+    "Nowhere to Hide" to
+            "Ningún lugar donde esconderse",
+
+    "A Nurse's Calling" to
+            "La llamada de una enfermera",
+
+    "No Way Out" to
+            "Sin salida",
+
+    "Remember Me" to
+            "Recuérdame",
+
+    "Blood Warden" to
+            "Guardián de sangre",
+
+    "Hex: Devour Hope" to
+            "Maleficio: Devorar esperanza"
+)
+
+private val spanishMetaText = mapOf(
+
+    // Difficulty
+
+    "EASY" to
+            "FÁCIL",
+
+    "MEDIUM" to
+            "MEDIA",
+
+    "HARD" to
+            "DIFÍCIL",
+
+    // Chase Specialist
+
+    "CHASE SPECIALIST" to
+            "ESPECIALISTA EN PERSECUCIONES",
+
+    "Extend chases, route efficiently, and punish predictable pressure." to
+            "Alarga las persecuciones, usa rutas eficientes y castiga la presión predecible.",
+
+    "Windows of Opportunity improves routing, Lithe creates separation after a vault, Resilience increases action speed while injured, and Adrenaline rewards surviving until the final generator." to
+            "Oportunidades mejora tus rutas, Agilidad crea distancia después de un salto, Resiliencia aumenta la velocidad de acción mientras estás herido y Adrenalina recompensa llegar con vida hasta el último generador.",
+
+    "Players who enjoy long chases" to
+            "Jugadores que disfrutan de persecuciones largas",
+
+    "Maps with connected windows and pallets" to
+            "Mapas con ventanas y palés bien conectados",
+
+    "Solo queue players who need reliable information" to
+            "Jugadores de Solo Queue que necesitan información fiable",
+
+    "Anti-loop Killers" to
+            "Asesinos con fuertes herramientas anti-loop",
+
+    "Exhaustion management" to
+            "Gestión del Agotamiento",
+
+    "Dead zones after resources are spent" to
+            "Zonas muertas después de gastar los recursos",
+
+    // Generator Pressure
+
+    "GENERATOR PRESSURE" to
+            "PRESIÓN DE GENERADORES",
+
+    "Push objectives quickly while protecting the final generator spread." to
+            "Avanza los objetivos rápidamente mientras proteges una distribución segura de los últimos generadores.",
+
+    "Deja Vu prevents dangerous generator clusters, Prove Thyself improves cooperative repair efficiency, and the Stake Out plus Hyperfocus pairing rewards strong skill-check execution." to
+            "Déjà Vu evita agrupaciones peligrosas de generadores, Demuestra lo que vales mejora la eficiencia de reparación en equipo y la combinación de Vigilancia con Hiperconcentración recompensa una buena ejecución de las pruebas de habilidad.",
+
+    "Objective-focused players" to
+            "Jugadores centrados en objetivos",
+
+    "Coordinated teammates" to
+            "Compañeros coordinados",
+
+    "Breaking dangerous three-generator setups" to
+            "Romper configuraciones peligrosas de tres generadores",
+
+    "Heavy regression builds" to
+            "Builds con mucha regresión",
+
+    "Frequent chase interruption" to
+            "Interrupciones frecuentes por persecuciones",
+
+    "Poor Great Skill Check consistency" to
+            "Poca consistencia con las pruebas de habilidad excelentes",
+
+    // Solo Queue
+
+    "SOLO QUEUE SURVIVOR" to
+            "SUPERVIVIENTE SOLO QUEUE",
+
+    "Reliable information, safer rescues, and independent survival." to
+            "Información fiable, rescates más seguros y mayor independencia para sobrevivir.",
+
+    "Kindred and Bond replace missing communication, Off the Record helps after an unhook, and Adrenaline gives a powerful endgame reset." to
+            "Afinidad y Vínculo compensan la falta de comunicación, Extraoficialmente ayuda después de un desenganche y Adrenalina ofrece una recuperación muy potente en el final de partida.",
+
+    "Solo queue" to
+            "Solo Queue",
+
+    "Players without voice communication" to
+            "Jugadores sin comunicación por voz",
+
+    "Rescue timing and teammate awareness" to
+            "Control del momento de los rescates y posición de los compañeros",
+
+    "Aura blocking" to
+            "Bloqueo de auras",
+
+    "Early elimination before endgame" to
+            "Eliminación temprana antes del final de partida",
+
+    "Overcommitting to unsafe rescues" to
+            "Comprometerse demasiado con rescates inseguros",
+
+    // Stealth Escape
+
+    "STEALTH ESCAPE" to
+            "ESCAPE SIGILOSO",
+
+    "Break tracking, hide your route, and disappear after contact." to
+            "Rompe el rastreo, oculta tu ruta y desaparece después del contacto.",
+
+    "Distortion protects against aura reading, while Quick & Quiet, Dance With Me, and Lucky Break suppress the information Killers normally use to continue a chase." to
+            "Distorsión protege contra la lectura de auras, mientras Velocidad silenciosa, Baila conmigo y Golpe de suerte eliminan gran parte de la información que el Asesino usa normalmente para continuar una persecución.",
+
+    "Breaking line of sight" to
+            "Romper la línea de visión",
+
+    "Indoor maps" to
+            "Mapas interiores",
+
+    "Players who prefer evasion over looping" to
+            "Jugadores que prefieren evadir en lugar de mantener un loop",
+
+    "Killers with strong sound tracking" to
+            "Asesinos con buen rastreo mediante sonido",
+
+    "Open maps" to
+            "Mapas abiertos",
+
+    "Running out of Distortion value" to
+            "Quedarse sin valor de Distorsión",
+
+    // Anti-Tunnel
+
+    "ANTI-TUNNEL" to
+            "ANTI-TÚNEL",
+
+    "Punish repeated pressure and create extra chances after an unhook." to
+            "Castiga la presión repetida y crea oportunidades adicionales después de un desenganche.",
+
+    "Off the Record protects after an unhook, Decisive Strike punishes immediate pickup pressure, Dead Hard can extend a chase, and Unbreakable answers slugging." to
+            "Extraoficialmente protege después de un desenganche, Golpe decisivo castiga la presión inmediata al recogerte, Fajador puede alargar una persecución e Inquebrantable responde al slugging.",
+
+    "High-pressure matches" to
+            "Partidas de mucha presión",
+
+    "Players frequently targeted after unhook" to
+            "Jugadores perseguidos con frecuencia después de ser desenganchados",
+
+    "Second-chance focused play" to
+            "Juego centrado en segundas oportunidades",
+
+    "Perk activation requirements" to
+            "Requisitos de activación de las ventajas",
+
+    "Killers waiting out protection" to
+            "Asesinos que esperan a que termine la protección",
+
+    "Using resources too early" to
+            "Gastar los recursos demasiado pronto",
+
+    // Killer Slowdown
+
+    "KILLER SLOWDOWN" to
+            "RALENTIZACIÓN DEL ASESINO",
+
+    "Control generator progress and force Survivors into inefficient repairs." to
+            "Controla el progreso de los generadores y obliga a los Supervivientes a realizar reparaciones menos eficientes.",
+
+    "Corrupt Intervention stabilizes the opening, Pain Resonance and Pop reward hooks with regression, and Deadlock slows the next objective after a generator is completed." to
+            "Intervención corrupta estabiliza el inicio de la partida, Resonancia del dolor y Pop recompensan los enganches con regresión y Bloqueo ralentiza el siguiente objetivo después de completar un generador.",
+
+    "Most Killer powers" to
+            "La mayoría de poderes de Asesino",
+
+    "Learning macro pressure" to
+            "Aprender presión macro",
+
+    "Protecting a strong generator spread" to
+            "Proteger una buena distribución de generadores",
+
+    "Scourge Hook placement" to
+            "Posición de los Ganchos Flagelantes",
+
+    "Failing to convert pressure into hooks" to
+            "No convertir la presión en enganches",
+
+    "Overcommitting to one chase" to
+            "Comprometerse demasiado con una sola persecución",
+
+    // Aura Hunter
+
+    "AURA HUNTER" to
+            "CAZADOR DE AURAS",
+
+    "Locate targets quickly and reduce downtime between chases." to
+            "Localiza objetivos rápidamente y reduce el tiempo perdido entre persecuciones.",
+
+    "Lethal Pursuer gives immediate direction, Barbecue & Chilli finds distant targets after hooks, Nowhere to Hide checks nearby generator zones, and A Nurse's Calling punishes healing." to
+            "Perseguidor letal proporciona una dirección inmediata, Barbacoa y chile localiza objetivos lejanos después de los enganches, Ningún lugar donde esconderse revisa las zonas cercanas a generadores y La llamada de una enfermera castiga las curaciones.",
+
+    "Mobile Killers" to
+            "Asesinos con buena movilidad",
+
+    "Aggressive chase chaining" to
+            "Encadenar persecuciones de forma agresiva",
+
+    "Players who dislike searching" to
+            "Jugadores a los que no les gusta perder tiempo buscando",
+
+    "Distortion" to
+            "Distorsión",
+
+    "Lockers" to
+            "Taquillas",
+
+    "Overreliance on aura information" to
+            "Depender demasiado de la información de auras",
+
+    // Endgame Lockdown
+
+    "ENDGAME LOCKDOWN" to
+            "BLOQUEO DE FINAL DE PARTIDA",
+
+    "Turn the final generator into a dangerous second phase." to
+            "Convierte la finalización del último generador en una peligrosa segunda fase.",
+
+    "No Way Out and Remember Me delay escape, Blood Warden can trap Survivors after a late hook, and Devour Hope creates pressure before the endgame begins." to
+            "Sin salida y Recuérdame retrasan la escapatoria, Guardián de sangre puede atrapar a los Supervivientes después de un enganche tardío y Devorar esperanza genera presión antes de que comience el final de partida.",
+
+    "Killers with strong late-game mobility" to
+            "Asesinos con buena movilidad en el final de partida",
+
+    "Players who enjoy comeback pressure" to
+            "Jugadores que disfrutan remontando mediante presión",
+
+    "Punishing greedy gate play" to
+            "Castigar jugadas demasiado codiciosas en las puertas",
+
+    "Hex removal" to
+            "Destrucción del Maleficio",
+
+    "Losing too much pressure before endgame" to
+            "Perder demasiada presión antes del final de partida",
+
+    "Blood Warden timing" to
+            "Momento de activación de Guardián de sangre"
+)
+
 private val metaBuilds = listOf(
     MetaBuildDefinition(
         id = "chase_specialist",
         title = "CHASE SPECIALIST",
-        description = "Extend chases, route efficiently, and punish predictable pressure.",
+        description =
+            "Extend chases, route efficiently, and punish predictable pressure.",
         role = PerkRole.SURVIVOR,
         accentColor = ReaperColors.CyanGlow,
         difficulty = "MEDIUM",
@@ -539,10 +1041,12 @@ private val metaBuilds = listOf(
             "Dead zones after resources are spent"
         )
     ),
+
     MetaBuildDefinition(
         id = "generator_pressure",
         title = "GENERATOR PRESSURE",
-        description = "Push objectives quickly while protecting the final generator spread.",
+        description =
+            "Push objectives quickly while protecting the final generator spread.",
         role = PerkRole.SURVIVOR,
         accentColor = Color(0xFF56D6A7),
         difficulty = "HARD",
@@ -566,10 +1070,12 @@ private val metaBuilds = listOf(
             "Poor Great Skill Check consistency"
         )
     ),
+
     MetaBuildDefinition(
         id = "solo_queue",
         title = "SOLO QUEUE SURVIVOR",
-        description = "Reliable information, safer rescues, and independent survival.",
+        description =
+            "Reliable information, safer rescues, and independent survival.",
         role = PerkRole.SURVIVOR,
         accentColor = Color(0xFF67B7FF),
         difficulty = "EASY",
@@ -593,10 +1099,12 @@ private val metaBuilds = listOf(
             "Overcommitting to unsafe rescues"
         )
     ),
+
     MetaBuildDefinition(
         id = "stealth_escape",
         title = "STEALTH ESCAPE",
-        description = "Break tracking, hide your route, and disappear after contact.",
+        description =
+            "Break tracking, hide your route, and disappear after contact.",
         role = PerkRole.SURVIVOR,
         accentColor = Color(0xFFB26BFF),
         difficulty = "MEDIUM",
@@ -620,10 +1128,12 @@ private val metaBuilds = listOf(
             "Running out of Distortion value"
         )
     ),
+
     MetaBuildDefinition(
         id = "anti_tunnel",
         title = "ANTI-TUNNEL",
-        description = "Punish repeated pressure and create extra chances after an unhook.",
+        description =
+            "Punish repeated pressure and create extra chances after an unhook.",
         role = PerkRole.SURVIVOR,
         accentColor = Color(0xFFFF6B9D),
         difficulty = "MEDIUM",
@@ -647,10 +1157,12 @@ private val metaBuilds = listOf(
             "Using resources too early"
         )
     ),
+
     MetaBuildDefinition(
         id = "slowdown_control",
         title = "KILLER SLOWDOWN",
-        description = "Control generator progress and force Survivors into inefficient repairs.",
+        description =
+            "Control generator progress and force Survivors into inefficient repairs.",
         role = PerkRole.KILLER,
         accentColor = Color(0xFFFF5A5A),
         difficulty = "EASY",
@@ -674,10 +1186,12 @@ private val metaBuilds = listOf(
             "Overcommitting to one chase"
         )
     ),
+
     MetaBuildDefinition(
         id = "aura_hunter",
         title = "AURA HUNTER",
-        description = "Locate targets quickly and reduce downtime between chases.",
+        description =
+            "Locate targets quickly and reduce downtime between chases.",
         role = PerkRole.KILLER,
         accentColor = Color(0xFFFF8A65),
         difficulty = "MEDIUM",
@@ -701,10 +1215,12 @@ private val metaBuilds = listOf(
             "Overreliance on aura information"
         )
     ),
+
     MetaBuildDefinition(
         id = "endgame_lockdown",
         title = "ENDGAME LOCKDOWN",
-        description = "Turn the final generator into a dangerous second phase.",
+        description =
+            "Turn the final generator into a dangerous second phase.",
         role = PerkRole.KILLER,
         accentColor = Color(0xFFFFC857),
         difficulty = "HARD",
