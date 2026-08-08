@@ -173,5 +173,9 @@
     <string name="launch_polish_testing">Pulido y pruebas</string>
     <string name="launch_google_play">Google Play</string>
     <string name="launch_footer">Lanza la app. Mejórala después de que jugadores reales la usen.</string>
-
+    <string name="reaper_live_title">REAPER LIVE</string>
+    <string name="reaper_live_categories">Noticias • Recompensas • Builds destacadas</string>
+    <string name="reaper_live_badge">EN VIVO</string>
+    <string name="reaper_live_description">Consulta anuncios en vivo, recompensas activas y contenido destacado sin esperar una actualización de Play Store.</string>
+    <string name="reaper_live_open">ABRIR REAPER LIVE  ›</string>
 </resources>

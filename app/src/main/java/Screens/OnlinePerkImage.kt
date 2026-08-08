@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -31,146 +32,51 @@ fun OnlinePerkImage(
     perk: Perk,
     modifier: Modifier = Modifier
 ) {
-    val initials = perk.name
-        .split(" ")
-        .filter { it.isNotBlank() }
-        .take(2)
-        .joinToString("") { word ->
-            word.firstOrNull()?.uppercase() ?: ""
-        }
-
-    val iconName = when (perk.id) {
-
-        // Survivor perks
-        "windows_of_opportunity" -> "windowsOfOpportunity"
-        "lithe" -> "lithe"
-        "resilience" -> "resilience"
-        "adrenaline" -> "adrenaline"
-        "deja_vu" -> "dejaVu"
-        "prove_thyself" -> "proveThyself"
-        "well_make_it" -> "wellMakeIt"
-        "botany_knowledge" -> "botanyKnowledge"
-        "empathy" -> "empathy"
-        "kindred" -> "kindred"
-        "quick_and_quiet" -> "quickAndQuiet"
-        "lightweight" -> "lightweight"
-        "distortion" -> "distortion"
-        "iron_will" -> "ironWill"
-        "head_on" -> "headOn"
-        "flashbang" -> "flashbang"
-        "deception" -> "deception"
-        "off_the_record" -> "offTheRecord"
-        "finesse" -> "finesse"
-        "balanced_landing" -> "balancedLanding"
-
-        // Special filename handled inside perkImageUrl().
-        "five_moves_ahead" -> "FiveMovesAhead"
-
-        "built_to_last" -> "builtToLast"
-        "overzealous" -> "overzealous"
-        "stake_out" -> "stakeOut"
-        "hyperfocus" -> "hyperfocus"
-        "desperate_measures" -> "desperateMeasures"
-        "aftercare" -> "aftercare"
-        "babysitter" -> "babysitter"
-        "leader" -> "leader"
-        "dance_with_me" -> "danceWithMe"
-        "lucky_break" -> "luckyBreak"
-        "calm_spirit" -> "calmSpirit"
-        "urban_evasion" -> "urbanEvasion"
-        "blast_mine" -> "blastMine"
-        "diversion" -> "diversion"
-        "power_struggle" -> "powerStruggle"
-        "chemical_trap" -> "chemicalTrap"
-        "decisive_strike" -> "decisiveStrike"
-        "unbreakable" -> "unbreakable"
-        "deliverance" -> "deliverance"
-        "dead_hard" -> "deadHard"
-        "bond" -> "bond"
-
-        // Killer perks
-        "scourge_hook_pain_resonance" ->
-            "scourgeHookPainResonance"
-
-        "pop_goes_the_weasel" ->
-            "popGoesTheWeasel"
-
-        "corrupt_intervention" ->
-            "corruptIntervention"
-
-        "deadlock" ->
-            "deadlock"
-
-        "bamboozle" ->
-            "bamboozle"
-
-        "enduring" ->
-            "enduring"
-
-        "spirit_fury" ->
-            "spiritFury"
-
-        "brutal_strength" ->
-            "brutalStrength"
-
-        "nowhere_to_hide" ->
-            "nowhereToHide"
-
-        "lethal_pursuer" ->
-            "lethalPursuer"
-
-        "barbecue_and_chilli" ->
-            "barbecueAndChilli"
-
-        "a_nurses_calling" ->
-            "aNursesCalling"
-
-        "tinkerer" ->
-            "tinkerer"
-
-        "trail_of_torment" ->
-            "trailOfTorment"
-
-        "dark_devotion" ->
-            "darkDevotion"
-
-        "hex_ruin" ->
-            "hexRuin"
-
-        "hex_undying" ->
-            "hexUndying"
-
-        "hex_devour_hope" ->
-            "hexDevourHope"
-
-        "no_way_out" ->
-            "noWayOut"
-
-        "remember_me" ->
-            "rememberMe"
-
-        "blood_warden" ->
-            "bloodWarden"
-
-        else -> null
+    val initials = remember(perk.name) {
+        perk.name
+            .split(" ")
+            .filter { word ->
+                word.isNotBlank()
+            }
+            .take(2)
+            .joinToString("") { word ->
+                word.firstOrNull()?.uppercase() ?: ""
+            }
     }
 
-    val imageUrl = when {
-        iconName != null -> perkImageUrl(iconName)
-        !perk.imageUrl.isNullOrBlank() -> perk.imageUrl
-        else -> null
+    val imageUrls = remember(
+        perk.id,
+        perk.imageUrl
+    ) {
+        perkImageUrls(perk)
     }
+
+    var imageIndex by remember(
+        perk.id,
+        imageUrls
+    ) {
+        mutableIntStateOf(0)
+    }
+
+    var allImagesFailed by remember(
+        perk.id,
+        imageUrls
+    ) {
+        mutableStateOf(false)
+    }
+
+    val currentImageUrl =
+        imageUrls.getOrNull(imageIndex)
 
     val outerShape = RoundedCornerShape(18.dp)
     val innerShape = RoundedCornerShape(14.dp)
 
     val glowColor = when (perk.role) {
-        PerkRole.KILLER -> Color(0xFFFF5A5A)
-        PerkRole.SURVIVOR -> ReaperColors.CyanGlow
-    }
+        PerkRole.KILLER ->
+            Color(0xFFFF5A5A)
 
-    var imageFailed by remember(perk.id, imageUrl) {
-        mutableStateOf(false)
+        PerkRole.SURVIVOR ->
+            ReaperColors.CyanGlow
     }
 
     Box(
@@ -200,7 +106,10 @@ fun OnlinePerkImage(
                 .background(Color(0xFF080D10)),
             contentAlignment = Alignment.Center
         ) {
-            if (imageUrl.isNullOrBlank() || imageFailed) {
+            if (
+                currentImageUrl.isNullOrBlank() ||
+                allImagesFailed
+            ) {
                 Text(
                     text = initials,
                     color = glowColor,
@@ -209,20 +118,21 @@ fun OnlinePerkImage(
                 )
             } else {
                 AsyncImage(
-                    model = imageUrl,
+                    model = currentImageUrl,
                     contentDescription = perk.name,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(3.dp),
                     contentScale = ContentScale.Fit,
-                    onLoading = {
-                        imageFailed = false
-                    },
                     onSuccess = {
-                        imageFailed = false
+                        allImagesFailed = false
                     },
                     onError = {
-                        imageFailed = true
+                        if (imageIndex < imageUrls.lastIndex) {
+                            imageIndex++
+                        } else {
+                            allImagesFailed = true
+                        }
                     }
                 )
             }
@@ -230,16 +140,58 @@ fun OnlinePerkImage(
     }
 }
 
-private fun perkImageUrl(
-    iconName: String
-): String {
-    return when (iconName) {
-        "FiveMovesAhead" ->
-            "https://deadbydaylight.wiki.gg/wiki/" +
-                    "Special:Redirect/file/IconsPerks%20FiveMovesAhead.png"
+private fun perkImageUrls(
+    perk: Perk
+): List<String> {
+    val fileName = perkIconFileName(perk.id)
 
-        else ->
-            "https://deadbydaylight.wiki.gg/wiki/" +
-                    "Special:Redirect/file/IconPerks_${iconName}.png"
+    val wikiUrl =
+        "https://deadbydaylight.wiki.gg/wiki/" +
+                "Special:Redirect/file/$fileName"
+
+    val wikiThumbnailUrl =
+        "$wikiUrl?width=512"
+
+    val fandomUrl =
+        "https://deadbydaylight.fandom.com/wiki/" +
+                "Special:Redirect/file/$fileName"
+
+    val urls = mutableListOf<String>()
+
+    if (!perk.imageUrl.isNullOrBlank()) {
+        urls.add(perk.imageUrl)
     }
+
+    urls.add(wikiUrl)
+    urls.add(wikiThumbnailUrl)
+    urls.add(fandomUrl)
+
+    return urls.distinct()
+}
+
+private fun perkIconFileName(
+    perkId: String
+): String {
+    if (perkId == "five_moves_ahead") {
+        return "IconsPerks%20FiveMovesAhead.png"
+    }
+
+    val iconName = perkId
+        .split("_")
+        .filter { part ->
+            part.isNotBlank()
+        }
+        .mapIndexed { index, part ->
+            if (index == 0) {
+                part.lowercase()
+            } else {
+                part.lowercase()
+                    .replaceFirstChar { character ->
+                        character.uppercase()
+                    }
+            }
+        }
+        .joinToString("")
+
+    return "IconPerks_${iconName}.png"
 }

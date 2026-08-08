@@ -20,9 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.reapercompanion.R
 import com.example.reapercompanion.design.ReaperColors
 
 @Composable
@@ -66,16 +68,22 @@ fun ReaperLiveCard(
                         modifier = Modifier.weight(1f)
                     ) {
                         Text(
-                            text = "REAPER LIVE",
+                            text = stringResource(
+                                R.string.reaper_live_title
+                            ),
                             color = ReaperColors.PrimaryText,
                             fontSize = 22.sp,
                             fontWeight = FontWeight.Black
                         )
 
-                        Spacer(modifier = Modifier.height(5.dp))
+                        Spacer(
+                            modifier = Modifier.height(5.dp)
+                        )
 
                         Text(
-                            text = "News • Rewards • Featured Builds",
+                            text = stringResource(
+                                R.string.reaper_live_categories
+                            ),
                             color = Color(0xFFFFC857),
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Bold
@@ -87,7 +95,9 @@ fun ReaperLiveCard(
                         color = Color(0x22FFC857)
                     ) {
                         Text(
-                            text = "LIVE",
+                            text = stringResource(
+                                R.string.reaper_live_badge
+                            ),
                             color = Color(0xFFFFC857),
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
@@ -100,20 +110,27 @@ fun ReaperLiveCard(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(
+                    modifier = Modifier.height(12.dp)
+                )
 
                 Text(
-                    text =
-                        "See live announcements, active rewards, and featured content without waiting for a Play Store update.",
+                    text = stringResource(
+                        R.string.reaper_live_description
+                    ),
                     color = ReaperColors.SecondaryText,
                     fontSize = 14.sp,
                     lineHeight = 20.sp
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(
+                    modifier = Modifier.height(16.dp)
+                )
 
                 Text(
-                    text = "OPEN REAPER LIVE  ›",
+                    text = stringResource(
+                        R.string.reaper_live_open
+                    ),
                     color = Color(0xFFFFC857),
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Black,

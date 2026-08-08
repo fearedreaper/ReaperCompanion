@@ -33,7 +33,7 @@
     <string name="home_welcome_body">Generate Survivor and Killer builds, compare loadouts, save favorites, and prepare for specific Killers and maps with Reaper Match Coach.</string>
     <string name="home_enter_fog">Enter the Fog</string>
     <string name="home_dead_by_daylight">Dead by Daylight</string>
-    <string name="home_dead_by_daylight_features">Survivor builds • Killer builds • Build Around • Match Coach • Favorites</string>
+    <string name="home_dead_by_daylight_features">Survivor builds • Killer builds • Item Coach • Match Coach • Favorites</string>
     <string name="home_open_companion">Open Companion</string>
     <string name="home_reaper_live">Reaper Live</string>
     <string name="home_reaper_live_subtitle">News • Events • Featured Builds</string>
@@ -79,8 +79,8 @@
     <string name="dbd_killer_body">Build around slowdown, stealth, aura reading, chase power, or pure aggression.</string>
     <string name="dbd_build_wizard">Build Wizard</string>
     <string name="dbd_quick_access">Quick Access</string>
-    <string name="dbd_build_around_perk">Build Around a Perk</string>
-    <string name="dbd_build_around_perk_body">Choose any Survivor or Killer perk as the core of a build.</string>
+    <string name="dbd_build_around_perk">Item Coach</string>
+    <string name="dbd_build_around_perk_body">Choose your goal and get ranked items, add-ons, perks, and execution tips.</string>
     <string name="dbd_reaper_engine">Reaper Engine</string>
     <string name="dbd_match_coach">Reaper Match Coach</string>
     <string name="dbd_match_coach_body">Choose a Killer and map to generate a complete Survivor match plan.</string>
@@ -173,5 +173,10 @@
     <string name="launch_polish_testing">Polish and Testing</string>
     <string name="launch_google_play">Google Play</string>
     <string name="launch_footer">Ship the app. Improve it after real players use it.</string>
+    <string name="reaper_live_title">REAPER LIVE</string>
+    <string name="reaper_live_categories">News • Rewards • Featured Builds</string>
+    <string name="reaper_live_badge">LIVE</string>
+    <string name="reaper_live_description">See live announcements, active rewards, and featured content without waiting for a Play Store update.</string>
+    <string name="reaper_live_open">OPEN REAPER LIVE  ›</string>
 
 </resources>

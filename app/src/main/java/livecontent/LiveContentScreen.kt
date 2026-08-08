@@ -52,6 +52,9 @@ fun LiveContentScreen(
         mutableStateOf(true)
     }
 
+    val isSpanish =
+        stringResource(R.string.live_network) == "Red Reaper"
+
     LaunchedEffect(Unit) {
         liveContent = LiveContentService.fetchLiveContent()
         isLoading = false
@@ -79,31 +82,49 @@ fun LiveContentScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(
+                    modifier = Modifier.height(16.dp)
+                )
 
                 ReaperHeader(
-                    title = stringResource(R.string.live_content_title),
+                    title = stringResource(
+                        R.string.live_content_title
+                    ),
                     onBackClick = onBackClick
                 )
             }
 
             item {
                 ReaperInfoPanel(
-                    eyebrow = stringResource(R.string.live_network),
+                    eyebrow = stringResource(
+                        R.string.live_network
+                    ),
                     title = if (isLoading) {
-                        stringResource(R.string.live_checking_updates)
+                        stringResource(
+                            R.string.live_checking_updates
+                        )
                     } else {
-                        stringResource(R.string.live_fresh_content)
+                        stringResource(
+                            R.string.live_fresh_content
+                        )
                     },
                     body = if (isLoading) {
-                        stringResource(R.string.live_contacting_source)
+                        stringResource(
+                            R.string.live_contacting_source
+                        )
                     } else {
-                        stringResource(R.string.live_content_body)
+                        stringResource(
+                            R.string.live_content_body
+                        )
                     },
                     badge = if (isLoading) {
-                        stringResource(R.string.live_syncing)
+                        stringResource(
+                            R.string.live_syncing
+                        )
                     } else {
-                        stringResource(R.string.live)
+                        stringResource(
+                            R.string.live
+                        )
                     }
                 )
             }
@@ -115,7 +136,9 @@ fun LiveContentScreen(
             } else {
                 item {
                     LiveSectionHeader(
-                        title = stringResource(R.string.live_announcements),
+                        title = stringResource(
+                            R.string.live_announcements
+                        ),
                         count = activeAnnouncements.size,
                         accentColor = ReaperColors.CyanGlow
                     )
@@ -124,7 +147,9 @@ fun LiveContentScreen(
                 if (activeAnnouncements.isEmpty()) {
                     item {
                         EmptyLiveCard(
-                            message = stringResource(R.string.live_no_announcements)
+                            message = stringResource(
+                                R.string.live_no_announcements
+                            )
                         )
                     }
                 } else {
@@ -135,7 +160,8 @@ fun LiveContentScreen(
                         }
                     ) { announcement ->
                         AnnouncementCard(
-                            announcement = announcement
+                            announcement = announcement,
+                            isSpanish = isSpanish
                         )
                     }
                 }
@@ -146,7 +172,9 @@ fun LiveContentScreen(
 
                 item {
                     LiveSectionHeader(
-                        title = stringResource(R.string.live_events),
+                        title = stringResource(
+                            R.string.live_events
+                        ),
                         count = activeEvents.size,
                         accentColor = Color(0xFFFFC857)
                     )
@@ -155,7 +183,9 @@ fun LiveContentScreen(
                 if (activeEvents.isEmpty()) {
                     item {
                         EmptyLiveCard(
-                            message = stringResource(R.string.live_no_events)
+                            message = stringResource(
+                                R.string.live_no_events
+                            )
                         )
                     }
                 } else {
@@ -166,7 +196,8 @@ fun LiveContentScreen(
                         }
                     ) { event ->
                         EventCard(
-                            event = event
+                            event = event,
+                            isSpanish = isSpanish
                         )
                     }
                 }
@@ -177,7 +208,9 @@ fun LiveContentScreen(
 
                 item {
                     LiveSectionHeader(
-                        title = stringResource(R.string.live_featured_builds),
+                        title = stringResource(
+                            R.string.live_featured_builds
+                        ),
                         count = featuredBuilds.size,
                         accentColor = Color(0xFF56D6A7)
                     )
@@ -186,7 +219,9 @@ fun LiveContentScreen(
                 if (featuredBuilds.isEmpty()) {
                     item {
                         EmptyLiveCard(
-                            message = stringResource(R.string.live_no_featured_builds)
+                            message = stringResource(
+                                R.string.live_no_featured_builds
+                            )
                         )
                     }
                 } else {
@@ -197,7 +232,8 @@ fun LiveContentScreen(
                         }
                     ) { build ->
                         FeaturedBuildCard(
-                            build = build
+                            build = build,
+                            isSpanish = isSpanish
                         )
                     }
                 }
@@ -205,7 +241,9 @@ fun LiveContentScreen(
 
             item {
                 ReaperSecondaryButton(
-                    text = stringResource(R.string.back),
+                    text = stringResource(
+                        R.string.back
+                    ),
                     onClick = onBackClick
                 )
             }
@@ -213,9 +251,13 @@ fun LiveContentScreen(
             item {
                 Text(
                     text = if (isLoading) {
-                        stringResource(R.string.live_connecting_footer)
+                        stringResource(
+                            R.string.live_connecting_footer
+                        )
                     } else {
-                        stringResource(R.string.live_loaded_footer)
+                        stringResource(
+                            R.string.live_loaded_footer
+                        )
                     },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -248,23 +290,32 @@ private fun LoadingCard() {
                 color = ReaperColors.CyanGlow
             )
 
-            Spacer(modifier = Modifier.padding(horizontal = 10.dp))
+            Spacer(
+                modifier = Modifier.padding(
+                    horizontal = 10.dp
+                )
+            )
 
             Column(
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = stringResource(R.string.live_syncing_content),
+                    text = stringResource(
+                        R.string.live_syncing_content
+                    ),
                     color = ReaperColors.PrimaryText,
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Black
                 )
 
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(
+                    modifier = Modifier.height(5.dp)
+                )
 
                 Text(
-                    text =
-                        stringResource(R.string.live_fallback_body),
+                    text = stringResource(
+                        R.string.live_fallback_body
+                    ),
                     color = ReaperColors.SecondaryText,
                     fontSize = 13.sp,
                     lineHeight = 18.sp
@@ -302,22 +353,39 @@ private fun LiveSectionHeader(
 
 @Composable
 private fun AnnouncementCard(
-    announcement: LiveAnnouncement
+    announcement: LiveAnnouncement,
+    isSpanish: Boolean
 ) {
+    val displayTitle =
+        if (isSpanish && announcement.id == "welcome") {
+            "Bienvenido a Reaper Live"
+        } else {
+            announcement.title
+        }
+
+    val displayMessage =
+        if (isSpanish && announcement.id == "welcome") {
+            "¡Gracias por usar Reaper Companion! Vuelve con frecuencia para ver eventos en vivo, configuraciones destacadas y las últimas novedades de Dead by Daylight."
+        } else {
+            announcement.message
+        }
+
     ReaperCard(
         accentColor = ReaperColors.CyanGlow
     ) {
         Text(
-            text = announcement.title,
+            text = displayTitle,
             color = ReaperColors.PrimaryText,
             fontSize = 17.sp,
             fontWeight = FontWeight.Black
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
 
         Text(
-            text = announcement.message,
+            text = displayMessage,
             color = ReaperColors.SecondaryText,
             fontSize = 14.sp,
             lineHeight = 20.sp
@@ -327,8 +395,36 @@ private fun AnnouncementCard(
 
 @Composable
 private fun EventCard(
-    event: LiveEvent
+    event: LiveEvent,
+    isSpanish: Boolean
 ) {
+    val displayTitle =
+        if (isSpanish && event.id == "launch") {
+            "Celebración de lanzamiento"
+        } else {
+            event.title
+        }
+
+    val displayDescription =
+        if (isSpanish && event.id == "launch") {
+            "¡Reaper Companion ya está oficialmente disponible! Se añadirán regularmente nuevos eventos, guías y configuraciones destacadas."
+        } else {
+            event.description
+        }
+
+    val displayExpires =
+        if (
+            isSpanish &&
+            event.expires.equals(
+                "Limited Time",
+                ignoreCase = true
+            )
+        ) {
+            "Tiempo limitado"
+        } else {
+            event.expires
+        }
+
     ReaperCard(
         accentColor = Color(0xFFFFC857)
     ) {
@@ -340,16 +436,18 @@ private fun EventCard(
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = event.title,
+                    text = displayTitle,
                     color = ReaperColors.PrimaryText,
                     fontSize = 17.sp,
                     fontWeight = FontWeight.Black
                 )
 
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(
+                    modifier = Modifier.height(5.dp)
+                )
 
                 Text(
-                    text = event.description,
+                    text = displayDescription,
                     color = ReaperColors.SecondaryText,
                     fontSize = 14.sp,
                     lineHeight = 20.sp
@@ -357,7 +455,7 @@ private fun EventCard(
             }
 
             ReaperBadge(
-                text = event.expires,
+                text = displayExpires,
                 accentColor = Color(0xFFFFC857)
             )
         }
@@ -366,22 +464,39 @@ private fun EventCard(
 
 @Composable
 private fun FeaturedBuildCard(
-    build: FeaturedBuild
+    build: FeaturedBuild,
+    isSpanish: Boolean
 ) {
+    val displayTitle =
+        if (isSpanish && build.id == "starter") {
+            "Superviviente sigiloso"
+        } else {
+            build.title
+        }
+
+    val displayDescription =
+        if (isSpanish && build.id == "starter") {
+            "De pies ligeros • Oportunidades • Afinidad • Adrenalina"
+        } else {
+            build.description
+        }
+
     ReaperCard(
         accentColor = Color(0xFF56D6A7)
     ) {
         Text(
-            text = build.title,
+            text = displayTitle,
             color = ReaperColors.PrimaryText,
             fontSize = 17.sp,
             fontWeight = FontWeight.Black
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
 
         Text(
-            text = build.description,
+            text = displayDescription,
             color = ReaperColors.SecondaryText,
             fontSize = 14.sp,
             lineHeight = 20.sp
