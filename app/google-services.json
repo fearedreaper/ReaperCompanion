@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "763428344328",
+    "project_id": "reaper-companion-dbd",
+    "storage_bucket": "reaper-companion-dbd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763428344328:android:48ea7c6fe19e4b266877bd",
+        "android_client_info": {
+          "package_name": "com.example.reapercompanion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmtxovf3a9UQzRBTlj1Af6jCfmOBChkUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
