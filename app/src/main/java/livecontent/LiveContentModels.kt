@@ -15,14 +15,7 @@ data class LiveEvent(
     val active: Boolean = true
 )
 
-data class FeaturedBuild(
-    val id: String,
-    val title: String,
-    val description: String
-)
-
 data class LiveContent(
     val announcements: List<LiveAnnouncement> = emptyList(),
-    val events: List<LiveEvent> = emptyList(),
-    val featuredBuilds: List<FeaturedBuild> = emptyList()
+    val events: List<LiveEvent> = emptyList()
 )

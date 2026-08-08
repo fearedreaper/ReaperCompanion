@@ -36,8 +36,8 @@
     <string name="home_dead_by_daylight_features">Survivor builds • Killer builds • Item Coach • Match Coach • Favorites</string>
     <string name="home_open_companion">Open Companion</string>
     <string name="home_reaper_live">Reaper Live</string>
-    <string name="home_reaper_live_subtitle">News • Events • Featured Builds</string>
-    <string name="home_reaper_live_body">See live announcements, active events, and featured content without waiting for a Play Store update.</string>
+    <string name="home_reaper_live_subtitle">Codes • Events • Updates</string>
+    <string name="home_reaper_live_body">See active redeemable codes, current events, and important updates without waiting for a Play Store update.</string>
     <string name="home_open_reaper_live">Open Reaper Live</string>
     <string name="home_feature_build">Build</string>
     <string name="home_feature_compare">Compare</string>
@@ -132,14 +132,12 @@
     <string name="live_checking_updates">Checking for Updates</string>
     <string name="live_fresh_content">Fresh Content Without App Updates</string>
     <string name="live_contacting_source">Reaper is contacting the live content source.</string>
-    <string name="live_content_body">Announcements, live events, and featured builds update remotely without a new Play Store release.</string>
+    <string name="live_content_body">Redeemable codes, live events, and important updates refresh remotely without a new Play Store release.</string>
     <string name="live_syncing">Syncing</string>
     <string name="live_announcements">Announcements</string>
     <string name="live_events">Live Events</string>
-    <string name="live_featured_builds">Featured Builds</string>
     <string name="live_no_announcements">No active announcements.</string>
     <string name="live_no_events">No active events.</string>
-    <string name="live_no_featured_builds">No featured builds.</string>
     <string name="live_syncing_content">Syncing Live Content</string>
     <string name="live_fallback_body">If the remote source is unavailable, Reaper will safely use the local fallback content.</string>
     <string name="live_connecting_footer">Connecting to Reaper Network…</string>
@@ -151,7 +149,7 @@
     <string name="settings_body">Manage app information, support details, language, and release information.</string>
     <string name="settings_app_information">App Information</string>
     <string name="settings_reaper_companion_body">A Dead by Daylight decision engine for builds, Match Coach strategy, favorites, and live content.</string>
-    <string name="settings_reaper_live_body">Announcements, live events, and featured builds update remotely without a Play Store release.</string>
+    <string name="settings_reaper_live_body">Codes, live events, and important updates refresh remotely without a Play Store release.</string>
     <string name="settings_support">Support</string>
     <string name="settings_contact_support">Contact Support</string>
     <string name="settings_contact_support_body">Support contact details will be added before the public Play Store release.</string>
@@ -174,9 +172,9 @@
     <string name="launch_google_play">Google Play</string>
     <string name="launch_footer">Ship the app. Improve it after real players use it.</string>
     <string name="reaper_live_title">REAPER LIVE</string>
-    <string name="reaper_live_categories">News • Rewards • Featured Builds</string>
+    <string name="reaper_live_categories">Codes • Events • Updates</string>
     <string name="reaper_live_badge">LIVE</string>
-    <string name="reaper_live_description">See live announcements, active rewards, and featured content without waiting for a Play Store update.</string>
+    <string name="reaper_live_description">See active codes, current events, and important updates without waiting for a Play Store release.</string>
     <string name="reaper_live_open">OPEN REAPER LIVE  ›</string>
 
 </resources>

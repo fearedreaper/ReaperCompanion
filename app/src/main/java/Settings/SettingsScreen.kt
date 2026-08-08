@@ -199,9 +199,9 @@ fun SettingsScreen(
                 SettingsInfoCard(
                     title = "Reaper Live",
                     description = if (isSpanish) {
-                        "Los anuncios, eventos en vivo y builds destacadas se actualizan de forma remota sin una nueva versión de Play Store."
+                        "Los códigos, eventos en vivo y actualizaciones importantes se actualizan de forma remota sin una nueva versión de Google Play."
                     } else {
-                        "Announcements, live events, and featured builds update remotely without a Play Store release."
+                        "Codes, live events, and important updates refresh remotely without a Play Store release."
                     },
                     badge = if (isSpanish) {
                         "ACTIVO"

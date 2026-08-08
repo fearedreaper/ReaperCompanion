@@ -36,8 +36,8 @@
     <string name="home_dead_by_daylight_features">Configuraciones de Superviviente • Configuraciones de Asesino • Item Coach • Match Coach • Favoritos</string>
     <string name="home_open_companion">Abrir Companion</string>
     <string name="home_reaper_live">Reaper Live</string>
-    <string name="home_reaper_live_subtitle">Noticias • Eventos • Configuraciones destacadas</string>
-    <string name="home_reaper_live_body">Consulta anuncios, eventos activos y contenido destacado sin esperar una actualización de Google Play.</string>
+    <string name="home_reaper_live_subtitle">Códigos • Eventos • Actualizaciones</string>
+    <string name="home_reaper_live_body">Consulta códigos canjeables activos, eventos actuales y actualizaciones importantes sin esperar una actualización de Google Play.</string>
     <string name="home_open_reaper_live">Abrir Reaper Live</string>
     <string name="home_feature_build">Configurar</string>
     <string name="home_feature_compare">Comparar</string>
@@ -132,14 +132,12 @@
     <string name="live_checking_updates">Buscando actualizaciones</string>
     <string name="live_fresh_content">Contenido nuevo sin actualizar la app</string>
     <string name="live_contacting_source">Reaper está contactando la fuente de contenido en vivo.</string>
-    <string name="live_content_body">Los anuncios, eventos en vivo y configuraciones destacadas se actualizan de forma remota sin una nueva versión de Google Play.</string>
+    <string name="live_content_body">Los códigos canjeables, los eventos en vivo y las actualizaciones importantes se actualizan de forma remota sin una nueva versión de Google Play.</string>
     <string name="live_syncing">Sincronizando</string>
     <string name="live_announcements">Anuncios</string>
     <string name="live_events">Eventos en vivo</string>
-    <string name="live_featured_builds">Configuraciones destacadas</string>
     <string name="live_no_announcements">No hay anuncios activos.</string>
     <string name="live_no_events">No hay eventos activos.</string>
-    <string name="live_no_featured_builds">No hay configuraciones destacadas.</string>
     <string name="live_syncing_content">Sincronizando contenido en vivo</string>
     <string name="live_fallback_body">Si la fuente remota no está disponible, Reaper usará de forma segura el contenido local de respaldo.</string>
     <string name="live_connecting_footer">Conectando con la Red Reaper…</string>
@@ -151,7 +149,7 @@
     <string name="settings_body">Gestiona la información de la app, soporte, idioma y datos de la versión.</string>
     <string name="settings_app_information">Información de la app</string>
     <string name="settings_reaper_companion_body">Un motor de decisiones de Dead by Daylight para configuraciones, estrategia de Match Coach, favoritos y contenido en vivo.</string>
-    <string name="settings_reaper_live_body">Los anuncios, eventos en vivo y configuraciones destacadas se actualizan de forma remota sin una nueva versión de Google Play.</string>
+    <string name="settings_reaper_live_body">Los códigos, eventos en vivo y actualizaciones importantes se actualizan de forma remota sin una nueva versión de Google Play.</string>
     <string name="settings_support">Soporte</string>
     <string name="settings_contact_support">Contactar soporte</string>
     <string name="settings_contact_support_body">Los datos de contacto de soporte se añadirán antes del lanzamiento público en Google Play.</string>
@@ -174,8 +172,9 @@
     <string name="launch_google_play">Google Play</string>
     <string name="launch_footer">Lanza la app. Mejórala después de que jugadores reales la usen.</string>
     <string name="reaper_live_title">REAPER LIVE</string>
-    <string name="reaper_live_categories">Noticias • Recompensas • Builds destacadas</string>
+    <string name="reaper_live_categories">Códigos • Eventos • Actualizaciones</string>
     <string name="reaper_live_badge">EN VIVO</string>
-    <string name="reaper_live_description">Consulta anuncios en vivo, recompensas activas y contenido destacado sin esperar una actualización de Play Store.</string>
+    <string name="reaper_live_description">Consulta códigos activos, eventos actuales y actualizaciones importantes sin esperar una nueva versión de Google Play.</string>
     <string name="reaper_live_open">ABRIR REAPER LIVE  ›</string>
+
 </resources>

@@ -61,15 +61,15 @@ fun LiveContentScreen(
     }
 
     val activeAnnouncements = remember(liveContent) {
-        liveContent.announcements.filter { it.active }
+        liveContent.announcements.filter { announcement ->
+            announcement.active
+        }
     }
 
     val activeEvents = remember(liveContent) {
-        liveContent.events.filter { it.active }
-    }
-
-    val featuredBuilds = remember(liveContent) {
-        liveContent.featuredBuilds
+        liveContent.events.filter { event ->
+            event.active
+        }
     }
 
     AppBackground {
@@ -197,42 +197,6 @@ fun LiveContentScreen(
                     ) { event ->
                         EventCard(
                             event = event,
-                            isSpanish = isSpanish
-                        )
-                    }
-                }
-
-                item {
-                    ReaperDivider()
-                }
-
-                item {
-                    LiveSectionHeader(
-                        title = stringResource(
-                            R.string.live_featured_builds
-                        ),
-                        count = featuredBuilds.size,
-                        accentColor = Color(0xFF56D6A7)
-                    )
-                }
-
-                if (featuredBuilds.isEmpty()) {
-                    item {
-                        EmptyLiveCard(
-                            message = stringResource(
-                                R.string.live_no_featured_builds
-                            )
-                        )
-                    }
-                } else {
-                    items(
-                        items = featuredBuilds,
-                        key = { build ->
-                            build.id
-                        }
-                    ) { build ->
-                        FeaturedBuildCard(
-                            build = build,
                             isSpanish = isSpanish
                         )
                     }
@@ -365,7 +329,7 @@ private fun AnnouncementCard(
 
     val displayMessage =
         if (isSpanish && announcement.id == "welcome") {
-            "¡Gracias por usar Reaper Companion! Vuelve con frecuencia para ver eventos en vivo, configuraciones destacadas y las últimas novedades de Dead by Daylight."
+            "¡Gracias por usar Reaper Companion! Vuelve con frecuencia para ver códigos activos, eventos en vivo y las últimas novedades de Dead by Daylight."
         } else {
             announcement.message
         }
@@ -407,7 +371,7 @@ private fun EventCard(
 
     val displayDescription =
         if (isSpanish && event.id == "launch") {
-            "¡Reaper Companion ya está oficialmente disponible! Se añadirán regularmente nuevos eventos, guías y configuraciones destacadas."
+            "¡Reaper Companion ya está oficialmente disponible! Se añadirán regularmente nuevos códigos, eventos y novedades."
         } else {
             event.description
         }
@@ -459,48 +423,6 @@ private fun EventCard(
                 accentColor = Color(0xFFFFC857)
             )
         }
-    }
-}
-
-@Composable
-private fun FeaturedBuildCard(
-    build: FeaturedBuild,
-    isSpanish: Boolean
-) {
-    val displayTitle =
-        if (isSpanish && build.id == "starter") {
-            "Superviviente sigiloso"
-        } else {
-            build.title
-        }
-
-    val displayDescription =
-        if (isSpanish && build.id == "starter") {
-            "De pies ligeros • Oportunidades • Afinidad • Adrenalina"
-        } else {
-            build.description
-        }
-
-    ReaperCard(
-        accentColor = Color(0xFF56D6A7)
-    ) {
-        Text(
-            text = displayTitle,
-            color = ReaperColors.PrimaryText,
-            fontSize = 17.sp,
-            fontWeight = FontWeight.Black
-        )
-
-        Spacer(
-            modifier = Modifier.height(8.dp)
-        )
-
-        Text(
-            text = displayDescription,
-            color = ReaperColors.SecondaryText,
-            fontSize = 14.sp,
-            lineHeight = 20.sp
-        )
     }
 }
 

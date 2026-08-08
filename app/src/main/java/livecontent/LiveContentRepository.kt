@@ -4,31 +4,23 @@ object LiveContentRepository {
 
     fun getLiveContent(): LiveContent {
         return LiveContent(
-
             announcements = listOf(
                 LiveAnnouncement(
                     id = "welcome",
-                    title = "Welcome to Reaper Companion",
-                    message = "Thanks for downloading Reaper Companion. Watch this space for updates, events, and featured builds.",
+                    title = "Welcome to Reaper Live",
+                    message =
+                        "Thanks for using Reaper Companion! Check back regularly for active codes, live events, and the latest Dead by Daylight updates.",
                     active = true
                 )
             ),
-
             events = listOf(
                 LiveEvent(
                     id = "launch",
                     title = "Launch Celebration",
-                    description = "Reaper Companion is now live! Check back often for new guides, events, and content.",
+                    description =
+                        "Reaper Companion is officially live! New codes, events, and important updates will be added regularly.",
                     expires = "Limited Time",
                     active = true
-                )
-            ),
-
-            featuredBuilds = listOf(
-                FeaturedBuild(
-                    id = "starter",
-                    title = "Stealth Survivor",
-                    description = "Lightweight • Windows of Opportunity • Kindred • Adrenaline"
                 )
             )
         )

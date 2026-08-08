@@ -25,6 +25,7 @@ object LiveContentService {
 
                 if (responseCode !in 200..299) {
                     connection.disconnect()
+
                     LiveContentRepository.getLiveContent()
                 } else {
                     val responseText =
@@ -55,9 +56,6 @@ object LiveContentService {
         val eventsArray =
             root.optJSONArray("events")
                 ?: root.optJSONArray("rewards")
-
-        val featuredBuildsArray =
-            root.optJSONArray("featuredBuilds")
 
         val announcements =
             buildList {
@@ -126,37 +124,9 @@ object LiveContentService {
                 }
             }
 
-        val featuredBuilds =
-            buildList {
-                if (featuredBuildsArray != null) {
-                    for (
-                    index in
-                    0 until featuredBuildsArray.length()
-                    ) {
-                        val item =
-                            featuredBuildsArray
-                                .getJSONObject(index)
-
-                        add(
-                            FeaturedBuild(
-                                id =
-                                    item.optString("id"),
-                                title =
-                                    item.optString("title"),
-                                description =
-                                    item.optString(
-                                        "description"
-                                    )
-                            )
-                        )
-                    }
-                }
-            }
-
         return LiveContent(
             announcements = announcements,
-            events = events,
-            featuredBuilds = featuredBuilds
+            events = events
         )
     }
 }
