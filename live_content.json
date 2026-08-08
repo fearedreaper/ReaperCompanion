@@ -3,16 +3,62 @@
     {
       "id": "welcome",
       "title": "Welcome to Reaper Live",
+      "titleEs": "Bienvenido a Reaper Live",
       "message": "Thanks for using Reaper Companion! Check back regularly for active codes, live events, and the latest Dead by Daylight updates.",
+      "messageEs": "¡Gracias por usar Reaper Companion! Vuelve con frecuencia para ver códigos activos, eventos en vivo y las últimas novedades de Dead by Daylight.",
       "active": true
     }
   ],
   "events": [
     {
-      "id": "launch",
-      "title": "Launch Celebration",
-      "description": "Reaper Companion is officially live! New codes, events, and important updates will be added regularly.",
-      "expires": "Limited Time",
+      "id": "summer_screams",
+      "title": "Summer Screams: Lights Out",
+      "titleEs": "Summer Screams: Apagón",
+      "description": "Week two of Summer Screams features Lights Out from August 4 through August 11. Complete the available quests to earn rewards.",
+      "descriptionEs": "La segunda semana de Summer Screams presenta Apagón del 4 al 11 de agosto. Completa las misiones disponibles para conseguir recompensas.",
+      "expires": "Ends August 11",
+      "expiresEs": "Termina el 11 de agosto",
+      "active": true
+    }
+  ],
+  "updates": [
+    {
+      "id": "patch_10_1_0_ptb",
+      "title": "Update 10.1.0 PTB Patch Notes",
+      "titleEs": "Notas del parche de la beta pública 10.1.0",
+      "description": "The newest Public Test Build improves Survivor bots and fixes issues affecting characters, maps, perks, audio, and the interface.",
+      "descriptionEs": "La beta pública más reciente mejora los bots supervivientes y corrige problemas relacionados con personajes, mapas, ventajas, audio y la interfaz.",
+      "date": "August 4, 2026",
+      "dateEs": "4 de agosto de 2026",
+      "category": "PTB",
+      "categoryEs": "BETA PÚBLICA",
+      "url": "https://forums.bhvr.com/dead-by-daylight/kb/articles/555-10-1-0-ptb-patch-notes",
+      "active": true
+    },
+    {
+      "id": "chorus_of_sin",
+      "title": "Chorus of Sin Arrives August 25",
+      "titleEs": "Chorus of Sin llega el 25 de agosto",
+      "description": "The upcoming Chapter introduces The Judgement, a terrifying new Killer, and Aurora, a spiritual scientist entering the Fog as a new Survivor.",
+      "descriptionEs": "El próximo capítulo presenta a The Judgement, un nuevo asesino aterrador, y a Aurora, una científica espiritual que entra en la Niebla como nueva superviviente.",
+      "date": "June 15, 2026",
+      "dateEs": "15 de junio de 2026",
+      "category": "CHAPTER",
+      "categoryEs": "CAPÍTULO",
+      "url": "https://deadbydaylight.com/news/dbd-10th-anniversary-recap-announcements-celebrations/",
+      "active": true
+    },
+    {
+      "id": "patch_10_0_3",
+      "title": "Update 10.0.3 Bugfix Patch",
+      "titleEs": "Actualización correctiva 10.0.3",
+      "description": "This live patch added the Summer Screams schedule and fixed issues affecting game modes, Killers, maps, perks, loadouts, and general gameplay.",
+      "descriptionEs": "Este parche añadió el calendario de Summer Screams y corrigió problemas relacionados con modos de juego, asesinos, mapas, ventajas, configuraciones y la jugabilidad general.",
+      "date": "July 21, 2026",
+      "dateEs": "21 de julio de 2026",
+      "category": "PATCH",
+      "categoryEs": "PARCHE",
+      "url": "https://forums.bhvr.com/dead-by-daylight/kb/articles/553-10-0-3-bugfix-patch",
       "active": true
     }
   ],

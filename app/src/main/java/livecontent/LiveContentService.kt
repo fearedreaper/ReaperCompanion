@@ -59,6 +59,9 @@ object LiveContentService {
         val codesArray =
             root.optJSONArray("codes")
 
+        val updatesArray =
+            root.optJSONArray("updates")
+
         val announcements =
             buildList {
                 if (announcementsArray != null) {
@@ -74,11 +77,17 @@ object LiveContentService {
                             LiveAnnouncement(
                                 id = item.optString("id"),
                                 title = item.optString("title"),
-                                message = item.optString("message"),
-                                active = item.optBoolean(
-                                    "active",
-                                    true
-                                )
+                                titleEs =
+                                    item.optString("titleEs"),
+                                message =
+                                    item.optString("message"),
+                                messageEs =
+                                    item.optString("messageEs"),
+                                active =
+                                    item.optBoolean(
+                                        "active",
+                                        true
+                                    )
                             )
                         )
                     }
@@ -100,13 +109,21 @@ object LiveContentService {
                             LiveEvent(
                                 id = item.optString("id"),
                                 title = item.optString("title"),
+                                titleEs =
+                                    item.optString("titleEs"),
                                 description =
                                     item.optString("description"),
+                                descriptionEs =
+                                    item.optString(
+                                        "descriptionEs"
+                                    ),
                                 expires =
                                     item.optString(
                                         "expires",
                                         "Limited Time"
                                     ),
+                                expiresEs =
+                                    item.optString("expiresEs"),
                                 active =
                                     item.optBoolean(
                                         "active",
@@ -133,7 +150,8 @@ object LiveContentService {
                             LiveCode(
                                 id = item.optString("id"),
                                 code = item.optString("code"),
-                                reward = item.optString("reward"),
+                                reward =
+                                    item.optString("reward"),
                                 rewardEs =
                                     item.optString("rewardEs"),
                                 expires =
@@ -154,10 +172,59 @@ object LiveContentService {
                 }
             }
 
+        val updates =
+            buildList {
+                if (updatesArray != null) {
+                    for (
+                    index in
+                    0 until updatesArray.length()
+                    ) {
+                        val item =
+                            updatesArray
+                                .getJSONObject(index)
+
+                        add(
+                            LiveUpdate(
+                                id = item.optString("id"),
+                                title = item.optString("title"),
+                                titleEs =
+                                    item.optString("titleEs"),
+                                description =
+                                    item.optString("description"),
+                                descriptionEs =
+                                    item.optString(
+                                        "descriptionEs"
+                                    ),
+                                date = item.optString("date"),
+                                dateEs =
+                                    item.optString("dateEs"),
+                                category =
+                                    item.optString(
+                                        "category",
+                                        "UPDATE"
+                                    ),
+                                categoryEs =
+                                    item.optString(
+                                        "categoryEs",
+                                        "ACTUALIZACIÓN"
+                                    ),
+                                url = item.optString("url"),
+                                active =
+                                    item.optBoolean(
+                                        "active",
+                                        true
+                                    )
+                            )
+                        )
+                    }
+                }
+            }
+
         return LiveContent(
             announcements = announcements,
             events = events,
-            codes = codes
+            codes = codes,
+            updates = updates
         )
     }
 }

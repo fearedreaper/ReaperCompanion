@@ -3,6 +3,8 @@ package com.example.reapercompanion.livecontent
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -65,16 +67,20 @@ fun LiveContentScreen(
         isLoading = false
     }
 
-    val activeCodes = remember(liveContent) {
-        liveContent.codes.filter { it.active }
-    }
-
     val activeAnnouncements = remember(liveContent) {
         liveContent.announcements.filter { it.active }
     }
 
     val activeEvents = remember(liveContent) {
         liveContent.events.filter { it.active }
+    }
+
+    val activeUpdates = remember(liveContent) {
+        liveContent.updates.filter { it.active }
+    }
+
+    val activeCodes = remember(liveContent) {
+        liveContent.codes.filter { it.active }
     }
 
     AppBackground {
@@ -141,46 +147,6 @@ fun LiveContentScreen(
             } else {
                 item {
                     LiveSectionHeader(
-                        title = if (isSpanish) {
-                            "CÓDIGOS ACTIVOS"
-                        } else {
-                            "ACTIVE CODES"
-                        },
-                        count = activeCodes.size,
-                        accentColor = Color(0xFF56D6A7)
-                    )
-                }
-
-                if (activeCodes.isEmpty()) {
-                    item {
-                        EmptyLiveCard(
-                            message = if (isSpanish) {
-                                "No hay códigos activos en este momento."
-                            } else {
-                                "There are no active codes right now."
-                            }
-                        )
-                    }
-                } else {
-                    items(
-                        items = activeCodes,
-                        key = { code ->
-                            code.id
-                        }
-                    ) { code ->
-                        LiveCodeCard(
-                            code = code,
-                            isSpanish = isSpanish
-                        )
-                    }
-                }
-
-                item {
-                    ReaperDivider()
-                }
-
-                item {
-                    LiveSectionHeader(
                         title = stringResource(
                             R.string.live_announcements
                         ),
@@ -242,6 +208,86 @@ fun LiveContentScreen(
                     ) { event ->
                         EventCard(
                             event = event,
+                            isSpanish = isSpanish
+                        )
+                    }
+                }
+
+                item {
+                    ReaperDivider()
+                }
+
+                item {
+                    LiveSectionHeader(
+                        title = if (isSpanish) {
+                            "ACTUALIZACIONES DEL JUEGO"
+                        } else {
+                            "GAME UPDATES"
+                        },
+                        count = activeUpdates.size,
+                        accentColor = Color(0xFFB58CFF)
+                    )
+                }
+
+                if (activeUpdates.isEmpty()) {
+                    item {
+                        EmptyLiveCard(
+                            message = if (isSpanish) {
+                                "No hay actualizaciones nuevas en este momento."
+                            } else {
+                                "There are no new game updates right now."
+                            }
+                        )
+                    }
+                } else {
+                    items(
+                        items = activeUpdates,
+                        key = { update ->
+                            update.id
+                        }
+                    ) { update ->
+                        LiveUpdateCard(
+                            update = update,
+                            isSpanish = isSpanish
+                        )
+                    }
+                }
+
+                item {
+                    ReaperDivider()
+                }
+
+                item {
+                    LiveSectionHeader(
+                        title = if (isSpanish) {
+                            "CÓDIGOS ACTIVOS"
+                        } else {
+                            "ACTIVE CODES"
+                        },
+                        count = activeCodes.size,
+                        accentColor = Color(0xFF56D6A7)
+                    )
+                }
+
+                if (activeCodes.isEmpty()) {
+                    item {
+                        EmptyLiveCard(
+                            message = if (isSpanish) {
+                                "No hay códigos activos en este momento."
+                            } else {
+                                "There are no active codes right now."
+                            }
+                        )
+                    }
+                } else {
+                    items(
+                        items = activeCodes,
+                        key = { code ->
+                            code.id
+                        }
+                    ) { code ->
+                        LiveCodeCard(
+                            code = code,
                             isSpanish = isSpanish
                         )
                     }
@@ -357,6 +403,244 @@ private fun LiveSectionHeader(
             text = count.toString(),
             accentColor = accentColor
         )
+    }
+}
+
+@Composable
+private fun AnnouncementCard(
+    announcement: LiveAnnouncement,
+    isSpanish: Boolean
+) {
+    val displayTitle =
+        if (
+            isSpanish &&
+            announcement.titleEs.isNotBlank()
+        ) {
+            announcement.titleEs
+        } else {
+            announcement.title
+        }
+
+    val displayMessage =
+        if (
+            isSpanish &&
+            announcement.messageEs.isNotBlank()
+        ) {
+            announcement.messageEs
+        } else {
+            announcement.message
+        }
+
+    ReaperCard(
+        accentColor = ReaperColors.CyanGlow
+    ) {
+        Text(
+            text = displayTitle,
+            color = ReaperColors.PrimaryText,
+            fontSize = 17.sp,
+            fontWeight = FontWeight.Black
+        )
+
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
+
+        Text(
+            text = displayMessage,
+            color = ReaperColors.SecondaryText,
+            fontSize = 14.sp,
+            lineHeight = 20.sp
+        )
+    }
+}
+
+@Composable
+private fun EventCard(
+    event: LiveEvent,
+    isSpanish: Boolean
+) {
+    val displayTitle =
+        if (
+            isSpanish &&
+            event.titleEs.isNotBlank()
+        ) {
+            event.titleEs
+        } else {
+            event.title
+        }
+
+    val displayDescription =
+        if (
+            isSpanish &&
+            event.descriptionEs.isNotBlank()
+        ) {
+            event.descriptionEs
+        } else {
+            event.description
+        }
+
+    val displayExpires =
+        if (
+            isSpanish &&
+            event.expiresEs.isNotBlank()
+        ) {
+            event.expiresEs
+        } else {
+            event.expires
+        }
+
+    ReaperCard(
+        accentColor = Color(0xFFFFC857)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = displayTitle,
+                    color = ReaperColors.PrimaryText,
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Black
+                )
+
+                Spacer(
+                    modifier = Modifier.height(5.dp)
+                )
+
+                Text(
+                    text = displayDescription,
+                    color = ReaperColors.SecondaryText,
+                    fontSize = 14.sp,
+                    lineHeight = 20.sp
+                )
+            }
+
+            ReaperBadge(
+                text = displayExpires,
+                accentColor = Color(0xFFFFC857)
+            )
+        }
+    }
+}
+
+@Composable
+private fun LiveUpdateCard(
+    update: LiveUpdate,
+    isSpanish: Boolean
+) {
+    val context = LocalContext.current
+
+    val displayTitle =
+        if (
+            isSpanish &&
+            update.titleEs.isNotBlank()
+        ) {
+            update.titleEs
+        } else {
+            update.title
+        }
+
+    val displayDescription =
+        if (
+            isSpanish &&
+            update.descriptionEs.isNotBlank()
+        ) {
+            update.descriptionEs
+        } else {
+            update.description
+        }
+
+    val displayDate =
+        if (
+            isSpanish &&
+            update.dateEs.isNotBlank()
+        ) {
+            update.dateEs
+        } else {
+            update.date
+        }
+
+    val displayCategory =
+        if (
+            isSpanish &&
+            update.categoryEs.isNotBlank()
+        ) {
+            update.categoryEs
+        } else {
+            update.category
+        }
+
+    ReaperCard(
+        accentColor = Color(0xFFB58CFF)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = displayTitle,
+                modifier = Modifier.weight(1f),
+                color = ReaperColors.PrimaryText,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Black
+            )
+
+            ReaperBadge(
+                text = displayCategory,
+                accentColor = Color(0xFFB58CFF)
+            )
+        }
+
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
+
+        Text(
+            text = displayDescription,
+            color = ReaperColors.SecondaryText,
+            fontSize = 14.sp,
+            lineHeight = 20.sp
+        )
+
+        Spacer(
+            modifier = Modifier.height(10.dp)
+        )
+
+        Text(
+            text = if (isSpanish) {
+                "PUBLICADO: $displayDate"
+            } else {
+                "PUBLISHED: $displayDate"
+            },
+            color = Color(0xFFB58CFF),
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        if (update.url.isNotBlank()) {
+            Spacer(
+                modifier = Modifier.height(12.dp)
+            )
+
+            ReaperSecondaryButton(
+                text = if (isSpanish) {
+                    "VER ACTUALIZACIÓN OFICIAL"
+                } else {
+                    "READ OFFICIAL UPDATE"
+                },
+                onClick = {
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse(update.url)
+                    )
+
+                    context.startActivity(intent)
+                }
+            )
+        }
     }
 }
 
@@ -481,129 +765,6 @@ private fun LiveCodeCard(
                 copied = true
             }
         )
-    }
-}
-
-@Composable
-private fun AnnouncementCard(
-    announcement: LiveAnnouncement,
-    isSpanish: Boolean
-) {
-    val displayTitle =
-        if (
-            isSpanish &&
-            announcement.id == "welcome"
-        ) {
-            "Bienvenido a Reaper Live"
-        } else {
-            announcement.title
-        }
-
-    val displayMessage =
-        if (
-            isSpanish &&
-            announcement.id == "welcome"
-        ) {
-            "¡Gracias por usar Reaper Companion! Vuelve con frecuencia para ver códigos activos, eventos en vivo y las últimas novedades de Dead by Daylight."
-        } else {
-            announcement.message
-        }
-
-    ReaperCard(
-        accentColor = ReaperColors.CyanGlow
-    ) {
-        Text(
-            text = displayTitle,
-            color = ReaperColors.PrimaryText,
-            fontSize = 17.sp,
-            fontWeight = FontWeight.Black
-        )
-
-        Spacer(
-            modifier = Modifier.height(8.dp)
-        )
-
-        Text(
-            text = displayMessage,
-            color = ReaperColors.SecondaryText,
-            fontSize = 14.sp,
-            lineHeight = 20.sp
-        )
-    }
-}
-
-@Composable
-private fun EventCard(
-    event: LiveEvent,
-    isSpanish: Boolean
-) {
-    val displayTitle =
-        if (
-            isSpanish &&
-            event.id == "launch"
-        ) {
-            "Celebración de lanzamiento"
-        } else {
-            event.title
-        }
-
-    val displayDescription =
-        if (
-            isSpanish &&
-            event.id == "launch"
-        ) {
-            "¡Reaper Companion ya está oficialmente disponible! Se añadirán regularmente nuevos códigos, eventos y actualizaciones importantes."
-        } else {
-            event.description
-        }
-
-    val displayExpires =
-        if (
-            isSpanish &&
-            event.expires.equals(
-                "Limited Time",
-                ignoreCase = true
-            )
-        ) {
-            "Tiempo limitado"
-        } else {
-            event.expires
-        }
-
-    ReaperCard(
-        accentColor = Color(0xFFFFC857)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(
-                    text = displayTitle,
-                    color = ReaperColors.PrimaryText,
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Black
-                )
-
-                Spacer(
-                    modifier = Modifier.height(5.dp)
-                )
-
-                Text(
-                    text = displayDescription,
-                    color = ReaperColors.SecondaryText,
-                    fontSize = 14.sp,
-                    lineHeight = 20.sp
-                )
-            }
-
-            ReaperBadge(
-                text = displayExpires,
-                accentColor = Color(0xFFFFC857)
-            )
-        }
     }
 }
 
