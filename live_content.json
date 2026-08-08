@@ -19,6 +19,16 @@
       "expires": "Ends August 11",
       "expiresEs": "Termina el 11 de agosto",
       "active": true
+    },
+    {
+      "id": "summer_screams_2v8",
+      "title": "Coming Soon: Summer Screams 2v8",
+      "titleEs": "Próximamente: Summer Screams 2v8",
+      "description": "The final week of Summer Screams brings back 2v8 from August 11 through August 18. Complete the available quests to earn rewards.",
+      "descriptionEs": "La última semana de Summer Screams trae de vuelta el modo 2v8 del 11 al 18 de agosto. Completa las misiones disponibles para conseguir recompensas.",
+      "expires": "Starts August 11",
+      "expiresEs": "Comienza el 11 de agosto",
+      "active": true
     }
   ],
   "updates": [
