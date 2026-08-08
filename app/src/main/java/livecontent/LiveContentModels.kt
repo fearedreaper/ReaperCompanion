@@ -15,7 +15,18 @@ data class LiveEvent(
     val active: Boolean = true
 )
 
+data class LiveCode(
+    val id: String,
+    val code: String,
+    val reward: String,
+    val rewardEs: String = "",
+    val expires: String,
+    val expiresEs: String = "",
+    val active: Boolean = true
+)
+
 data class LiveContent(
     val announcements: List<LiveAnnouncement> = emptyList(),
-    val events: List<LiveEvent> = emptyList()
+    val events: List<LiveEvent> = emptyList(),
+    val codes: List<LiveCode> = emptyList()
 )

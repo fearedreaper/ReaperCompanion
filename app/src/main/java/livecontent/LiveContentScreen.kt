@@ -1,5 +1,8 @@
 package com.example.reapercompanion.livecontent
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,7 +26,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -60,16 +65,16 @@ fun LiveContentScreen(
         isLoading = false
     }
 
+    val activeCodes = remember(liveContent) {
+        liveContent.codes.filter { it.active }
+    }
+
     val activeAnnouncements = remember(liveContent) {
-        liveContent.announcements.filter { announcement ->
-            announcement.active
-        }
+        liveContent.announcements.filter { it.active }
     }
 
     val activeEvents = remember(liveContent) {
-        liveContent.events.filter { event ->
-            event.active
-        }
+        liveContent.events.filter { it.active }
     }
 
     AppBackground {
@@ -134,6 +139,46 @@ fun LiveContentScreen(
                     LoadingCard()
                 }
             } else {
+                item {
+                    LiveSectionHeader(
+                        title = if (isSpanish) {
+                            "CÓDIGOS ACTIVOS"
+                        } else {
+                            "ACTIVE CODES"
+                        },
+                        count = activeCodes.size,
+                        accentColor = Color(0xFF56D6A7)
+                    )
+                }
+
+                if (activeCodes.isEmpty()) {
+                    item {
+                        EmptyLiveCard(
+                            message = if (isSpanish) {
+                                "No hay códigos activos en este momento."
+                            } else {
+                                "There are no active codes right now."
+                            }
+                        )
+                    }
+                } else {
+                    items(
+                        items = activeCodes,
+                        key = { code ->
+                            code.id
+                        }
+                    ) { code ->
+                        LiveCodeCard(
+                            code = code,
+                            isSpanish = isSpanish
+                        )
+                    }
+                }
+
+                item {
+                    ReaperDivider()
+                }
+
                 item {
                     LiveSectionHeader(
                         title = stringResource(
@@ -316,19 +361,149 @@ private fun LiveSectionHeader(
 }
 
 @Composable
+private fun LiveCodeCard(
+    code: LiveCode,
+    isSpanish: Boolean
+) {
+    val context = LocalContext.current
+
+    var copied by remember(code.code) {
+        mutableStateOf(false)
+    }
+
+    val displayReward =
+        if (
+            isSpanish &&
+            code.rewardEs.isNotBlank()
+        ) {
+            code.rewardEs
+        } else {
+            code.reward
+        }
+
+    val displayExpires =
+        if (
+            isSpanish &&
+            code.expiresEs.isNotBlank()
+        ) {
+            code.expiresEs
+        } else {
+            code.expires
+        }
+
+    ReaperCard(
+        accentColor = Color(0xFF56D6A7)
+    ) {
+        Text(
+            text = code.code,
+            modifier = Modifier.fillMaxWidth(),
+            color = Color(0xFF56D6A7),
+            fontSize = 23.sp,
+            fontWeight = FontWeight.Black,
+            fontFamily = FontFamily.Monospace,
+            letterSpacing = 1.sp,
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(
+            modifier = Modifier.height(10.dp)
+        )
+
+        Text(
+            text = if (isSpanish) {
+                "RECOMPENSA"
+            } else {
+                "REWARD"
+            },
+            color = ReaperColors.PrimaryText,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = 1.5.sp
+        )
+
+        Spacer(
+            modifier = Modifier.height(4.dp)
+        )
+
+        Text(
+            text = displayReward,
+            color = ReaperColors.SecondaryText,
+            fontSize = 14.sp,
+            lineHeight = 20.sp
+        )
+
+        Spacer(
+            modifier = Modifier.height(10.dp)
+        )
+
+        Text(
+            text = if (isSpanish) {
+                "VENCE: $displayExpires"
+            } else {
+                "EXPIRES: $displayExpires"
+            },
+            color = Color(0xFFFFC857),
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+
+        ReaperSecondaryButton(
+            text = if (copied) {
+                if (isSpanish) {
+                    "COPIADO"
+                } else {
+                    "COPIED"
+                }
+            } else {
+                if (isSpanish) {
+                    "COPIAR CÓDIGO"
+                } else {
+                    "COPY CODE"
+                }
+            },
+            onClick = {
+                val clipboardManager =
+                    context.getSystemService(
+                        Context.CLIPBOARD_SERVICE
+                    ) as ClipboardManager
+
+                clipboardManager.setPrimaryClip(
+                    ClipData.newPlainText(
+                        "Reaper Live code",
+                        code.code
+                    )
+                )
+
+                copied = true
+            }
+        )
+    }
+}
+
+@Composable
 private fun AnnouncementCard(
     announcement: LiveAnnouncement,
     isSpanish: Boolean
 ) {
     val displayTitle =
-        if (isSpanish && announcement.id == "welcome") {
+        if (
+            isSpanish &&
+            announcement.id == "welcome"
+        ) {
             "Bienvenido a Reaper Live"
         } else {
             announcement.title
         }
 
     val displayMessage =
-        if (isSpanish && announcement.id == "welcome") {
+        if (
+            isSpanish &&
+            announcement.id == "welcome"
+        ) {
             "¡Gracias por usar Reaper Companion! Vuelve con frecuencia para ver códigos activos, eventos en vivo y las últimas novedades de Dead by Daylight."
         } else {
             announcement.message
@@ -363,15 +538,21 @@ private fun EventCard(
     isSpanish: Boolean
 ) {
     val displayTitle =
-        if (isSpanish && event.id == "launch") {
+        if (
+            isSpanish &&
+            event.id == "launch"
+        ) {
             "Celebración de lanzamiento"
         } else {
             event.title
         }
 
     val displayDescription =
-        if (isSpanish && event.id == "launch") {
-            "¡Reaper Companion ya está oficialmente disponible! Se añadirán regularmente nuevos códigos, eventos y novedades."
+        if (
+            isSpanish &&
+            event.id == "launch"
+        ) {
+            "¡Reaper Companion ya está oficialmente disponible! Se añadirán regularmente nuevos códigos, eventos y actualizaciones importantes."
         } else {
             event.description
         }

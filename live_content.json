@@ -15,5 +15,61 @@
       "expires": "Limited Time",
       "active": true
     }
+  ],
+  "codes": [
+    {
+      "id": "crowcaw",
+      "code": "CROWCAW",
+      "reward": "CrowTok Banner",
+      "rewardEs": "Estandarte CrowTok",
+      "expires": "August 17, 2026",
+      "expiresEs": "17 de agosto de 2026",
+      "active": true
+    },
+    {
+      "id": "graspingthedarkness",
+      "code": "GRASPINGTHEDARKNESS",
+      "reward": "Eyes in the Darkness Badge and Grasping Hallway Banner",
+      "rewardEs": "Insignia Ojos en la oscuridad y estandarte Pasillo en las garras",
+      "expires": "Expiration unknown",
+      "expiresEs": "Vencimiento desconocido",
+      "active": true
+    },
+    {
+      "id": "lifeoftheparty",
+      "code": "LIFEOFTHEPARTY",
+      "reward": "Party Dwight Figurine",
+      "rewardEs": "Figura de Dwight fiestero",
+      "expires": "Expiration unknown",
+      "expiresEs": "Vencimiento desconocido",
+      "active": true
+    },
+    {
+      "id": "finderscreepers",
+      "code": "FINDERSCREEPERS",
+      "reward": "Élodie in the Catacombs Banner and Élodie's Skull Badge",
+      "rewardEs": "Estandarte Élodie en las catacumbas e insignia Calavera de Élodie",
+      "expires": "No expiration announced",
+      "expiresEs": "Sin fecha de vencimiento anunciada",
+      "active": true
+    },
+    {
+      "id": "iflookscouldchill",
+      "code": "IFLOOKSCOULDCHILL",
+      "reward": "Frosty Eye Killer Cosmetics",
+      "rewardEs": "Cosméticos de ojos helados para asesinos",
+      "expires": "No expiration announced",
+      "expiresEs": "Sin fecha de vencimiento anunciada",
+      "active": true
+    },
+    {
+      "id": "reddit1mil",
+      "code": "REDDIT1MIL",
+      "reward": "8-Bit Crow Badge",
+      "rewardEs": "Insignia de cuervo de 8 bits",
+      "expires": "No expiration announced",
+      "expiresEs": "Sin fecha de vencimiento anunciada",
+      "active": true
+    }
   ]
 }

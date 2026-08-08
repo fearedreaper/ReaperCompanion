@@ -22,6 +22,19 @@ object LiveContentRepository {
                     expires = "Limited Time",
                     active = true
                 )
+            ),
+            codes = listOf(
+                LiveCode(
+                    id = "finderscreepers",
+                    code = "FINDERSCREEPERS",
+                    reward =
+                        "Élodie in the Catacombs Banner and Élodie's Skull Badge",
+                    rewardEs =
+                        "Estandarte Élodie en las catacumbas e insignia Calavera de Élodie",
+                    expires = "No expiration announced",
+                    expiresEs = "Sin fecha de vencimiento anunciada",
+                    active = true
+                )
             )
         )
     }

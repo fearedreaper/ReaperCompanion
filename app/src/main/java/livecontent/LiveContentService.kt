@@ -25,7 +25,6 @@ object LiveContentService {
 
                 if (responseCode !in 200..299) {
                     connection.disconnect()
-
                     LiveContentRepository.getLiveContent()
                 } else {
                     val responseText =
@@ -57,6 +56,9 @@ object LiveContentService {
             root.optJSONArray("events")
                 ?: root.optJSONArray("rewards")
 
+        val codesArray =
+            root.optJSONArray("codes")
+
         val announcements =
             buildList {
                 if (announcementsArray != null) {
@@ -70,17 +72,13 @@ object LiveContentService {
 
                         add(
                             LiveAnnouncement(
-                                id =
-                                    item.optString("id"),
-                                title =
-                                    item.optString("title"),
-                                message =
-                                    item.optString("message"),
-                                active =
-                                    item.optBoolean(
-                                        "active",
-                                        true
-                                    )
+                                id = item.optString("id"),
+                                title = item.optString("title"),
+                                message = item.optString("message"),
+                                active = item.optBoolean(
+                                    "active",
+                                    true
+                                )
                             )
                         )
                     }
@@ -100,14 +98,10 @@ object LiveContentService {
 
                         add(
                             LiveEvent(
-                                id =
-                                    item.optString("id"),
-                                title =
-                                    item.optString("title"),
+                                id = item.optString("id"),
+                                title = item.optString("title"),
                                 description =
-                                    item.optString(
-                                        "description"
-                                    ),
+                                    item.optString("description"),
                                 expires =
                                     item.optString(
                                         "expires",
@@ -124,9 +118,46 @@ object LiveContentService {
                 }
             }
 
+        val codes =
+            buildList {
+                if (codesArray != null) {
+                    for (
+                    index in
+                    0 until codesArray.length()
+                    ) {
+                        val item =
+                            codesArray
+                                .getJSONObject(index)
+
+                        add(
+                            LiveCode(
+                                id = item.optString("id"),
+                                code = item.optString("code"),
+                                reward = item.optString("reward"),
+                                rewardEs =
+                                    item.optString("rewardEs"),
+                                expires =
+                                    item.optString(
+                                        "expires",
+                                        "No expiration announced"
+                                    ),
+                                expiresEs =
+                                    item.optString("expiresEs"),
+                                active =
+                                    item.optBoolean(
+                                        "active",
+                                        true
+                                    )
+                            )
+                        )
+                    }
+                }
+            }
+
         return LiveContent(
             announcements = announcements,
-            events = events
+            events = events,
+            codes = codes
         )
     }
 }
