@@ -18,6 +18,11 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +31,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import com.example.reapercompanion.design.ReaperBadge
 import com.example.reapercompanion.design.ReaperCard
 import com.example.reapercompanion.design.ReaperColors
@@ -36,6 +44,7 @@ import com.example.reapercompanion.design.ReaperPrimaryButton
 import com.example.reapercompanion.design.ReaperSecondaryButton
 import com.example.reapercompanion.localization.LanguagePreferences
 import com.example.reapercompanion.localization.LocaleManager
+import com.example.reapercompanion.notifications.ReaperNotificationManager
 import com.example.reapercompanion.screens.AppBackground
 
 private const val PRIVACY_POLICY_URL =
@@ -48,13 +57,51 @@ fun SettingsScreen(
     val context = LocalContext.current
 
     val currentLanguageCode =
-        LanguagePreferences.getSelectedLanguageCode(context)
+        LanguagePreferences.getSelectedLanguageCode(
+            context
+        )
 
     val isSpanish =
         currentLanguageCode.equals(
             "es",
             ignoreCase = true
         )
+
+    var notificationsEnabled by remember {
+        mutableStateOf(
+            ReaperNotificationManager
+                .notificationsAreEnabled(context)
+        )
+    }
+
+    val lifecycleOwner =
+        context.findActivity() as? LifecycleOwner
+
+    DisposableEffect(lifecycleOwner) {
+        val observer =
+            LifecycleEventObserver { _, event ->
+                if (
+                    event ==
+                    Lifecycle.Event.ON_RESUME
+                ) {
+                    notificationsEnabled =
+                        ReaperNotificationManager
+                            .notificationsAreEnabled(
+                                context
+                            )
+                }
+            }
+
+        lifecycleOwner
+            ?.lifecycle
+            ?.addObserver(observer)
+
+        onDispose {
+            lifecycleOwner
+                ?.lifecycle
+                ?.removeObserver(observer)
+        }
+    }
 
     AppBackground {
         LazyColumn(
@@ -63,10 +110,13 @@ fun SettingsScreen(
                 .statusBarsPadding()
                 .navigationBarsPadding()
                 .padding(horizontal = 18.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement =
+                Arrangement.spacedBy(16.dp)
         ) {
             item {
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(
+                    modifier = Modifier.height(16.dp)
+                )
 
                 ReaperHeader(
                     title = if (isSpanish) {
@@ -87,9 +137,9 @@ fun SettingsScreen(
                         "App Settings"
                     },
                     body = if (isSpanish) {
-                        "Administra el idioma, la información de la aplicación, los detalles de soporte y la información de lanzamiento."
+                        "Administra el idioma, las notificaciones, la información de la aplicación y los detalles de soporte."
                     } else {
-                        "Manage language, app information, support details, and release information."
+                        "Manage language, notifications, app information, and support details."
                     },
                     badge = "VERSION 1.0.0"
                 )
@@ -103,7 +153,8 @@ fun SettingsScreen(
 
             item {
                 ReaperCard(
-                    accentColor = ReaperColors.CyanGlow
+                    accentColor =
+                        ReaperColors.CyanGlow
                 ) {
                     Text(
                         text = if (isSpanish) {
@@ -111,12 +162,17 @@ fun SettingsScreen(
                         } else {
                             "App Language"
                         },
-                        color = ReaperColors.PrimaryText,
+                        color =
+                            ReaperColors.PrimaryText,
                         fontSize = 17.sp,
-                        fontWeight = FontWeight.Black
+                        fontWeight =
+                            FontWeight.Black
                     )
 
-                    Spacer(modifier = Modifier.height(6.dp))
+                    Spacer(
+                        modifier =
+                            Modifier.height(6.dp)
+                    )
 
                     Text(
                         text = if (isSpanish) {
@@ -124,16 +180,23 @@ fun SettingsScreen(
                         } else {
                             "Choose the language you want to use in Reaper Companion."
                         },
-                        color = ReaperColors.SecondaryText,
+                        color =
+                            ReaperColors.SecondaryText,
                         fontSize = 13.sp,
                         lineHeight = 18.sp
                     )
 
-                    Spacer(modifier = Modifier.height(14.dp))
+                    Spacer(
+                        modifier =
+                            Modifier.height(14.dp)
+                    )
 
-                    if (currentLanguageCode == "en") {
+                    if (
+                        currentLanguageCode == "en"
+                    ) {
                         ReaperPrimaryButton(
-                            text = "ENGLISH • SELECTED",
+                            text =
+                                "ENGLISH • SELECTED",
                             onClick = {}
                         )
                     } else {
@@ -148,11 +211,17 @@ fun SettingsScreen(
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(
+                        modifier =
+                            Modifier.height(10.dp)
+                    )
 
-                    if (currentLanguageCode == "es") {
+                    if (
+                        currentLanguageCode == "es"
+                    ) {
                         ReaperPrimaryButton(
-                            text = "ESPAÑOL • SELECCIONADO",
+                            text =
+                                "ESPAÑOL • SELECCIONADO",
                             onClick = {}
                         )
                     } else {
@@ -167,6 +236,74 @@ fun SettingsScreen(
                         )
                     }
                 }
+            }
+
+            item {
+                ReaperDivider()
+            }
+
+            item {
+                SettingsSectionHeader(
+                    title = if (isSpanish) {
+                        "NOTIFICACIONES"
+                    } else {
+                        "NOTIFICATIONS"
+                    }
+                )
+            }
+
+            item {
+                SettingsInfoCard(
+                    title = if (isSpanish) {
+                        "Notificaciones de Reaper Live"
+                    } else {
+                        "Reaper Live Notifications"
+                    },
+                    description =
+                        if (notificationsEnabled) {
+                            if (isSpanish) {
+                                "Las alertas de nuevos códigos, eventos y actualizaciones están activadas."
+                            } else {
+                                "Alerts for new codes, events, and updates are enabled."
+                            }
+                        } else {
+                            if (isSpanish) {
+                                "Las notificaciones están desactivadas. Ábrelas en la configuración de Android para recibir alertas."
+                            } else {
+                                "Notifications are disabled. Enable them in Android settings to receive alerts."
+                            }
+                        },
+                    badge =
+                        if (notificationsEnabled) {
+                            if (isSpanish) {
+                                "ACTIVADAS"
+                            } else {
+                                "ENABLED"
+                            }
+                        } else {
+                            if (isSpanish) {
+                                "DESACTIVADAS"
+                            } else {
+                                "DISABLED"
+                            }
+                        }
+                )
+            }
+
+            item {
+                ReaperSecondaryButton(
+                    text = if (isSpanish) {
+                        "ADMINISTRAR NOTIFICACIONES"
+                    } else {
+                        "MANAGE NOTIFICATIONS"
+                    },
+                    onClick = {
+                        ReaperNotificationManager
+                            .openSystemNotificationSettings(
+                                context
+                            )
+                    }
+                )
             }
 
             item {
@@ -253,9 +390,9 @@ fun SettingsScreen(
                         "Privacy Policy"
                     },
                     description = if (isSpanish) {
-                        "Consulta cómo Reaper Companion gestiona el acceso a internet, los datos locales de la aplicación y la privacidad."
+                        "Consulta cómo Reaper Companion gestiona el acceso a internet, los datos locales de la aplicación, las notificaciones y la privacidad."
                     } else {
-                        "Read how Reaper Companion handles internet access, local app data, and privacy."
+                        "Read how Reaper Companion handles internet access, local app data, notifications, and privacy."
                     },
                     badge = if (isSpanish) {
                         "DISPONIBLE"
@@ -273,10 +410,13 @@ fun SettingsScreen(
                         "OPEN PRIVACY POLICY"
                     },
                     onClick = {
-                        val intent = Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse(PRIVACY_POLICY_URL)
-                        )
+                        val intent =
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse(
+                                    PRIVACY_POLICY_URL
+                                )
+                            )
 
                         context.startActivity(intent)
                     }
@@ -299,7 +439,8 @@ fun SettingsScreen(
 
             item {
                 ReaperCard(
-                    accentColor = Color(0xFFFFC857)
+                    accentColor =
+                        Color(0xFFFFC857)
                 ) {
                     Text(
                         text = if (isSpanish) {
@@ -307,12 +448,17 @@ fun SettingsScreen(
                         } else {
                             "Built by Feared Reaper"
                         },
-                        color = ReaperColors.PrimaryText,
+                        color =
+                            ReaperColors.PrimaryText,
                         fontSize = 17.sp,
-                        fontWeight = FontWeight.Black
+                        fontWeight =
+                            FontWeight.Black
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(
+                        modifier =
+                            Modifier.height(8.dp)
+                    )
 
                     Text(
                         text = if (isSpanish) {
@@ -320,7 +466,8 @@ fun SettingsScreen(
                         } else {
                             "Reaper Companion was created to help players build smarter, prepare for matchups, and stay connected through Reaper Live."
                         },
-                        color = ReaperColors.SecondaryText,
+                        color =
+                            ReaperColors.SecondaryText,
                         fontSize = 14.sp,
                         lineHeight = 20.sp
                     )
@@ -340,7 +487,8 @@ fun SettingsScreen(
 
             item {
                 Text(
-                    text = "REAPER COMPANION • VERSION 1.0.0",
+                    text =
+                        "REAPER COMPANION • VERSION 1.0.0",
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
@@ -349,9 +497,11 @@ fun SettingsScreen(
                         ),
                     color = Color(0xFF526268),
                     fontSize = 10.sp,
-                    fontWeight = FontWeight.Bold,
+                    fontWeight =
+                        FontWeight.Bold,
                     letterSpacing = 1.sp,
-                    textAlign = TextAlign.Center
+                    textAlign =
+                        TextAlign.Center
                 )
             }
         }
@@ -363,7 +513,8 @@ private fun changeAppLanguage(
     languageCode: String
 ) {
     if (
-        LanguagePreferences.getSelectedLanguageCode(context) ==
+        LanguagePreferences
+            .getSelectedLanguageCode(context) ==
         languageCode
     ) {
         return
@@ -387,12 +538,17 @@ private fun changeAppLanguage(
 private fun Context.findActivity(): Activity? {
     var currentContext = this
 
-    while (currentContext is ContextWrapper) {
-        if (currentContext is Activity) {
+    while (
+        currentContext is ContextWrapper
+    ) {
+        if (
+            currentContext is Activity
+        ) {
             return currentContext
         }
 
-        currentContext = currentContext.baseContext
+        currentContext =
+            currentContext.baseContext
     }
 
     return currentContext as? Activity
@@ -421,33 +577,45 @@ private fun SettingsInfoCard(
     ReaperCard {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment =
+                Alignment.CenterVertically
         ) {
             Column(
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
                     text = title,
-                    color = ReaperColors.PrimaryText,
+                    color =
+                        ReaperColors.PrimaryText,
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight =
+                        FontWeight.Bold
                 )
 
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(
+                    modifier =
+                        Modifier.height(5.dp)
+                )
 
                 Text(
                     text = description,
-                    color = ReaperColors.SecondaryText,
+                    color =
+                        ReaperColors.SecondaryText,
                     fontSize = 13.sp,
                     lineHeight = 18.sp
                 )
             }
 
-            Spacer(modifier = Modifier.padding(horizontal = 6.dp))
+            Spacer(
+                modifier = Modifier.padding(
+                    horizontal = 6.dp
+                )
+            )
 
             ReaperBadge(
                 text = badge,
-                accentColor = ReaperColors.CyanGlow
+                accentColor =
+                    ReaperColors.CyanGlow
             )
         }
     }

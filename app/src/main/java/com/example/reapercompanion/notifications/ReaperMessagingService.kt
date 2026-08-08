@@ -12,10 +12,23 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.example.reapercompanion.MainActivity
 import com.example.reapercompanion.R
+import com.example.reapercompanion.localization.LanguagePreferences
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
 class ReaperMessagingService : FirebaseMessagingService() {
+
+    override fun onNewToken(
+        token: String
+    ) {
+        super.onNewToken(token)
+
+        ReaperNotificationManager.syncLanguageTopic(
+            LanguagePreferences.getSelectedLanguageCode(
+                this
+            )
+        )
+    }
 
     override fun onMessageReceived(
         remoteMessage: RemoteMessage

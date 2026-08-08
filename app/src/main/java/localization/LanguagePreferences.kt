@@ -1,6 +1,7 @@
 package com.example.reapercompanion.localization
 
 import android.content.Context
+import com.example.reapercompanion.notifications.ReaperNotificationManager
 
 object LanguagePreferences {
 
@@ -20,12 +21,19 @@ object LanguagePreferences {
     fun getSelectedLanguageCode(
         context: Context
     ): String {
-        return preferences(context)
-            .getString(
-                KEY_SELECTED_LANGUAGE,
-                "en"
-            )
-            ?: "en"
+        val languageCode =
+            preferences(context)
+                .getString(
+                    KEY_SELECTED_LANGUAGE,
+                    "en"
+                )
+                ?: "en"
+
+        ReaperNotificationManager.syncLanguageTopic(
+            languageCode
+        )
+
+        return languageCode
     }
 
     fun saveSelectedLanguage(
@@ -39,6 +47,10 @@ object LanguagePreferences {
                 languageCode
             )
             .apply()
+
+        ReaperNotificationManager.syncLanguageTopic(
+            languageCode
+        )
     }
 
     fun clearSelectedLanguage(
